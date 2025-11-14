@@ -57,35 +57,29 @@ export function MainSidebar() {
       <SidebarMenu className="flex-1">
         {menuItems.map((item) => (
           <SidebarMenuItem key={item.href}>
-            <Link href={item.href} legacyBehavior passHref>
-              <SidebarMenuButton
-                asChild
-                isActive={isActive(item.href)}
-                tooltip={{ children: item.label }}
-              >
-                <a>
-                  {item.icon}
-                  <span>{item.label}</span>
-                </a>
-              </SidebarMenuButton>
-            </Link>
+            <SidebarMenuButton
+              as={Link}
+              href={item.href}
+              isActive={isActive(item.href)}
+              tooltip={{ children: item.label }}
+            >
+              {item.icon}
+              <span>{item.label}</span>
+            </SidebarMenuButton>
           </SidebarMenuItem>
         ))}
         <SidebarSeparator />
         {aiMenuItems.map((item) => (
           <SidebarMenuItem key={item.href}>
-            <Link href={item.href} legacyBehavior passHref>
-              <SidebarMenuButton
-                asChild
-                isActive={isActive(item.href)}
-                tooltip={{ children: item.label }}
-              >
-                <a>
-                  {item.icon}
-                  <span>{item.label}</span>
-                </a>
-              </SidebarMenuButton>
-            </Link>
+            <SidebarMenuButton
+              as={Link}
+              href={item.href}
+              isActive={isActive(item.href)}
+              tooltip={{ children: item.label }}
+            >
+              {item.icon}
+              <span>{item.label}</span>
+            </SidebarMenuButton>
           </SidebarMenuItem>
         ))}
       </SidebarMenu>
@@ -93,14 +87,10 @@ export function MainSidebar() {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <Link href="/profile" legacyBehavior passHref>
-              <SidebarMenuButton asChild isActive={isActive("/profile")} tooltip={{ children: "Profile" }}>
-                <a>
-                  <User />
-                  <span>Profile</span>
-                </a>
-              </SidebarMenuButton>
-            </Link>
+            <SidebarMenuButton as={Link} href="/profile" isActive={isActive("/profile")} tooltip={{ children: "Profile" }}>
+                <User />
+                <span>Profile</span>
+            </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
             <SidebarMenuButton tooltip={{ children: "Settings" }}>
