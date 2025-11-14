@@ -1,0 +1,156 @@
+export const user = {
+  name: 'Harmanpreet Singh',
+  email: 'h.singh@example.com',
+  avatarUrl: 'https://picsum.photos/seed/user-avatar/100/100',
+  headline: 'Aspiring Software Developer | Mohali, Punjab',
+  skills: [
+    'JavaScript',
+    'React',
+    'Node.js',
+    'Communication',
+    'Teamwork',
+  ],
+  experience:
+    'Completed a 6-month internship at a local tech startup, where I contributed to front-end development using React. Eager to apply my skills in a full-time role.',
+};
+
+export const jobs = [
+  {
+    id: 'job-1',
+    title: 'Frontend Developer',
+    company: 'Innovate Punjab Tech',
+    location: 'Mohali, Punjab',
+    type: 'Full-time',
+    imageId: 'job-1',
+  },
+  {
+    id: 'job-2',
+    title: 'Digital Marketing Manager',
+    company: 'Amritsar Growth Solutions',
+    location: 'Amritsar, Punjab',
+    type: 'Full-time',
+    imageId: 'job-2',
+  },
+  {
+    id: 'job-3',
+    title: 'Accountant',
+    company: 'Ludhiana Financials',
+    location: 'Ludhiana, Punjab',
+    type: 'Part-time',
+    imageId: 'job-3',
+  },
+  {
+    id: 'job-4',
+    title: 'Data Analyst Intern',
+    company: 'Jalandhar Insights',
+    location: 'Jalandhar, Punjab',
+    type: 'Internship',
+    imageId: 'job-4',
+  },
+  {
+    id: 'job-5',
+    title: 'Graphic Designer',
+    company: 'Creative Designs Co.',
+    location: 'Remote',
+    type: 'Contract',
+    imageId: 'job-5',
+  },
+  {
+    id: 'job-6',
+    title: 'Operations Manager',
+    company: 'Punjab Logistics',
+    location: 'Patiala, Punjab',
+    type: 'Full-time',
+    imageId: 'job-6',
+  },
+];
+
+export const skills = [
+  {
+    id: 'skill-1',
+    title: 'Full-Stack Web Development Bootcamp',
+    provider: 'Punjab Skills University',
+    duration: '12 Weeks',
+    imageId: 'skill-1',
+  },
+  {
+    id: 'skill-2',
+    title: 'Advanced Digital Marketing',
+    provider: 'eLearn Punjab',
+    duration: '8 Weeks',
+    imageId: 'skill-2',
+  },
+  {
+    id: 'skill-3',
+    title: 'Data Science with Python',
+    provider: 'Punjab Technical Institute',
+    duration: '16 Weeks',
+    imageId: 'skill-3',
+  },
+  {
+    id: 'skill-4',
+    title: 'Certified Public Accountant (CPA) Prep',
+    provider: 'Punjab Commerce Academy',
+    duration: '24 Weeks',
+    imageId: 'skill-4',
+  },
+  {
+    id: 'skill-5',
+    title: 'UI/UX Design fundamentals',
+    provider: 'Design School of Punjab',
+    duration: '6 Weeks',
+    imageId: 'skill-5',
+  },
+  {
+    id: 'skill-6',
+    title: 'Supply Chain Management',
+    provider: 'Punjab Management College',
+    duration: '10 Weeks',
+    imageId: 'skill-6',
+  },
+];
+
+export const businessResources = [
+  {
+    id: 'biz-1',
+    name: 'Punjab State Startup Grant',
+    category: 'Financial',
+    description: 'Seed funding for innovative startups in key sectors.',
+  },
+  {
+    id: 'biz-2',
+    name: 'MSME Loan Scheme',
+    category: 'Financial',
+    description: 'Low-interest loans for small and medium enterprises.',
+  },
+  {
+    id: 'biz-3',
+    name: 'Punjab Entrepreneurs Network (PEN)',
+    category: 'Mentorship',
+    description: 'Connect with experienced mentors and fellow entrepreneurs.',
+  },
+  {
+    id: 'biz-4',
+    name: 'TiE Chandigarh',
+    category: 'Mentorship',
+    description: 'Global network fostering entrepreneurship through mentoring, networking, and education.',
+  },
+  {
+    id: 'biz-5',
+    name: 'STPI Mohali',
+    category: 'Infrastructure',
+    description: 'Incubation center with state-of-the-art facilities for tech startups.',
+  },
+  {
+    id: 'biz-6',
+    name: 'Agri-Processing Park',
+    category: 'Infrastructure',
+    description: 'Specialized zones with facilities for food processing businesses.',
+  },
+  {
+    id: 'biz-7',
+    name: 'Invest Punjab Business First Portal',
+    category: 'Startup',
+    description: 'A single portal for regulatory clearances and fiscal incentive applications.',
+  },
+];

@@ -1,3 +1,82 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-bg",
+      "description": "A vibrant background image representing Punjab's culture and opportunities.",
+      "imageUrl": "https://images.unsplash.com/photo-1609947017136-9daf32a5eb16?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxnb2xkZW4lMjB0ZW1wbGV8ZW58MHx8fHwxNzYzMTI4ODg1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "golden temple"
+    },
+    {
+      "id": "job-1",
+      "description": "Placeholder for a frontend developer job.",
+      "imageUrl": "https://images.unsplash.com/photo-1629904853716-f0bc54eea481?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxvZmZpY2UlMjBjb21wdXRlcnxlbnwwfHx8fDE3NjMwOTI1ODh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "office computer"
+    },
+    {
+      "id": "job-2",
+      "description": "Placeholder for a digital marketing manager job.",
+      "imageUrl": "https://images.unsplash.com/photo-1579869847557-1f67382cc158?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxzb2NpYWwlMjBtZWRpYXxlbnwwfHx8fDE3NjMwNjUzNzd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "social media"
+    },
+    {
+      "id": "job-3",
+      "description": "Placeholder for an accountant job.",
+      "imageUrl": "https://images.unsplash.com/photo-1711097383282-28097ae16b1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjYWxjdWxhdG9yJTIwY2hhcnRzfGVufDB8fHx8MTc2MzEyODg4NXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "calculator charts"
+    },
+    {
+      "id": "job-4",
+      "description": "Placeholder for a data analyst intern job.",
+      "imageUrl": "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxkYXRhJTIwZ3JhcGh8ZW58MHx8fHwxNzYzMDY0OTQyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "data graph"
+    },
+    {
+      "id": "job-5",
+      "description": "Placeholder for a graphic designer job.",
+      "imageUrl": "https://images.unsplash.com/photo-1632198470750-8a106905a3c3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8ZGVzaWduJTIwcGFsZXR0ZXxlbnwwfHx8fDE3NjMxMTkwNDZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "design palette"
+    },
+    {
+      "id": "job-6",
+      "description": "Placeholder for an operations manager job.",
+      "imageUrl": "https://images.unsplash.com/photo-1651525670054-279c154bc3b6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHx3YXJlaG91c2UlMjBsb2dpc3RpY3xlbnwwfHx8fDE3NjMxMjg4ODV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "warehouse logistic"
+    },
+    {
+      "id": "skill-1",
+      "description": "Placeholder for a web development course.",
+      "imageUrl": "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjb2RpbmclMjBsYXB0b3B8ZW58MHx8fHwxNzYzMDQwODkxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "coding laptop"
+    },
+    {
+      "id": "skill-2",
+      "description": "Placeholder for a digital marketing course.",
+      "imageUrl": "https://images.unsplash.com/photo-1711097383282-28097ae16b1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxtYXJrZXRpbmclMjBjaGFydHxlbnwwfHx8fDE3NjMwNzc1Njh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "marketing chart"
+    },
+    {
+      "id": "skill-3",
+      "description": "Placeholder for a data science course.",
+      "imageUrl": "https://images.unsplash.com/photo-1737505599162-d9932323a889?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxuZXR3b3JrJTIwbm9kZXN8ZW58MHx8fHwxNzYzMDE4ODIyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "network nodes"
+    },
+    {
+      "id": "skill-4",
+      "description": "Placeholder for a CPA prep course.",
+      "imageUrl": "https://images.unsplash.com/photo-1625834318071-f28f0e51449b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxmaW5hbmNlJTIwZG9jdW1lbnR8ZW58MHx8fHwxNzYzMTI4ODg1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "finance document"
+    },
+    {
+      "id": "skill-5",
+      "description": "Placeholder for a UI/UX design course.",
+      "imageUrl": "https://images.unsplash.com/photo-1567095721309-f0222119c902?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHx3aXJlZnJhbWUlMjBwcm90b3R5cGV8ZW58MHx8fHwxNzYzMTI4ODg1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "wireframe prototype"
+    },
+    {
+      "id": "skill-6",
+      "description": "Placeholder for a supply chain management course.",
+      "imageUrl": "https://images.unsplash.com/photo-1585713181935-d5f622cc2415?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjYXJnbyUyMHNoaXB8ZW58MHx8fHwxNzYzMTI4ODg1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cargo ship"
+    }
+  ]
 }
