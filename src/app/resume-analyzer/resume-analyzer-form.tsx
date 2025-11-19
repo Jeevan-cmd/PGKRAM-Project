@@ -103,30 +103,30 @@ export function ResumeAnalyzerForm() {
         return;
     }
     
-    setFileName(file.name);
     const reader = new FileReader();
 
     reader.onload = async (e) => {
         try {
             let text = '';
-            if (file.type === 'application/pdf') {
-                const arrayBuffer = e.target?.result as ArrayBuffer;
+            const fileType = file.type;
+            const arrayBuffer = e.target?.result;
+
+            if (fileType === 'application/pdf' && arrayBuffer instanceof ArrayBuffer) {
                 const pdf = await pdfjs.getDocument({ data: arrayBuffer }).promise;
                 for (let i = 1; i <= pdf.numPages; i++) {
                     const page = await pdf.getPage(i);
                     const content = await page.getTextContent();
                     text += content.items.map(item => (item as any).str).join(' ');
                 }
-            } else if (file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
-                const arrayBuffer = e.target?.result as ArrayBuffer;
+            } else if (fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' && arrayBuffer instanceof ArrayBuffer) {
                 const result = await mammoth.extractRawText({ arrayBuffer });
                 text = result.value;
-            } else if (file.type === 'text/plain' || file.type === 'text/markdown') {
-                text = e.target?.result as string;
+            } else if (typeof arrayBuffer === 'string') { // For .txt and .md
+                text = arrayBuffer;
             } else {
                  toast({
                     title: 'Unsupported file type',
-                    description: 'Please upload a .pdf, .docx, .txt or .md file.',
+                    description: 'Could not process the file content.',
                     variant: 'destructive',
                 });
                 setFileName(null);
@@ -134,6 +134,7 @@ export function ResumeAnalyzerForm() {
             }
 
             form.setValue('resumeText', text, { shouldValidate: true });
+            setFileName(file.name);
             toast({
                 title: 'File loaded',
                 description: `${file.name} has been loaded into the text area.`,
@@ -159,9 +160,11 @@ export function ResumeAnalyzerForm() {
       setFileName(null);
     }
     
-    if (file.type === 'application/pdf' || file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+    const fileType = file.type;
+
+    if (fileType === 'application/pdf' || fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
         reader.readAsArrayBuffer(file);
-    } else if (file.type === 'text/plain' || file.type === 'text/markdown') {
+    } else if (fileType === 'text/plain' || fileType === 'text/markdown') {
         reader.readAsText(file);
     } else {
        toast({
