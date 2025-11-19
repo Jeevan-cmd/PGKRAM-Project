@@ -1,3 +1,4 @@
+
 "use client";
 
 import {
@@ -27,6 +28,7 @@ import {
   User,
   Wrench,
   BotMessageSquare,
+  LineChart,
 } from "lucide-react";
 import { user } from "@/lib/data";
 
@@ -40,6 +42,7 @@ const menuItems = [
 
 const aiMenuItems = [
     { href: "/resume-analyzer", label: "AI Resume Analyzer", icon: <BotMessageSquare /> },
+    { href: "/analysis-dashboard", label: "Analysis Dashboard", icon: <LineChart /> },
 ]
 
 export function MainSidebar() {
