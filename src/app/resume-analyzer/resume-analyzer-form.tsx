@@ -93,63 +93,61 @@ export function ResumeAnalyzerForm() {
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
-
+  
     if (file.size > 30 * 1024 * 1024) { // 30MB limit
-        toast({
-            title: 'File too large',
-            description: 'Please upload a file smaller than 30MB.',
-            variant: 'destructive',
-        });
-        return;
+      toast({
+        title: 'File too large',
+        description: 'Please upload a file smaller than 30MB.',
+        variant: 'destructive',
+      });
+      return;
     }
-    
+  
     const reader = new FileReader();
-
+  
     reader.onload = async (e) => {
-        try {
-            let text = '';
-            const fileType = file.type;
-            const arrayBuffer = e.target?.result;
-
-            if (fileType === 'application/pdf' && arrayBuffer instanceof ArrayBuffer) {
-                const pdf = await pdfjs.getDocument({ data: arrayBuffer }).promise;
-                for (let i = 1; i <= pdf.numPages; i++) {
-                    const page = await pdf.getPage(i);
-                    const content = await page.getTextContent();
-                    text += content.items.map(item => (item as any).str).join(' ');
-                }
-            } else if (fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' && arrayBuffer instanceof ArrayBuffer) {
-                const result = await mammoth.extractRawText({ arrayBuffer });
-                text = result.value;
-            } else if (typeof arrayBuffer === 'string') { // For .txt and .md
-                text = arrayBuffer;
-            } else {
-                 toast({
-                    title: 'Unsupported file type',
-                    description: 'Could not process the file content.',
-                    variant: 'destructive',
-                });
-                setFileName(null);
-                return;
-            }
-
-            form.setValue('resumeText', text, { shouldValidate: true });
-            setFileName(file.name);
-            toast({
-                title: 'File loaded',
-                description: `${file.name} has been loaded into the text area.`,
-            });
-        } catch (error) {
-            console.error('Error processing file:', error);
-            toast({
-                title: 'File Processing Error',
-                description: 'Could not read the content of the uploaded file.',
-                variant: 'destructive',
-            });
-            setFileName(null);
+      try {
+        const arrayBuffer = e.target?.result;
+        if (!arrayBuffer) {
+            throw new Error("Could not read file buffer.");
         }
-    };
 
+        let text = '';
+        const fileType = file.type;
+  
+        if (fileType === 'application/pdf') {
+          const pdf = await pdfjs.getDocument({ data: arrayBuffer as ArrayBuffer }).promise;
+          for (let i = 1; i <= pdf.numPages; i++) {
+            const page = await pdf.getPage(i);
+            const content = await page.getTextContent();
+            text += content.items.map(item => (item as any).str).join(' ');
+          }
+        } else if (fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+          const result = await mammoth.extractRawText({ arrayBuffer: arrayBuffer as ArrayBuffer });
+          text = result.value;
+        } else if (fileType === 'text/plain' || fileType === 'text/markdown') {
+            text = arrayBuffer as string;
+        } else {
+            throw new Error("Unsupported file type.");
+        }
+  
+        form.setValue('resumeText', text, { shouldValidate: true });
+        setFileName(file.name);
+        toast({
+          title: 'File loaded',
+          description: `${file.name} has been loaded into the text area.`,
+        });
+      } catch (error) {
+        console.error('Error processing file:', error);
+        toast({
+          title: 'File Processing Error',
+          description: 'Could not read the content of the uploaded file.',
+          variant: 'destructive',
+        });
+        setFileName(null);
+      }
+    };
+  
     reader.onerror = () => {
       console.error('File reading error');
       toast({
@@ -158,27 +156,25 @@ export function ResumeAnalyzerForm() {
         variant: 'destructive'
       });
       setFileName(null);
-    }
-    
-    const fileType = file.type;
+    };
 
+    const fileType = file.type;
     if (fileType === 'application/pdf' || fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
         reader.readAsArrayBuffer(file);
     } else if (fileType === 'text/plain' || fileType === 'text/markdown') {
         reader.readAsText(file);
     } else {
-       toast({
-          title: 'Unsupported file type',
-          description: 'Please upload a .pdf, .docx, .txt or .md file.',
-          variant: 'destructive',
-      });
-      setFileName(null);
+        toast({
+            title: 'Unsupported file type',
+            description: 'Please upload a .pdf, .docx, .txt or .md file.',
+            variant: 'destructive',
+        });
+        setFileName(null);
     }
-
-
+  
     // Reset file input
-    if(event.target) {
-        event.target.value = '';
+    if (event.target) {
+      event.target.value = '';
     }
   };
 
