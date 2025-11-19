@@ -1,7 +1,8 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { CheckCircle, Loader2, Sparkles } from 'lucide-react';
+import { CheckCircle, Loader2, Sparkles, Upload } from 'lucide-react';
+import * as React from 'react';
 import { useFormState } from 'react-dom';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -28,6 +29,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import { Progress } from '@/components/ui/progress';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
@@ -35,7 +37,7 @@ import { useToast } from '@/hooks/use-toast';
 const formSchema = z.object({
   resumeText: z
     .string()
-    .min(100, 'Please paste your full resume content for an accurate analysis.')
+    .min(100, 'Please paste or upload your full resume content for an accurate analysis.')
     .describe('Full text of the resume'),
 });
 
@@ -70,6 +72,7 @@ export function ResumeAnalyzerForm() {
   );
 
   const { toast } = useToast();
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -77,6 +80,45 @@ export function ResumeAnalyzerForm() {
       resumeText: '',
     },
   });
+
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 1024 * 1024) { // 1MB limit
+        toast({
+            title: 'File too large',
+            description: 'Please upload a file smaller than 1MB.',
+            variant: 'destructive',
+        });
+        return;
+    }
+    
+    // For simplicity, we'll handle .txt files.
+    // For .docx or .pdf, a library like mammoth.js or pdf.js would be needed.
+    if (file.type === 'text/plain') {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const text = e.target?.result as string;
+            form.setValue('resumeText', text, { shouldValidate: true });
+            toast({
+                title: 'File loaded',
+                description: `${file.name} has been loaded into the text area.`,
+            });
+        };
+        reader.readAsText(file);
+    } else {
+        toast({
+            title: 'Unsupported file type',
+            description: 'Please upload a plain text (.txt) file.',
+            variant: 'destructive',
+        });
+    }
+
+    // Reset file input
+    event.target.value = '';
+  };
+
 
   const { isSubmitting } = form.formState;
 
@@ -91,7 +133,7 @@ export function ResumeAnalyzerForm() {
                 AI Resume Analyzer
               </CardTitle>
               <CardDescription>
-                Paste your resume below to get an instant ATS score and
+                Paste your resume below or upload a file to get an instant ATS score and
                 actionable feedback for improvement.
               </CardDescription>
             </CardHeader>
@@ -101,18 +143,36 @@ export function ResumeAnalyzerForm() {
                 name="resumeText"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Your Resume Content</FormLabel>
+                    <div className="flex justify-between items-center">
+                      <FormLabel>Your Resume Content</FormLabel>
+                       <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => fileInputRef.current?.click()}
+                      >
+                        <Upload className="mr-2 h-4 w-4" />
+                        Upload File
+                      </Button>
+                    </div>
                     <FormControl>
                       <Textarea
-                        placeholder="Paste the full text of your resume here..."
+                        placeholder="Paste the full text of your resume here, or upload a .txt file..."
                         {...field}
                         rows={15}
                       />
                     </FormControl>
                     <FormDescription>
-                      Ensure you copy all text from your resume document.
+                      Ensure you copy all text from your resume document or upload it.
                     </FormDescription>
                     <FormMessage />
+                     <Input 
+                        type="file"
+                        ref={fileInputRef}
+                        className="hidden"
+                        onChange={handleFileChange}
+                        accept=".txt"
+                      />
                   </FormItem>
                 )}
               />
