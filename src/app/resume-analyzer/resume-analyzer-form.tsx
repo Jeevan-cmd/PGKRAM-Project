@@ -85,10 +85,10 @@ export function ResumeAnalyzerForm() {
     const file = event.target.files?.[0];
     if (!file) return;
 
-    if (file.size > 1024 * 1024) { // 1MB limit
+    if (file.size > 30 * 1024 * 1024) { // 30MB limit
         toast({
             title: 'File too large',
-            description: 'Please upload a file smaller than 1MB.',
+            description: 'Please upload a file smaller than 30MB.',
             variant: 'destructive',
         });
         return;
