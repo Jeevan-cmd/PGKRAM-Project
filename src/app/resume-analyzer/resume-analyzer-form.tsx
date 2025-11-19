@@ -1,7 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { CheckCircle, Loader2, Sparkles, Upload } from 'lucide-react';
+import { CheckCircle, Loader2, Sparkles, Upload, X } from 'lucide-react';
 import * as React from 'react';
 import { useFormState } from 'react-dom';
 import { useForm } from 'react-hook-form';
@@ -81,6 +81,7 @@ export function ResumeAnalyzerForm() {
 
   const { toast } = useToast();
   const fileInputRef = React.useRef<HTMLInputElement>(null);
+  const [fileName, setFileName] = React.useState<string | null>(null);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -102,6 +103,7 @@ export function ResumeAnalyzerForm() {
         return;
     }
     
+    setFileName(file.name);
     const reader = new FileReader();
 
     reader.onload = async (e) => {
@@ -127,6 +129,7 @@ export function ResumeAnalyzerForm() {
                     description: 'Please upload a .pdf, .docx, .txt or .md file.',
                     variant: 'destructive',
                 });
+                setFileName(null);
                 return;
             }
 
@@ -142,6 +145,7 @@ export function ResumeAnalyzerForm() {
                 description: 'Could not read the content of the uploaded file.',
                 variant: 'destructive',
             });
+            setFileName(null);
         }
     };
 
@@ -152,6 +156,7 @@ export function ResumeAnalyzerForm() {
         description: 'There was an issue reading the file.',
         variant: 'destructive'
       });
+      setFileName(null);
     }
     
     if (file.type === 'application/pdf' || file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
@@ -164,6 +169,7 @@ export function ResumeAnalyzerForm() {
           description: 'Please upload a .pdf, .docx, .txt or .md file.',
           variant: 'destructive',
       });
+      setFileName(null);
     }
 
 
@@ -175,6 +181,11 @@ export function ResumeAnalyzerForm() {
 
 
   const { isSubmitting } = form.formState;
+
+  const clearFile = () => {
+    setFileName(null);
+    form.setValue('resumeText', '');
+  }
 
   return (
     <div className="mx-auto max-w-4xl space-y-8">
@@ -209,11 +220,19 @@ export function ResumeAnalyzerForm() {
                         Upload File
                       </Button>
                     </div>
+                    {fileName && (
+                      <div className="flex items-center justify-between text-sm text-muted-foreground bg-muted/50 p-2 rounded-md border">
+                        <span>{fileName}</span>
+                        <Button variant="ghost" size="icon" onClick={clearFile} className="h-6 w-6">
+                            <X className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    )}
                     <FormControl>
                       <Textarea
                         placeholder="Paste the full text of your resume here, or upload a file..."
                         {...field}
-                        rows={15}
+                        rows={10}
                       />
                     </FormControl>
                     <FormDescription>
