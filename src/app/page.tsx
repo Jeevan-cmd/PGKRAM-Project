@@ -125,37 +125,23 @@ export default function Home() {
           <CardHeader>
             <CardTitle className="font-headline flex items-center gap-3">
               <Lightbulb className="text-accent" />
-              AI-Powered Recommendations
+              AI-Powered Resume Analysis
             </CardTitle>
             <CardDescription>
-              Let our AI help you find the perfect opportunity.
+              Let our AI help you optimize your resume for success.
             </CardDescription>
           </CardHeader>
-          <CardContent className="grid gap-4 md:grid-cols-2">
+          <CardContent>
             <div>
               <h3 className="font-semibold text-foreground">
-                Intelligent Job Matching
+                AI Resume Analyzer
               </h3>
               <p className="text-muted-foreground">
-                Get personalized job recommendations based on your unique
-                skills, experience, and preferences.
+                Get an instant analysis of your resume, including an ATS score and
+                actionable feedback to improve your chances.
               </p>
               <Button asChild variant="link" className="px-0">
-                <Link href="/job-matcher">Try the Job Matcher &rarr;</Link>
-              </Button>
-            </div>
-            <div>
-              <h3 className="font-semibold text-foreground">
-                Personalized Content
-              </h3>
-              <p className="text-muted-foreground">
-                Discover relevant resources and job categories based on your
-                activity on the portal.
-              </p>
-              <Button asChild variant="link" className="px-0">
-                <Link href="/recommendations">
-                  View Your Recommendations &rarr;
-                </Link>
+                <Link href="/resume-analyzer">Analyze Your Resume &rarr;</Link>
               </Button>
             </div>
           </CardContent>

@@ -21,14 +21,12 @@ import {
   BriefcaseBusiness,
   Building2,
   LayoutDashboard,
-  LifeBuoy,
   LogOut,
   Settings,
   Shield,
   User,
   Wrench,
   BotMessageSquare,
-  ThumbsUp,
 } from "lucide-react";
 import { user } from "@/lib/data";
 
@@ -41,8 +39,7 @@ const menuItems = [
 ];
 
 const aiMenuItems = [
-    { href: "/job-matcher", label: "AI Job Matcher", icon: <BotMessageSquare /> },
-    { href: "/recommendations", label: "Recommendations", icon: <ThumbsUp /> },
+    { href: "/resume-analyzer", label: "AI Resume Analyzer", icon: <BotMessageSquare /> },
 ]
 
 export function MainSidebar() {
@@ -121,5 +118,3 @@ export function MainSidebar() {
     </Sidebar>
   );
 }
-
-    
