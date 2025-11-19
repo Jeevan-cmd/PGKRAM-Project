@@ -14,7 +14,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { user } from "@/lib/data";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronRight, LogOut, User as UserIcon } from "lucide-react";
+import { ChevronRight, Globe, LogOut, User as UserIcon } from "lucide-react";
 
 type PageHeaderProps = {
   title: string;
@@ -38,10 +38,27 @@ export function PageHeader({ title }: PageHeaderProps) {
            </span>
         ))}
       </div>
-      <div className="ml-auto flex items-center gap-4">
+      <div className="ml-auto flex items-center gap-2">
         <h1 className="hidden font-headline text-2xl font-bold lg:block">
           {title}
         </h1>
+
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon" className="h-9 w-9">
+              <Globe className="h-5 w-5" />
+              <span className="sr-only">Change language</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>Select Language</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>English</DropdownMenuItem>
+            <DropdownMenuItem>हिन्दी</DropdownMenuItem>
+            <DropdownMenuItem>ਪੰਜਾਬੀ</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="relative h-9 w-9 rounded-full">
