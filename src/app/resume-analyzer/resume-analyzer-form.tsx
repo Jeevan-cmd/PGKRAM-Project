@@ -124,7 +124,7 @@ export function ResumeAnalyzerForm() {
             } else {
                  toast({
                     title: 'Unsupported file type',
-                    description: 'Please upload a .pdf, .docx, or .txt file.',
+                    description: 'Please upload a .pdf, .docx, .txt or .md file.',
                     variant: 'destructive',
                 });
                 return;
@@ -144,6 +144,15 @@ export function ResumeAnalyzerForm() {
             });
         }
     };
+
+    reader.onerror = () => {
+      console.error('File reading error');
+      toast({
+        title: 'File Reading Error',
+        description: 'There was an issue reading the file.',
+        variant: 'destructive'
+      });
+    }
     
     if (file.type === 'application/pdf' || file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
         reader.readAsArrayBuffer(file);
@@ -152,14 +161,16 @@ export function ResumeAnalyzerForm() {
     } else {
        toast({
           title: 'Unsupported file type',
-          description: 'Please upload a .pdf, .docx, or .txt file.',
+          description: 'Please upload a .pdf, .docx, .txt or .md file.',
           variant: 'destructive',
       });
     }
 
 
     // Reset file input
-    event.target.value = '';
+    if(event.target) {
+        event.target.value = '';
+    }
   };
 
 
