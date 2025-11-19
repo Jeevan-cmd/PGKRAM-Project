@@ -1,9 +1,10 @@
+
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CheckCircle, Loader2, Sparkles, Upload, X } from 'lucide-react';
 import * as React from 'react';
-import { useFormState } from 'react-dom';
+import { useActionState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import * as pdfjs from 'pdfjs-dist';
@@ -58,7 +59,7 @@ const initialState = {
 };
 
 export function ResumeAnalyzerForm() {
-  const [state, formAction] = useFormState(
+  const [state, formAction, isSubmitting] = useActionState(
     async (_prevState: any, data: ResumeAnalyzerInput) => {
       const result = await analyzeResume(data);
       if (!result.atsScore) {
@@ -178,9 +179,6 @@ export function ResumeAnalyzerForm() {
     }
   };
 
-
-  const { isSubmitting } = form.formState;
-
   const clearFile = () => {
     setFileName(null);
     form.setValue('resumeText', '');
@@ -190,7 +188,7 @@ export function ResumeAnalyzerForm() {
     <div className="mx-auto max-w-4xl space-y-8">
       <Card>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(formAction)}>
+          <form action={formAction} onSubmit={form.handleSubmit(() => formAction(form.getValues()))}>
             <CardHeader>
               <CardTitle className="font-headline flex items-center gap-2 text-2xl">
                 <Sparkles className="text-primary" />
@@ -307,3 +305,5 @@ export function ResumeAnalyzerForm() {
     </div>
   );
 }
+
+    
