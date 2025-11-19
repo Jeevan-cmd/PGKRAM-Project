@@ -6,6 +6,8 @@ import * as React from 'react';
 import { useFormState } from 'react-dom';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import * as pdfjs from 'pdfjs-dist';
+import mammoth from 'mammoth';
 
 import {
   analyzeResume,
@@ -33,6 +35,12 @@ import { Input } from '@/components/ui/input';
 import { Progress } from '@/components/ui/progress';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+
+// Set up the worker for pdf.js
+if (typeof window !== 'undefined') {
+  pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
+}
+
 
 const formSchema = z.object({
   resumeText: z
@@ -94,26 +102,61 @@ export function ResumeAnalyzerForm() {
         return;
     }
     
-    // For simplicity, we'll handle .txt files.
-    // For .docx or .pdf, a library like mammoth.js or pdf.js would be needed.
-    if (file.type === 'text/plain') {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const text = e.target?.result as string;
+    const reader = new FileReader();
+
+    reader.onload = async (e) => {
+        try {
+            let text = '';
+            if (file.type === 'application/pdf') {
+                const arrayBuffer = e.target?.result as ArrayBuffer;
+                const pdf = await pdfjs.getDocument({ data: arrayBuffer }).promise;
+                for (let i = 1; i <= pdf.numPages; i++) {
+                    const page = await pdf.getPage(i);
+                    const content = await page.getTextContent();
+                    text += content.items.map(item => (item as any).str).join(' ');
+                }
+            } else if (file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+                const arrayBuffer = e.target?.result as ArrayBuffer;
+                const result = await mammoth.extractRawText({ arrayBuffer });
+                text = result.value;
+            } else if (file.type === 'text/plain' || file.type === 'text/markdown') {
+                text = e.target?.result as string;
+            } else {
+                 toast({
+                    title: 'Unsupported file type',
+                    description: 'Please upload a .pdf, .docx, or .txt file.',
+                    variant: 'destructive',
+                });
+                return;
+            }
+
             form.setValue('resumeText', text, { shouldValidate: true });
             toast({
                 title: 'File loaded',
                 description: `${file.name} has been loaded into the text area.`,
             });
-        };
+        } catch (error) {
+            console.error('Error processing file:', error);
+            toast({
+                title: 'File Processing Error',
+                description: 'Could not read the content of the uploaded file.',
+                variant: 'destructive',
+            });
+        }
+    };
+    
+    if (file.type === 'application/pdf' || file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+        reader.readAsArrayBuffer(file);
+    } else if (file.type === 'text/plain' || file.type === 'text/markdown') {
         reader.readAsText(file);
     } else {
-        toast({
-            title: 'Unsupported file type',
-            description: 'Please upload a plain text (.txt) file.',
-            variant: 'destructive',
-        });
+       toast({
+          title: 'Unsupported file type',
+          description: 'Please upload a .pdf, .docx, or .txt file.',
+          variant: 'destructive',
+      });
     }
+
 
     // Reset file input
     event.target.value = '';
@@ -157,7 +200,7 @@ export function ResumeAnalyzerForm() {
                     </div>
                     <FormControl>
                       <Textarea
-                        placeholder="Paste the full text of your resume here, or upload a .txt file..."
+                        placeholder="Paste the full text of your resume here, or upload a file..."
                         {...field}
                         rows={15}
                       />
@@ -171,7 +214,7 @@ export function ResumeAnalyzerForm() {
                         ref={fileInputRef}
                         className="hidden"
                         onChange={handleFileChange}
-                        accept=".txt"
+                        accept=".txt,.pdf,.docx,.md"
                       />
                   </FormItem>
                 )}
