@@ -42,7 +42,6 @@ if (typeof window !== 'undefined') {
   pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
 }
 
-
 const formSchema = z.object({
   resumeText: z
     .string()
@@ -94,8 +93,9 @@ export function ResumeAnalyzerForm() {
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
-  
-    if (file.size > 30 * 1024 * 1024) { // 30MB limit
+
+    if (file.size > 30 * 1024 * 1024) {
+      // 30MB limit
       toast({
         title: 'File too large',
         description: 'Please upload a file smaller than 30MB.',
@@ -103,35 +103,40 @@ export function ResumeAnalyzerForm() {
       });
       return;
     }
-  
+
     const reader = new FileReader();
-  
+
     reader.onload = async (e) => {
       try {
         const arrayBuffer = e.target?.result;
         if (!arrayBuffer) {
-            throw new Error("Could not read file buffer.");
+          throw new Error('Could not read file buffer.');
         }
 
         let text = '';
         const fileType = file.type;
-  
+
         if (fileType === 'application/pdf') {
           const pdf = await pdfjs.getDocument({ data: arrayBuffer as ArrayBuffer }).promise;
           for (let i = 1; i <= pdf.numPages; i++) {
             const page = await pdf.getPage(i);
             const content = await page.getTextContent();
-            text += content.items.map(item => (item as any).str).join(' ');
+            text += content.items.map((item: any) => item.str).join(' ');
           }
         } else if (fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
           const result = await mammoth.extractRawText({ arrayBuffer: arrayBuffer as ArrayBuffer });
           text = result.value;
         } else if (fileType === 'text/plain' || fileType === 'text/markdown') {
-            text = arrayBuffer as string;
+          text = arrayBuffer as string;
         } else {
-            throw new Error("Unsupported file type.");
+          toast({
+            title: 'Unsupported file type',
+            description: 'Please upload a .pdf, .docx, .txt or .md file.',
+            variant: 'destructive',
+          });
+          return;
         }
-  
+
         form.setValue('resumeText', text, { shouldValidate: true });
         setFileName(file.name);
         toast({
@@ -142,47 +147,48 @@ export function ResumeAnalyzerForm() {
         console.error('Error processing file:', error);
         toast({
           title: 'File Processing Error',
-          description: 'Could not read the content of the uploaded file.',
+          description: 'Could not read the content of the uploaded file. Please check if the file is corrupted.',
           variant: 'destructive',
         });
         setFileName(null);
       }
     };
-  
+
     reader.onerror = () => {
       console.error('File reading error');
       toast({
         title: 'File Reading Error',
         description: 'There was an issue reading the file.',
-        variant: 'destructive'
+        variant: 'destructive',
       });
       setFileName(null);
     };
 
     const fileType = file.type;
     if (fileType === 'application/pdf' || fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
-        reader.readAsArrayBuffer(file);
+      reader.readAsArrayBuffer(file);
     } else if (fileType === 'text/plain' || fileType === 'text/markdown') {
-        reader.readAsText(file);
+      reader.readAsText(file);
     } else {
-        toast({
-            title: 'Unsupported file type',
-            description: 'Please upload a .pdf, .docx, .txt or .md file.',
-            variant: 'destructive',
-        });
-        setFileName(null);
+      toast({
+        title: 'Unsupported file type',
+        description: 'Please upload a .pdf, .docx, .txt or .md file.',
+        variant: 'destructive',
+      });
+      setFileName(null);
     }
-  
+
     // Reset file input
     if (event.target) {
       event.target.value = '';
     }
   };
 
+
   const clearFile = () => {
     setFileName(null);
     form.setValue('resumeText', '');
-  }
+  };
 
   return (
     <div className="mx-auto max-w-4xl space-y-8">
@@ -195,8 +201,7 @@ export function ResumeAnalyzerForm() {
                 AI Resume Analyzer
               </CardTitle>
               <CardDescription>
-                Paste your resume below or upload a file to get an instant ATS score and
-                actionable feedback for improvement.
+                Paste your resume below or upload a file to get an instant ATS score and actionable feedback for improvement.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -205,9 +210,9 @@ export function ResumeAnalyzerForm() {
                 name="resumeText"
                 render={({ field }) => (
                   <FormItem>
-                    <div className="flex justify-between items-center">
+                    <div className="flex items-center justify-between">
                       <FormLabel>Your Resume Content</FormLabel>
-                       <Button
+                      <Button
                         type="button"
                         variant="outline"
                         size="sm"
@@ -218,10 +223,15 @@ export function ResumeAnalyzerForm() {
                       </Button>
                     </div>
                     {fileName && (
-                      <div className="flex items-center justify-between text-sm text-muted-foreground bg-muted/50 p-2 rounded-md border">
+                      <div className="flex items-center justify-between rounded-md border bg-muted/50 p-2 text-sm text-muted-foreground">
                         <span>{fileName}</span>
-                        <Button variant="ghost" size="icon" onClick={clearFile} className="h-6 w-6">
-                            <X className="h-4 w-4" />
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={clearFile}
+                          className="h-6 w-6"
+                        >
+                          <X className="h-4 w-4" />
                         </Button>
                       </div>
                     )}
@@ -236,13 +246,13 @@ export function ResumeAnalyzerForm() {
                       Ensure you copy all text from your resume document or upload it.
                     </FormDescription>
                     <FormMessage />
-                     <Input 
-                        type="file"
-                        ref={fileInputRef}
-                        className="hidden"
-                        onChange={handleFileChange}
-                        accept=".txt,.pdf,.docx,.md"
-                      />
+                    <Input
+                      type="file"
+                      ref={fileInputRef}
+                      className="hidden"
+                      onChange={handleFileChange}
+                      accept=".txt,.pdf,.docx,.md"
+                    />
                   </FormItem>
                 )}
               />
@@ -264,43 +274,54 @@ export function ResumeAnalyzerForm() {
       </Card>
 
       {state.atsScore !== null && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="font-headline">Analysis Results</CardTitle>
-            <CardDescription>
-              Here's how your resume stacks up against applicant tracking systems.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div>
-              <div className="mb-2 flex justify-between">
-                <h3 className="font-semibold">ATS Compatibility Score</h3>
-                <p className="font-bold text-primary">{state.atsScore} / 100</p>
-              </div>
-              <Progress value={state.atsScore} className="h-3" />
-            </div>
-
-            <div>
-              <h3 className="font-semibold">Overall Analysis</h3>
-              <p className="mt-2 text-sm text-muted-foreground">
-                {state.analysis}
-              </p>
-            </div>
-            
-            <div>
-              <h3 className="font-semibold">Suggested Improvements</h3>
-              <ul className="mt-2 space-y-2">
-                {state.suggestedImprovements.map((item, index) => (
-                  <li key={index} className="flex items-start gap-2 text-sm">
-                    <CheckCircle className="mt-1 h-4 w-4 flex-shrink-0 text-green-500" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-          </CardContent>
-        </Card>
+        <div>
+          <h2 className="font-headline mb-4 text-center text-2xl font-bold">Analysis Dashboard</h2>
+          <div className="grid gap-6 lg:grid-cols-3">
+            <Card className="flex flex-col items-center justify-center text-center lg:col-span-1">
+              <CardHeader>
+                <CardTitle className="font-headline">ATS Score</CardTitle>
+                <CardDescription>Your resume's compatibility with applicant tracking systems.</CardDescription>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                 <div className="relative size-40">
+                  <svg className="size-full" width="36" height="36" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="18" cy="18" r="16" fill="none" className="stroke-current text-muted/50" strokeWidth="2"></circle>
+                    <g className="origin-center -rotate-90 transform">
+                      <circle cx="18" cy="18" r="16" fill="none" className="stroke-current text-primary" strokeWidth="2" strokeDasharray={`${state.atsScore}, 100`}></circle>
+                    </g>
+                  </svg>
+                  <div className="absolute top-1/2 start-1/2 -translate-x-1/2 -translate-y-1/2 transform">
+                    <span className="text-center text-4xl font-bold text-primary">{state.atsScore}</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            <Card className="lg:col-span-2">
+               <CardHeader>
+                <CardTitle className="font-headline">Overall Analysis</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">{state.analysis}</p>
+              </CardContent>
+            </Card>
+          </div>
+           <Card className="mt-6">
+            <CardHeader>
+              <CardTitle className="font-headline">Suggested Improvements</CardTitle>
+              <CardDescription>Actionable steps to improve your resume's score and impact.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-4">
+                  {state.suggestedImprovements.map((item, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <CheckCircle className="mt-1 size-5 flex-shrink-0 text-green-500" />
+                      <span className="text-sm">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+            </CardContent>
+           </Card>
+        </div>
       )}
     </div>
   );
