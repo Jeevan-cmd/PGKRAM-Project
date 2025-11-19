@@ -33,6 +33,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { useEffect } from "react";
+import { useLanguage } from "@/context/language-context";
 
 const formSchema = z.object({
   skills: z
@@ -56,13 +57,14 @@ const initialState = {
 };
 
 export function JobMatcherForm() {
+  const { t } = useLanguage();
   const [state, formAction] = useFormState(
     async (_prevState: any, data: IntelligentJobMatchingInput) => {
       const result = await intelligentJobMatching(data);
       if (!result.jobRecommendations || result.jobRecommendations.length === 0) {
         toast({
-          title: "No matches found",
-          description: "We couldn't find any job recommendations. Try adjusting your criteria.",
+          title: t('noMatchesFound'),
+          description: t('noMatchesFoundDesc'),
           variant: "destructive",
         })
         return { jobRecommendations: [] };
@@ -98,11 +100,10 @@ export function JobMatcherForm() {
             <CardHeader>
               <CardTitle className="font-headline text-2xl flex items-center gap-2">
                 <Sparkles className="text-primary" />
-                AI-Powered Job Matcher
+                {t('aiPoweredJobMatcher')}
               </CardTitle>
               <CardDescription>
-                Describe your profile, and our AI will find the best job
-                opportunities for you in Punjab.
+                {t('aiPoweredJobMatcherDesc')}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -111,15 +112,15 @@ export function JobMatcherForm() {
                 name="skills"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Your Skills</FormLabel>
+                    <FormLabel>{t('yourSkills')}</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="e.g., React, Node.js, Project Management"
+                        placeholder={t('yourSkillsPlaceholder')}
                         {...field}
                       />
                     </FormControl>
                     <FormDescription>
-                      Enter your skills, separated by commas.
+                      {t('yourSkillsDesc')}
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -130,10 +131,10 @@ export function JobMatcherForm() {
                 name="experience"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Your Experience</FormLabel>
+                    <FormLabel>{t('yourExperience')}</FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder="Describe your past roles, responsibilities, and achievements. e.g., '5 years as a Senior Developer at a tech startup...'"
+                        placeholder={t('yourExperiencePlaceholder')}
                         {...field}
                         rows={5}
                       />
@@ -147,15 +148,15 @@ export function JobMatcherForm() {
                 name="preferences"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Job Preferences</FormLabel>
+                    <FormLabel>{t('jobPreferences')}</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="e.g., 'Full-time remote role in the IT sector'"
+                        placeholder={t('jobPreferencesPlaceholder')}
                         {...field}
                       />
                     </FormControl>
                     <FormDescription>
-                      What are you looking for in a job?
+                      {t('jobPreferencesDesc')}
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -167,10 +168,10 @@ export function JobMatcherForm() {
                 {isSubmitting ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Finding Matches...
+                    {t('findingMatches')}...
                   </>
                 ) : (
-                  "Find My Perfect Job"
+                  t('findMyPerfectJob')
                 )}
               </Button>
             </CardFooter>
@@ -181,7 +182,7 @@ export function JobMatcherForm() {
       {state.jobRecommendations && state.jobRecommendations.length > 0 && (
         <div className="mt-8">
           <h2 className="font-headline mb-4 text-2xl font-bold">
-            Your Personalized Job Recommendations
+            {t('yourPersonalizedJobRecommendations')}
           </h2>
           <div className="space-y-4">
             {state.jobRecommendations.map((rec, index) => (
@@ -191,12 +192,12 @@ export function JobMatcherForm() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
-                    This position is recommended based on your profile.
+                    {t('positionRecommended')}
                   </p>
                 </CardContent>
                 <CardFooter className="gap-2">
-                  <Button>Apply Now</Button>
-                  <Button variant="ghost">View Details</Button>
+                  <Button>{t('applyNow')}</Button>
+                  <Button variant="ghost">{t('viewDetails')}</Button>
                 </CardFooter>
               </Card>
             ))}

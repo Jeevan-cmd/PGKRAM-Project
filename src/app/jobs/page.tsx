@@ -18,24 +18,27 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { useLanguage } from '@/context/language-context';
 import { jobs } from '@/lib/data';
 import { Search } from 'lucide-react';
 
 export default function JobsPage() {
+  const { t } = useLanguage();
+
   return (
     <div className="flex h-full flex-col">
-      <PageHeader title="Job Listings" />
+      <PageHeader title={t('jobListings')} />
       <div className="flex-1 space-y-8 overflow-y-auto p-4 md:p-8">
         <Card>
           <CardContent className="p-4">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
               <div className="relative sm:col-span-2">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                <Input placeholder="Search by title, company, or keyword" className="pl-10" />
+                <Input placeholder={t('searchBy')} className="pl-10" />
               </div>
               <Select>
                 <SelectTrigger>
-                  <SelectValue placeholder="Filter by location" />
+                  <SelectValue placeholder={t('filterByLocation')} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="mohali">Mohali</SelectItem>
@@ -46,13 +49,13 @@ export default function JobsPage() {
               </Select>
               <Select>
                 <SelectTrigger>
-                  <SelectValue placeholder="Filter by type" />
+                  <SelectValue placeholder={t('filterByType')} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="full-time">Full-Time</SelectItem>
-                  <SelectItem value="part-time">Part-Time</SelectItem>
-                  <SelectItem value="contract">Contract</SelectItem>
-                  <SelectItem value="internship">Internship</SelectItem>
+                  <SelectItem value="full-time">{t('fullTime')}</SelectItem>
+                  <SelectItem value="part-time">{t('partTime')}</SelectItem>
+                  <SelectItem value="contract">{t('contract')}</SelectItem>
+                  <SelectItem value="internship">{t('internship')}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -66,7 +69,7 @@ export default function JobsPage() {
               className="flex flex-col transition-all hover:shadow-lg"
             >
               <CardHeader>
-                <CardTitle className="font-headline">{job.title}</CardTitle>
+                <CardTitle className="font-headline">{t(job.title)}</CardTitle>
                 <CardDescription>{job.company}</CardDescription>
               </CardHeader>
               <CardContent className="flex-grow space-y-2">
@@ -74,13 +77,13 @@ export default function JobsPage() {
                   <span>{job.location}</span>
                 </div>
                 <div>
-                  <Badge variant="secondary">{job.type}</Badge>
+                  <Badge variant="secondary">{t(job.type)}</Badge>
                 </div>
               </CardContent>
               <CardFooter className="flex gap-2">
-                <Button className="flex-1">Apply Now</Button>
+                <Button className="flex-1">{t('applyNow')}</Button>
                 <Button variant="outline" className="flex-1">
-                  View Details
+                  {t('viewDetails')}
                 </Button>
               </CardFooter>
             </Card>

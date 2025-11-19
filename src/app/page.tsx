@@ -1,3 +1,4 @@
+'use client';
 import {
   BriefcaseBusiness,
   Building2,
@@ -18,15 +19,17 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { useLanguage } from '@/context/language-context';
 import { jobs } from '@/lib/data';
 import { placeholderImages } from '@/lib/placeholder-images.json';
 
 const heroImage = placeholderImages.find((img) => img.id === 'hero-bg');
 
 export default function Home() {
+  const { t } = useLanguage();
   return (
     <div className="flex h-full flex-col">
-      <PageHeader title="Dashboard" />
+      <PageHeader title={t('dashboard')} />
       <div className="flex-1 space-y-8 overflow-y-auto p-4 md:p-8">
         <div className="relative h-64 w-full overflow-hidden rounded-lg">
           {heroImage && (
@@ -42,10 +45,10 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
           <div className="absolute inset-0 flex flex-col items-start justify-end p-6 md:p-8">
             <h1 className="font-headline text-3xl font-bold text-white md:text-5xl">
-              Punjab Opportunities Hub
+              {t('punjabOpportunitiesHub')}
             </h1>
             <p className="mt-2 max-w-2xl text-lg text-primary-foreground/90">
-              Your gateway to jobs, skills, and business growth in Punjab.
+              {t('hubTagline')}
             </p>
           </div>
         </div>
@@ -55,21 +58,20 @@ export default function Home() {
             <CardHeader>
               <CardTitle className="font-headline flex items-center gap-2">
                 <BriefcaseBusiness className="text-primary" />
-                Find Your Next Job
+                {t('findYourNextJob')}
               </CardTitle>
               <CardDescription>
-                Explore thousands of job openings across Punjab.
+                {t('findYourNextJobDesc')}
               </CardDescription>
             </CardHeader>
             <CardContent className="flex-grow">
               <p>
-                Search and filter through a comprehensive list of public and
-                private sector jobs.
+                {t('findYourNextJobPara')}
               </p>
             </CardContent>
             <CardFooter>
               <Button asChild className="w-full">
-                <Link href="/jobs">Browse Jobs</Link>
+                <Link href="/jobs">{t('browseJobs')}</Link>
               </Button>
             </CardFooter>
           </Card>
@@ -78,21 +80,20 @@ export default function Home() {
             <CardHeader>
               <CardTitle className="font-headline flex items-center gap-2">
                 <Wrench className="text-primary" />
-                Develop Your Skills
+                {t('developYourSkills')}
               </CardTitle>
               <CardDescription>
-                Access curated skill development programs and resources.
+                {t('developYourSkillsDesc')}
               </CardDescription>
             </CardHeader>
             <CardContent className="flex-grow">
               <p>
-                Upskill and reskill with courses relevant to the Punjab job
-                market.
+                {t('developYourSkillsPara')}
               </p>
             </CardContent>
             <CardFooter>
               <Button asChild className="w-full">
-                <Link href="/skills">Explore Resources</Link>
+                <Link href="/skills">{t('exploreResources')}</Link>
               </Button>
             </CardFooter>
           </Card>
@@ -101,21 +102,20 @@ export default function Home() {
             <CardHeader>
               <CardTitle className="font-headline flex items-center gap-2">
                 <Building2 className="text-primary" />
-                Grow Your Business
+                {t('growYourBusiness')}
               </CardTitle>
               <CardDescription>
-                Find support and resources to start or expand your business.
+                {t('growYourBusinessDesc')}
               </CardDescription>
             </CardHeader>
             <CardContent className="flex-grow">
               <p>
-                Our directory connects you with grants, mentorship, and other
-                services.
+                {t('growYourBusinessPara')}
               </p>
             </CardContent>
             <CardFooter>
               <Button asChild className="w-full">
-                <Link href="/business-support">Business Directory</Link>
+                <Link href="/business-support">{t('businessDirectory')}</Link>
               </Button>
             </CardFooter>
           </Card>
@@ -125,23 +125,22 @@ export default function Home() {
           <CardHeader>
             <CardTitle className="font-headline flex items-center gap-3">
               <Lightbulb className="text-accent" />
-              AI-Powered Resume Analysis
+              {t('aiPoweredResumeAnalysis')}
             </CardTitle>
             <CardDescription>
-              Let our AI help you optimize your resume for success.
+              {t('aiPoweredResumeAnalysisDesc')}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <div>
               <h3 className="font-semibold text-foreground">
-                AI Resume Analyzer
+                {t('aiResumeAnalyzer')}
               </h3>
               <p className="text-muted-foreground">
-                Get an instant analysis of your resume, including an ATS score and
-                actionable feedback to improve your chances.
+                {t('aiResumeAnalyzerDesc')}
               </p>
               <Button asChild variant="link" className="px-0">
-                <Link href="/resume-analyzer">Analyze Your Resume &rarr;</Link>
+                <Link href="/resume-analyzer">{t('analyzeYourResume')} &rarr;</Link>
               </Button>
             </div>
           </CardContent>
@@ -149,15 +148,15 @@ export default function Home() {
 
         <div>
           <h2 className="font-headline mb-4 text-2xl font-bold">
-            Featured Job Openings
+            {t('featuredJobOpenings')}
           </h2>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {jobs.slice(0, 3).map((job) => (
               <Card key={job.id} className="transition-all hover:shadow-md">
                 <CardHeader>
                   <CardTitle className="font-headline flex items-start justify-between gap-4">
-                    <span>{job.title}</span>
-                    <Badge variant="secondary">{job.type}</Badge>
+                    <span>{t(job.title)}</span>
+                    <Badge variant="secondary">{t(job.type)}</Badge>
                   </CardTitle>
                   <CardDescription>{job.company}</CardDescription>
                 </CardHeader>
@@ -168,7 +167,7 @@ export default function Home() {
                 </CardContent>
                 <CardFooter>
                   <Button variant="outline" className="w-full">
-                    View Details
+                    {t('viewDetails')}
                   </Button>
                 </CardFooter>
               </Card>

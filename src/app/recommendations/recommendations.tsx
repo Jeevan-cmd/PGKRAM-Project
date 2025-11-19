@@ -14,9 +14,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useLanguage } from "@/context/language-context";
 import { BotMessageSquare, ThumbsUp } from "lucide-react";
 
 export function Recommendations() {
+  const { t } = useLanguage();
   const [recommendations, setRecommendations] =
     useState<PersonalizedContentRecommendationsOutput | null>(null);
   const [loading, setLoading] = useState(true);
@@ -57,11 +59,10 @@ export function Recommendations() {
         <CardHeader>
           <CardTitle className="font-headline flex items-center gap-2 text-accent">
             <BotMessageSquare />
-            For You
+            {t('forYou')}
           </CardTitle>
           <CardDescription className="text-accent-foreground/80">
-            Based on your recent activity, here are some resources and job
-            categories you might find interesting.
+            {t('forYouDesc')}
           </CardDescription>
         </CardHeader>
       </Card>
@@ -69,7 +70,7 @@ export function Recommendations() {
       <div className="mt-8 grid gap-8 lg:grid-cols-2">
         <div>
           <h2 className="font-headline mb-4 text-2xl font-bold">
-            Recommended Resources
+            {t('recommendedResources')}
           </h2>
           <div className="space-y-4">
             {loading
@@ -81,11 +82,11 @@ export function Recommendations() {
                         {rec}
                       </CardTitle>
                       <CardDescription>
-                        A curated resource to boost your skills.
+                        {t('recommendedResourceDesc')}
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <Button variant="outline">Learn More</Button>
+                      <Button variant="outline">{t('learnMore')}</Button>
                     </CardContent>
                   </Card>
                 ))}
@@ -94,7 +95,7 @@ export function Recommendations() {
 
         <div>
           <h2 className="font-headline mb-4 text-2xl font-bold">
-            Recommended Job Categories
+            {t('recommendedJobCategories')}
           </h2>
           <div className="space-y-4">
             {loading
@@ -106,11 +107,11 @@ export function Recommendations() {
                         {rec}
                       </CardTitle>
                       <CardDescription>
-                        Explore roles in this growing category.
+                        {t('recommendedJobCategoryDesc')}
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <Button variant="outline">Browse Jobs</Button>
+                      <Button variant="outline">{t('browseJobs')}</Button>
                     </CardContent>
                   </Card>
                 ))}

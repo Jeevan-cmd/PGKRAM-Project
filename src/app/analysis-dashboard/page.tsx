@@ -14,6 +14,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
+import { useLanguage } from '@/context/language-context';
 import { Briefcase, Building, UserCheck, Users } from 'lucide-react';
 import { Bar, BarChart, CartesianGrid, Pie, PieChart, XAxis } from 'recharts';
 
@@ -57,62 +58,63 @@ const chartConfig: ChartConfig = {
 };
 
 export default function AnalysisDashboardPage() {
+  const { t } = useLanguage();
   return (
     <div className="flex h-full flex-col">
-      <PageHeader title="Analysis Dashboard" />
+      <PageHeader title={t('analysisDashboard')} />
       <div className="flex-1 space-y-8 overflow-y-auto p-4 md:p-8">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Jobs</CardTitle>
+              <CardTitle className="text-sm font-medium">{t('totalJobs')}</CardTitle>
               <Briefcase className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">4,050</div>
               <p className="text-xs text-muted-foreground">
-                +15% from last month
+                {t('fromLastMonth', { value: '+15%' })}
               </p>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                Registered Job Seekers
+                {t('registeredJobSeekers')}
               </CardTitle>
               <Users className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">+23,480</div>
               <p className="text-xs text-muted-foreground">
-                +180.1% from last month
+                 {t('fromLastMonth', { value: '+180.1%' })}
               </p>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                Registered Employers
+                {t('registeredEmployers')}
               </CardTitle>
               <Building className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">+1,250</div>
               <p className="text-xs text-muted-foreground">
-                +32 from last month
+                {t('fromLastMonth', { value: '+32' })}
               </p>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                Successful Placements
+                {t('successfulPlacements')}
               </CardTitle>
               <UserCheck className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">+573</div>
               <p className="text-xs text-muted-foreground">
-                +201 since last month
+                {t('sinceLastMonth', { value: '+201' })}
               </p>
             </CardContent>
           </Card>
@@ -122,11 +124,10 @@ export default function AnalysisDashboardPage() {
           <Card>
             <CardHeader>
               <CardTitle className="font-headline">
-                Job Distribution by Sector
+                {t('jobDistributionBySector')}
               </CardTitle>
               <CardDescription>
-                A breakdown of available jobs in the private vs. government
-                sectors.
+                {t('jobDistributionBySectorDesc')}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -149,10 +150,10 @@ export default function AnalysisDashboardPage() {
           <Card>
             <CardHeader>
               <CardTitle className="font-headline">
-                Job Openings by Top Locations
+                {t('jobOpeningsByTopLocations')}
               </CardTitle>
               <CardDescription>
-                Distribution of job openings across major cities in Punjab.
+                {t('jobOpeningsByTopLocationsDesc')}
               </CardDescription>
             </CardHeader>
             <CardContent>

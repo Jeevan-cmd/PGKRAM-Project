@@ -33,9 +33,9 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Progress } from '@/components/ui/progress';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import { useLanguage } from '@/context/language-context';
 
 // Set up the worker for pdf.js
 if (typeof window !== 'undefined') {
@@ -58,21 +58,22 @@ const initialState = {
 };
 
 export function ResumeAnalyzerForm() {
+  const { t } = useLanguage();
   const [state, formAction, isSubmitting] = useActionState(
     async (_prevState: any, data: ResumeAnalyzerInput) => {
       const result = await analyzeResume(data);
       if (!result.atsScore) {
         toast({
-          title: 'Analysis Failed',
+          title: t('analysisFailed'),
           description:
-            "We couldn't analyze your resume. Please try again.",
+            t('analysisFailedDesc'),
           variant: 'destructive',
         });
         return initialState;
       }
       toast({
-        title: 'Analysis Complete!',
-        description: 'Check out your resume score and feedback below.',
+        title: t('analysisComplete'),
+        description: t('analysisCompleteDesc'),
       });
       return result;
     },
@@ -97,8 +98,8 @@ export function ResumeAnalyzerForm() {
     if (file.size > 30 * 1024 * 1024) {
       // 30MB limit
       toast({
-        title: 'File too large',
-        description: 'Please upload a file smaller than 30MB.',
+        title: t('fileTooLarge'),
+        description: t('fileTooLargeDesc'),
         variant: 'destructive',
       });
       return;
@@ -127,38 +128,31 @@ export function ResumeAnalyzerForm() {
           const result = await mammoth.extractRawText({ arrayBuffer: arrayBuffer as ArrayBuffer });
           text = result.value;
         } else if (fileType === 'text/plain' || fileType === 'text/markdown') {
-          text = arrayBuffer as string;
-        } else {
-          toast({
-            title: 'Unsupported file type',
-            description: 'Please upload a .pdf, .docx, .txt or .md file.',
-            variant: 'destructive',
-          });
-          return;
+          text = arrayBuffer.toString();
         }
 
         form.setValue('resumeText', text, { shouldValidate: true });
         setFileName(file.name);
         toast({
-          title: 'File loaded',
-          description: `${file.name} has been loaded into the text area.`,
+          title: t('fileLoaded'),
+          description: t('fileLoadedDesc', { fileName: file.name }),
         });
       } catch (error) {
         console.error('Error processing file:', error);
         toast({
-          title: 'File Processing Error',
-          description: 'Could not read the content of the uploaded file. Please check if the file is corrupted.',
+          title: t('fileProcessingError'),
+          description: t('fileProcessingErrorDesc'),
           variant: 'destructive',
         });
         setFileName(null);
       }
     };
-
+    
     reader.onerror = () => {
       console.error('File reading error');
       toast({
-        title: 'File Reading Error',
-        description: 'There was an issue reading the file.',
+        title: t('fileReadingError'),
+        description: t('fileReadingErrorDesc'),
         variant: 'destructive',
       });
       setFileName(null);
@@ -166,16 +160,16 @@ export function ResumeAnalyzerForm() {
 
     const fileType = file.type;
     if (fileType === 'application/pdf' || fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
-      reader.readAsArrayBuffer(file);
+        reader.readAsArrayBuffer(file);
     } else if (fileType === 'text/plain' || fileType === 'text/markdown') {
-      reader.readAsText(file);
+        reader.readAsText(file);
     } else {
-      toast({
-        title: 'Unsupported file type',
-        description: 'Please upload a .pdf, .docx, .txt or .md file.',
-        variant: 'destructive',
-      });
-      setFileName(null);
+        toast({
+            title: t('unsupportedFileType'),
+            description: t('unsupportedFileTypeDesc'),
+            variant: 'destructive',
+        });
+        setFileName(null);
     }
 
     // Reset file input
@@ -198,10 +192,10 @@ export function ResumeAnalyzerForm() {
             <CardHeader>
               <CardTitle className="font-headline flex items-center gap-2 text-2xl">
                 <Sparkles className="text-primary" />
-                AI Resume Analyzer
+                {t('aiResumeAnalyzer')}
               </CardTitle>
               <CardDescription>
-                Paste your resume below or upload a file to get an instant ATS score and actionable feedback for improvement.
+                {t('aiResumeAnalyzerFormDesc')}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -211,7 +205,7 @@ export function ResumeAnalyzerForm() {
                 render={({ field }) => (
                   <FormItem>
                     <div className="flex items-center justify-between">
-                      <FormLabel>Your Resume Content</FormLabel>
+                      <FormLabel>{t('yourResumeContent')}</FormLabel>
                       <Button
                         type="button"
                         variant="outline"
@@ -219,7 +213,7 @@ export function ResumeAnalyzerForm() {
                         onClick={() => fileInputRef.current?.click()}
                       >
                         <Upload className="mr-2 h-4 w-4" />
-                        Upload File
+                        {t('uploadFile')}
                       </Button>
                     </div>
                     {fileName && (
@@ -237,13 +231,13 @@ export function ResumeAnalyzerForm() {
                     )}
                     <FormControl>
                       <Textarea
-                        placeholder="Paste the full text of your resume here, or upload a file..."
+                        placeholder={t('resumePlaceholder')}
                         {...field}
                         rows={10}
                       />
                     </FormControl>
                     <FormDescription>
-                      Ensure you copy all text from your resume document or upload it.
+                      {t('resumeDesc')}
                     </FormDescription>
                     <FormMessage />
                     <Input
@@ -262,10 +256,10 @@ export function ResumeAnalyzerForm() {
                 {isSubmitting ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Analyzing...
+                    {t('analyzing')}...
                   </>
                 ) : (
-                  'Analyze My Resume'
+                  t('analyzeMyResume')
                 )}
               </Button>
             </CardFooter>
@@ -275,12 +269,12 @@ export function ResumeAnalyzerForm() {
 
       {state.atsScore !== null && (
         <div>
-          <h2 className="font-headline mb-4 text-center text-2xl font-bold">Analysis Dashboard</h2>
+          <h2 className="font-headline mb-4 text-center text-2xl font-bold">{t('analysisDashboard')}</h2>
           <div className="grid gap-6 lg:grid-cols-3">
             <Card className="flex flex-col items-center justify-center text-center lg:col-span-1">
               <CardHeader>
-                <CardTitle className="font-headline">ATS Score</CardTitle>
-                <CardDescription>Your resume's compatibility with applicant tracking systems.</CardDescription>
+                <CardTitle className="font-headline">{t('atsScore')}</CardTitle>
+                <CardDescription>{t('atsScoreDesc')}</CardDescription>
               </CardHeader>
               <CardContent className="flex-grow">
                  <div className="relative size-40">
@@ -298,7 +292,7 @@ export function ResumeAnalyzerForm() {
             </Card>
             <Card className="lg:col-span-2">
                <CardHeader>
-                <CardTitle className="font-headline">Overall Analysis</CardTitle>
+                <CardTitle className="font-headline">{t('overallAnalysis')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground">{state.analysis}</p>
@@ -307,8 +301,8 @@ export function ResumeAnalyzerForm() {
           </div>
            <Card className="mt-6">
             <CardHeader>
-              <CardTitle className="font-headline">Suggested Improvements</CardTitle>
-              <CardDescription>Actionable steps to improve your resume's score and impact.</CardDescription>
+              <CardTitle className="font-headline">{t('suggestedImprovements')}</CardTitle>
+              <CardDescription>{t('suggestedImprovementsDesc')}</CardDescription>
             </CardHeader>
             <CardContent>
               <ul className="space-y-4">
@@ -326,5 +320,4 @@ export function ResumeAnalyzerForm() {
     </div>
   );
 }
-
     

@@ -26,55 +26,57 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Textarea } from '@/components/ui/textarea';
+import { useLanguage } from '@/context/language-context';
 import { jobs } from '@/lib/data';
 
 export default function EmployerPortalPage() {
+  const { t } = useLanguage();
   const postedJobs = jobs.slice(0, 4);
 
   return (
     <div className="flex h-full flex-col">
-      <PageHeader title="Employer Portal" />
+      <PageHeader title={t('employerPortal')} />
       <div className="flex-1 space-y-8 overflow-y-auto p-4 md:p-8">
         <div className="grid gap-8 lg:grid-cols-3">
           <div className="lg:col-span-1">
             <Card>
               <CardHeader>
-                <CardTitle className="font-headline">Post a New Job</CardTitle>
+                <CardTitle className="font-headline">{t('postNewJob')}</CardTitle>
                 <CardDescription>
-                  Fill out the form to add a new job opening.
+                  {t('postNewJobDesc')}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="job-title">Job Title</Label>
-                  <Input id="job-title" placeholder="e.g., Software Engineer" />
+                  <Label htmlFor="job-title">{t('jobTitle')}</Label>
+                  <Input id="job-title" placeholder={t('jobTitlePlaceholder')} />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="location">Location</Label>
-                  <Input id="location" placeholder="e.g., Mohali, Punjab" />
+                  <Label htmlFor="location">{t('location')}</Label>
+                  <Input id="location" placeholder={t('locationPlaceholder')} />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="job-type">Job Type</Label>
+                  <Label htmlFor="job-type">{t('jobType')}</Label>
                   <Select>
                     <SelectTrigger id="job-type">
-                      <SelectValue placeholder="Select job type" />
+                      <SelectValue placeholder={t('selectJobType')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="full-time">Full-Time</SelectItem>
-                      <SelectItem value="part-time">Part-Time</SelectItem>
-                      <SelectItem value="contract">Contract</SelectItem>
-                      <SelectItem value="internship">Internship</SelectItem>
+                      <SelectItem value="full-time">{t('fullTime')}</SelectItem>
+                      <SelectItem value="part-time">{t('partTime')}</SelectItem>
+                      <SelectItem value="contract">{t('contract')}</SelectItem>
+                      <SelectItem value="internship">{t('internship')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="description">Job Description</Label>
+                  <Label htmlFor="description">{t('jobDescription')}</Label>
                   <Textarea
                     id="description"
-                    placeholder="Describe the job responsibilities, requirements, etc."
+                    placeholder={t('jobDescriptionPlaceholder')}
                   />
                 </div>
-                <Button className="w-full">Post Job Opening</Button>
+                <Button className="w-full">{t('postJobOpening')}</Button>
               </CardContent>
             </Card>
           </div>
@@ -82,33 +84,33 @@ export default function EmployerPortalPage() {
             <Card>
               <CardHeader>
                 <CardTitle className="font-headline">
-                  Manage Job Openings
+                  {t('manageJobOpenings')}
                 </CardTitle>
                 <CardDescription>
-                  View and manage your current job postings.
+                  {t('manageJobOpeningsDesc')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Job Title</TableHead>
-                      <TableHead>Location</TableHead>
-                      <TableHead>Applicants</TableHead>
-                      <TableHead>Actions</TableHead>
+                      <TableHead>{t('jobTitle')}</TableHead>
+                      <TableHead>{t('location')}</TableHead>
+                      <TableHead>{t('applicants')}</TableHead>
+                      <TableHead>{t('actions')}</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {postedJobs.map((job) => (
                       <TableRow key={job.id}>
                         <TableCell className="font-medium">
-                          {job.title}
+                          {t(job.title)}
                         </TableCell>
                         <TableCell>{job.location}</TableCell>
                         <TableCell>{Math.floor(Math.random() * 50)}</TableCell>
                         <TableCell>
                           <Button variant="outline" size="sm">
-                            View
+                            {t('view')}
                           </Button>
                         </TableCell>
                       </TableRow>

@@ -8,7 +8,7 @@ type Language = 'en' | 'hi' | 'pa';
 type LanguageContextType = {
   language: Language;
   setLanguage: (language: Language) => void;
-  t: (key: string) => string;
+  t: (key: string, values?: Record<string, string | number>) => string;
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -16,8 +16,14 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguage] = useState<Language>('en');
 
-  const t = (key: string) => {
-    return translations[language][key] || translations['en'][key] || key;
+  const t = (key: string, values?: Record<string, string | number>) => {
+    let translation = translations[language][key] || translations['en'][key] || key;
+    if (values) {
+      Object.keys(values).forEach((valueKey) => {
+        translation = translation.replace(`{{${valueKey}}}`, String(values[valueKey]));
+      });
+    }
+    return translation;
   };
 
   return (

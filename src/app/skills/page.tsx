@@ -1,3 +1,4 @@
+'use client';
 import Image from 'next/image';
 import { PageHeader } from '@/components/layout/page-header';
 import { Badge } from '@/components/ui/badge';
@@ -9,17 +10,18 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { useLanguage } from '@/context/language-context';
 import { skills } from '@/lib/data';
 import { placeholderImages } from '@/lib/placeholder-images.json';
 
 export default function SkillsPage() {
+  const { t } = useLanguage();
   return (
     <div className="flex h-full flex-col">
-      <PageHeader title="Skill Development" />
+      <PageHeader title={t('skillDevelopment')} />
       <div className="flex-1 space-y-8 overflow-y-auto p-4 md:p-8">
         <p className="text-center text-lg text-muted-foreground">
-          Browse our curated collection of skill development programs to enhance
-          your career prospects in Punjab.
+          {t('skillDevelopmentDesc')}
         </p>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -49,14 +51,14 @@ export default function SkillsPage() {
                 <CardContent className="flex-grow space-y-2 p-4">
                   <Badge variant="secondary">{skill.provider}</Badge>
                   <CardTitle className="font-headline text-lg">
-                    {skill.title}
+                    {t(skill.title)}
                   </CardTitle>
                   <p className="text-sm text-muted-foreground">
-                    {skill.duration}
+                    {t(skill.duration, { duration: skill.durationValue, unit: t(skill.durationUnit) })}
                   </p>
                 </CardContent>
                 <CardFooter className="p-4 pt-0">
-                  <Button className="w-full">Enroll Now</Button>
+                  <Button className="w-full">{t('enrollNow')}</Button>
                 </CardFooter>
               </Card>
             );

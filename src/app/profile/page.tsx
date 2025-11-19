@@ -14,12 +14,14 @@ import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Textarea } from '@/components/ui/textarea';
+import { useLanguage } from '@/context/language-context';
 import { user } from '@/lib/data';
 
 export default function ProfilePage() {
+  const { t } = useLanguage();
   return (
     <div className="flex h-full flex-col">
-      <PageHeader title="My Profile" />
+      <PageHeader title={t('myProfile')} />
       <div className="flex-1 space-y-8 overflow-y-auto p-4 md:p-8">
         <div className="mx-auto max-w-5xl">
           <div className="flex flex-col items-center gap-4 text-center md:flex-row md:text-left">
@@ -39,40 +41,40 @@ export default function ProfilePage() {
           </div>
           <Tabs defaultValue="profile" className="mt-8">
             <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="profile">Profile Details</TabsTrigger>
-              <TabsTrigger value="skills">Skills & Experience</TabsTrigger>
-              <TabsTrigger value="settings">Settings</TabsTrigger>
+              <TabsTrigger value="profile">{t('profileDetails')}</TabsTrigger>
+              <TabsTrigger value="skills">{t('skillsExperience')}</TabsTrigger>
+              <TabsTrigger value="settings">{t('settings')}</TabsTrigger>
             </TabsList>
             <TabsContent value="profile" className="mt-6">
               <Card>
                 <CardHeader>
                   <CardTitle className="font-headline">
-                    Personal Information
+                    {t('personalInformation')}
                   </CardTitle>
                   <CardDescription>
-                    Update your personal details here.
+                    {t('updatePersonalDetails')}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div className="space-y-2">
-                      <Label htmlFor="name">Full Name</Label>
+                      <Label htmlFor="name">{t('fullName')}</Label>
                       <Input id="name" defaultValue={user.name} />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="email">Email Address</Label>
+                      <Label htmlFor="email">{t('emailAddress')}</Label>
                       <Input id="email" type="email" defaultValue={user.email} />
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="headline">Professional Headline</Label>
+                    <Label htmlFor="headline">{t('professionalHeadline')}</Label>
                     <Input
                       id="headline"
                       defaultValue={user.headline}
-                      placeholder="e.g., Full Stack Developer | Punjab"
+                      placeholder={t('professionalHeadlinePlaceholder')}
                     />
                   </div>
-                  <Button>Save Changes</Button>
+                  <Button>{t('saveChanges')}</Button>
                 </CardContent>
               </Card>
             </TabsContent>
@@ -80,31 +82,31 @@ export default function ProfilePage() {
               <Card>
                 <CardHeader>
                   <CardTitle className="font-headline">
-                    Skills & Experience
+                    {t('skillsExperience')}
                   </CardTitle>
                   <CardDescription>
-                    Showcase your professional background.
+                    {t('showcaseProfessionalBackground')}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="skills">Skills</Label>
+                    <Label htmlFor="skills">{t('skills')}</Label>
                     <Input
                       id="skills"
                       defaultValue={user.skills.join(', ')}
-                      placeholder="Add skills separated by commas"
+                      placeholder={t('addSkillsPlaceholder')}
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="experience">Work Experience</Label>
+                    <Label htmlFor="experience">{t('workExperience')}</Label>
                     <Textarea
                       id="experience"
                       defaultValue={user.experience}
                       rows={8}
-                      placeholder="Describe your work experience"
+                      placeholder={t('describeWorkExperience')}
                     />
                   </div>
-                  <Button>Save Changes</Button>
+                  <Button>{t('saveChanges')}</Button>
                 </CardContent>
               </Card>
             </TabsContent>
@@ -112,32 +114,32 @@ export default function ProfilePage() {
               <Card>
                 <CardHeader>
                   <CardTitle className="font-headline">
-                    Notifications & Privacy
+                    {t('notificationsPrivacy')}
                   </CardTitle>
                   <CardDescription>
-                    Manage your account settings.
+                    {t('manageAccountSettings')}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="flex items-center justify-between rounded-lg border p-4">
                     <div>
-                      <h3 className="font-medium">Email Notifications</h3>
+                      <h3 className="font-medium">{t('emailNotifications')}</h3>
                       <p className="text-sm text-muted-foreground">
-                        Receive updates about new jobs and recommendations.
+                        {t('emailNotificationsDesc')}
                       </p>
                     </div>
                     <Switch defaultChecked />
                   </div>
                   <div className="flex items-center justify-between rounded-lg border p-4">
                     <div>
-                      <h3 className="font-medium">Public Profile</h3>
+                      <h3 className="font-medium">{t('publicProfile')}</h3>
                       <p className="text-sm text-muted-foreground">
-                        Allow employers to view your public profile.
+                        {t('publicProfileDesc')}
                       </p>
                     </div>
                     <Switch defaultChecked />
                   </div>
-                  <Button variant="destructive">Delete Account</Button>
+                  <Button variant="destructive">{t('deleteAccount')}</Button>
                 </CardContent>
               </Card>
             </TabsContent>

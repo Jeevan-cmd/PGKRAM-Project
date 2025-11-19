@@ -71,6 +71,8 @@ export const skills = [
     title: 'Full-Stack Web Development Bootcamp',
     provider: 'Punjab Skills University',
     duration: '12 Weeks',
+    durationValue: 12,
+    durationUnit: 'weeks',
     imageId: 'skill-1',
   },
   {
@@ -78,6 +80,8 @@ export const skills = [
     title: 'Advanced Digital Marketing',
     provider: 'eLearn Punjab',
     duration: '8 Weeks',
+    durationValue: 8,
+    durationUnit: 'weeks',
     imageId: 'skill-2',
   },
   {
@@ -85,6 +89,8 @@ export const skills = [
     title: 'Data Science with Python',
     provider: 'Punjab Technical Institute',
     duration: '16 Weeks',
+    durationValue: 16,
+    durationUnit: 'weeks',
     imageId: 'skill-3',
   },
   {
@@ -92,6 +98,8 @@ export const skills = [
     title: 'Certified Public Accountant (CPA) Prep',
     provider: 'Punjab Commerce Academy',
     duration: '24 Weeks',
+    durationValue: 24,
+    durationUnit: 'weeks',
     imageId: 'skill-4',
   },
   {
@@ -99,6 +107,8 @@ export const skills = [
     title: 'UI/UX Design fundamentals',
     provider: 'Design School of Punjab',
     duration: '6 Weeks',
+    durationValue: 6,
+    durationUnit: 'weeks',
     imageId: 'skill-5',
   },
   {
@@ -106,6 +116,8 @@ export const skills = [
     title: 'Supply Chain Management',
     provider: 'Punjab Management College',
     duration: '10 Weeks',
+    durationValue: 10,
+    durationUnit: 'weeks',
     imageId: 'skill-6',
   },
 ];

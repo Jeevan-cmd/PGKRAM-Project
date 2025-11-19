@@ -1,3 +1,4 @@
+'use client';
 import { PageHeader } from '@/components/layout/page-header';
 import {
   Accordion,
@@ -12,41 +13,43 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { useLanguage } from '@/context/language-context';
 import { businessResources } from '@/lib/data';
 import { Building, Factory, HandCoins, Users } from 'lucide-react';
 
-const categories = [
-  {
-    name: 'Financial Support',
-    icon: <HandCoins className="size-5 text-primary" />,
-    items: businessResources.filter((r) => r.category === 'Financial'),
-  },
-  {
-    name: 'Mentorship & Networking',
-    icon: <Users className="size-5 text-primary" />,
-    items: businessResources.filter((r) => r.category === 'Mentorship'),
-  },
-  {
-    name: 'Infrastructure',
-    icon: <Factory className="size-5 text-primary" />,
-    items: businessResources.filter((r) => r.category === 'Infrastructure'),
-  },
-  {
-    name: 'Startup Schemes',
-    icon: <Building className="size-5 text-primary" />,
-    items: businessResources.filter((r) => r.category === 'Startup'),
-  },
-];
-
 export default function BusinessSupportPage() {
+  const { t } = useLanguage();
+
+  const categories = [
+    {
+      name: t('financialSupport'),
+      icon: <HandCoins className="size-5 text-primary" />,
+      items: businessResources.filter((r) => r.category === 'Financial'),
+    },
+    {
+      name: t('mentorshipNetworking'),
+      icon: <Users className="size-5 text-primary" />,
+      items: businessResources.filter((r) => r.category === 'Mentorship'),
+    },
+    {
+      name: t('infrastructure'),
+      icon: <Factory className="size-5 text-primary" />,
+      items: businessResources.filter((r) => r.category === 'Infrastructure'),
+    },
+    {
+      name: t('startupSchemes'),
+      icon: <Building className="size-5 text-primary" />,
+      items: businessResources.filter((r) => r.category === 'Startup'),
+    },
+  ];
+
   return (
     <div className="flex h-full flex-col">
-      <PageHeader title="Business Support" />
+      <PageHeader title={t('businessSupport')} />
       <div className="flex-1 space-y-8 overflow-y-auto p-4 md:p-8">
         <div className="mx-auto max-w-4xl">
           <p className="mb-8 text-center text-lg text-muted-foreground">
-            Discover a comprehensive directory of business support services and
-            resources to help you launch and grow your enterprise in Punjab.
+            {t('businessSupportDesc')}
           </p>
 
           <Accordion
@@ -72,11 +75,11 @@ export default function BusinessSupportPage() {
                       >
                         <CardHeader>
                           <CardTitle className="font-headline text-lg">
-                            {item.name}
+                            {t(item.name)}
                           </CardTitle>
                         </CardHeader>
                         <CardContent>
-                          <CardDescription>{item.description}</CardDescription>
+                          <CardDescription>{t(item.description)}</CardDescription>
                         </CardContent>
                       </Card>
                     ))}

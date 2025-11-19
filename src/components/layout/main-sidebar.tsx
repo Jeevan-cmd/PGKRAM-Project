@@ -28,6 +28,8 @@ import {
   Wrench,
   BotMessageSquare,
   LineChart,
+  Sparkles,
+  Heart,
 } from "lucide-react";
 import { user } from "@/lib/data";
 import { useLanguage } from "@/context/language-context";
@@ -41,6 +43,8 @@ const menuItems = [
 ];
 
 const aiMenuItems = [
+    { href: "/job-matcher", labelKey: "intelligentJobMatching", icon: <Sparkles /> },
+    { href: "/recommendations", labelKey: "personalizedRecommendations", icon: <Heart /> },
     { href: "/resume-analyzer", labelKey: "aiResumeAnalyzer", icon: <BotMessageSquare /> },
     { href: "/analysis-dashboard", labelKey: "analysisDashboard", icon: <LineChart /> },
 ]
