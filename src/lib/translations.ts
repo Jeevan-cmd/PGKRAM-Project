@@ -1,0 +1,43 @@
+const translations = {
+  en: {
+    dashboard: 'Dashboard',
+    jobListings: 'Job Listings',
+    skillDevelopment: 'Skill Development',
+    businessSupport: 'Business Support',
+    employerPortal: 'Employer Portal',
+    aiResumeAnalyzer: 'AI Resume Analyzer',
+    analysisDashboard: 'Analysis Dashboard',
+    profile: 'Profile',
+    settings: 'Settings',
+    logout: 'Logout',
+    selectLanguage: 'Select Language',
+  },
+  hi: {
+    dashboard: 'डैशबोर्ड',
+    jobListings: 'नौकरियों की सूची',
+    skillDevelopment: 'कौशल विकास',
+    businessSupport: 'व्यावसायिक सहायता',
+    employerPortal: 'नियोक्ता पोर्टल',
+    aiResumeAnalyzer: 'एआई बायोडाटा विश्लेषक',
+    analysisDashboard: 'विश्लेषण डैशबोर्ड',
+    profile: 'प्रोफ़ाइल',
+    settings: 'सेटिंग्स',
+    logout: 'लॉग आउट',
+    selectLanguage: 'भाषा चुनें',
+  },
+  pa: {
+    dashboard: 'ਡੈਸ਼ਬੋਰਡ',
+    jobListings: 'ਨੌਕਰੀਆਂ ਦੀ ਸੂਚੀ',
+    skillDevelopment: 'ਹੁਨਰ ਵਿਕਾਸ',
+    businessSupport: 'ਵਪਾਰਕ ਸਹਾਇਤਾ',
+    employerPortal: 'ਰੁਜ਼ਗਾਰਦਾਤਾ ਪੋਰਟਲ',
+    aiResumeAnalyzer: 'ਏਆਈ ਰੈਜ਼ਿਊਮੇ ਵਿਸ਼ਲੇਸ਼ਕ',
+    analysisDashboard: 'ਵਿਸ਼ਲੇਸ਼ਣ ਡੈਸ਼ਬੋਰਡ',
+    profile: 'ਪ੍ਰੋਫਾਈਲ',
+    settings: 'ਸੈਟਿੰਗਾਂ',
+    logout: 'ਲਾਗ ਆਊਟ',
+    selectLanguage: 'ਭਾਸ਼ਾ ਚੁਣੋ',
+  },
+};
+
+export default translations;

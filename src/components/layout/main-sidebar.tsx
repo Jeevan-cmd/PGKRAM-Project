@@ -1,4 +1,3 @@
-
 "use client";
 
 import {
@@ -31,23 +30,25 @@ import {
   LineChart,
 } from "lucide-react";
 import { user } from "@/lib/data";
+import { useLanguage } from "@/context/language-context";
 
 const menuItems = [
-  { href: "/", label: "Dashboard", icon: <LayoutDashboard /> },
-  { href: "/jobs", label: "Job Listings", icon: <BriefcaseBusiness /> },
-  { href: "/skills", label: "Skill Development", icon: <Wrench /> },
-  { href: "/business-support", label: "Business Support", icon: <Building2 /> },
-  { href: "/employer-portal", label: "Employer Portal", icon: <Shield /> },
+  { href: "/", labelKey: "dashboard", icon: <LayoutDashboard /> },
+  { href: "/jobs", labelKey: "jobListings", icon: <BriefcaseBusiness /> },
+  { href: "/skills", labelKey: "skillDevelopment", icon: <Wrench /> },
+  { href: "/business-support", labelKey: "businessSupport", icon: <Building2 /> },
+  { href: "/employer-portal", labelKey: "employerPortal", icon: <Shield /> },
 ];
 
 const aiMenuItems = [
-    { href: "/resume-analyzer", label: "AI Resume Analyzer", icon: <BotMessageSquare /> },
-    { href: "/analysis-dashboard", label: "Analysis Dashboard", icon: <LineChart /> },
+    { href: "/resume-analyzer", labelKey: "aiResumeAnalyzer", icon: <BotMessageSquare /> },
+    { href: "/analysis-dashboard", labelKey: "analysisDashboard", icon: <LineChart /> },
 ]
 
 export function MainSidebar() {
   const pathname = usePathname();
   const isActive = (href: string) => pathname === href;
+  const { t } = useLanguage();
 
   return (
     <Sidebar collapsible="icon">
@@ -61,10 +62,10 @@ export function MainSidebar() {
               as={Link}
               href={item.href}
               isActive={isActive(item.href)}
-              tooltip={{ children: item.label }}
+              tooltip={{ children: t(item.labelKey) }}
             >
               {item.icon}
-              <span>{item.label}</span>
+              <span>{t(item.labelKey)}</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         ))}
@@ -75,10 +76,10 @@ export function MainSidebar() {
               as={Link}
               href={item.href}
               isActive={isActive(item.href)}
-              tooltip={{ children: item.label }}
+              tooltip={{ children: t(item.labelKey) }}
             >
               {item.icon}
-              <span>{item.label}</span>
+              <span>{t(item.labelKey)}</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         ))}
@@ -87,21 +88,21 @@ export function MainSidebar() {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton as={Link} href="/profile" isActive={isActive("/profile")} tooltip={{ children: "Profile" }}>
+            <SidebarMenuButton as={Link} href="/profile" isActive={isActive("/profile")} tooltip={{ children: t('profile') }}>
                 <User />
-                <span>Profile</span>
+                <span>{t('profile')}</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton tooltip={{ children: "Settings" }}>
+            <SidebarMenuButton tooltip={{ children: t('settings') }}>
               <Settings />
-              <span>Settings</span>
+              <span>{t('settings')}</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton tooltip={{ children: "Logout" }}>
+            <SidebarMenuButton tooltip={{ children: t('logout') }}>
               <LogOut />
-              <span>Logout</span>
+              <span>{t('logout')}</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

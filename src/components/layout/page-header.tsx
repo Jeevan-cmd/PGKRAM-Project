@@ -15,6 +15,7 @@ import { user } from "@/lib/data";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronRight, Globe, LogOut, User as UserIcon } from "lucide-react";
+import { useLanguage } from "@/context/language-context";
 
 type PageHeaderProps = {
   title: string;
@@ -23,6 +24,7 @@ type PageHeaderProps = {
 export function PageHeader({ title }: PageHeaderProps) {
   const pathname = usePathname();
   const pathSegments = pathname.split('/').filter(Boolean);
+  const { setLanguage, t } = useLanguage();
 
   return (
     <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background/80 px-4 backdrop-blur-sm md:px-6">
@@ -51,11 +53,11 @@ export function PageHeader({ title }: PageHeaderProps) {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Select Language</DropdownMenuLabel>
+            <DropdownMenuLabel>{t('selectLanguage')}</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>English</DropdownMenuItem>
-            <DropdownMenuItem>हिन्दी</DropdownMenuItem>
-            <DropdownMenuItem>ਪੰਜਾਬੀ</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => setLanguage('en')}>English</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => setLanguage('hi')}>हिन्दी</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => setLanguage('pa')}>ਪੰਜਾਬੀ</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
 
@@ -79,12 +81,12 @@ export function PageHeader({ title }: PageHeaderProps) {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              <Link href="/profile"><UserIcon className="mr-2 h-4 w-4" />Profile</Link>
+              <Link href="/profile"><UserIcon className="mr-2 h-4 w-4" />{t('profile')}</Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <LogOut className="mr-2 h-4 w-4" />
-              Log out
+              {t('logout')}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

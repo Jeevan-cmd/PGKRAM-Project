@@ -3,6 +3,7 @@ import './globals.css';
 import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
 import { MainSidebar } from '@/components/layout/main-sidebar';
 import { Toaster } from '@/components/ui/toaster';
+import { LanguageProvider } from '@/context/language-context';
 
 export const metadata: Metadata = {
   title: 'Punjab Opportunities Hub',
@@ -30,11 +31,13 @@ export default function RootLayout({
         />
       </head>
       <body className="font-body antialiased">
-        <SidebarProvider>
-          <MainSidebar />
-          <SidebarInset>{children}</SidebarInset>
-          <Toaster />
-        </SidebarProvider>
+        <LanguageProvider>
+          <SidebarProvider>
+            <MainSidebar />
+            <SidebarInset>{children}</SidebarInset>
+            <Toaster />
+          </SidebarProvider>
+        </LanguageProvider>
       </body>
     </html>
   );
