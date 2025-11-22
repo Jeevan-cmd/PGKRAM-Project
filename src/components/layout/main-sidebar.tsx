@@ -35,7 +35,7 @@ import { user } from "@/lib/data";
 import { useLanguage } from "@/context/language-context";
 
 const menuItems = [
-  { href: "/", labelKey: "dashboard", icon: <LayoutDashboard /> },
+  { href: "/dashboard", labelKey: "dashboard", icon: <LayoutDashboard /> },
   { href: "/jobs", labelKey: "jobListings", icon: <BriefcaseBusiness /> },
   { href: "/skills", labelKey: "skillDevelopment", icon: <Wrench /> },
   { href: "/business-support", labelKey: "businessSupport", icon: <Building2 /> },
@@ -104,7 +104,7 @@ export function MainSidebar() {
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton tooltip={{ children: t('logout') }}>
+            <SidebarMenuButton as={Link} href="/" tooltip={{ children: t('logout') }}>
               <LogOut />
               <span>{t('logout')}</span>
             </SidebarMenuButton>

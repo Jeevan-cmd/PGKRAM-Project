@@ -30,7 +30,7 @@ export function PageHeader({ title }: PageHeaderProps) {
     <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background/80 px-4 backdrop-blur-sm md:px-6">
       <SidebarTrigger className="md:hidden" />
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
-        <Link href="/" className="hover:text-foreground">Home</Link>
+        <Link href="/dashboard" className="hover:text-foreground">Home</Link>
         {pathSegments.map((segment, index) => (
            <span key={segment} className="flex items-center gap-2">
             <ChevronRight className="size-4" />
@@ -84,9 +84,8 @@ export function PageHeader({ title }: PageHeaderProps) {
               <Link href="/profile"><UserIcon className="mr-2 h-4 w-4" />{t('profile')}</Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <LogOut className="mr-2 h-4 w-4" />
-              {t('logout')}
+            <DropdownMenuItem asChild>
+              <Link href="/"><LogOut className="mr-2 h-4 w-4" />{t('logout')}</Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
