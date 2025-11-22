@@ -185,6 +185,12 @@ const translations: Record<string, Record<string, string>> = {
     createAnAccountPrompt: 'Enter your information to create an account.',
     createAccount: 'Create Account',
     hasAccountPrompt: 'Already have an account?',
+    whereDidYouHearAboutUs: 'Where did you hear about us?',
+    selectSource: 'Select a source',
+    family: 'Family',
+    friends: 'Friends',
+    socialMedia: 'Social Media',
+    other: 'Other',
   },
   hi: {
     dashboard: 'डैशबोर्ड',
@@ -372,6 +378,12 @@ const translations: Record<string, Record<string, string>> = {
     createAnAccountPrompt: 'एक खाता बनाने के लिए अपनी जानकारी दर्ज करें।',
     createAccount: 'खाता बनाएं',
     hasAccountPrompt: 'क्या आपके पास पहले से एक खाता है?',
+    whereDidYouHearAboutUs: 'आपने हमारे बारे में कहाँ सुना?',
+    selectSource: 'एक स्रोत चुनें',
+    family: 'परिवार',
+    friends: 'दोस्त',
+    socialMedia: 'सोशल मीडिया',
+    other: 'अन्य',
   },
   pa: {
     dashboard: 'ਡੈਸ਼ਬੋਰਡ',
@@ -559,6 +571,12 @@ const translations: Record<string, Record<string, string>> = {
     createAnAccountPrompt: 'ਇੱਕ ਖਾਤਾ ਬਣਾਉਣ ਲਈ ਆਪਣੀ ਜਾਣਕਾਰੀ ਦਰਜ ਕਰੋ।',
     createAccount: 'ਖਾਤਾ ਬਣਾਓ',
     hasAccountPrompt: 'ਕੀ ਪਹਿਲਾਂ ਤੋਂ ਹੀ ਤੁਹਾਡਾ ਖਾਤਾ ਹੈ?',
+    whereDidYouHearAboutUs: 'ਤੁਸੀਂ ਸਾਡੇ ਬਾਰੇ ਕਿੱਥੋਂ ਸੁਣਿਆ?',
+    selectSource: 'ਇੱਕ ਸਰੋਤ ਚੁਣੋ',
+    family: 'ਪਰਿਵਾਰ',
+    friends: 'ਦੋਸਤ',
+    socialMedia: 'ਸੋਸ਼ਲ ਮੀਡੀਆ',
+    other: 'ਹੋਰ',
   },
 };
 

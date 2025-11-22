@@ -17,6 +17,13 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { useLanguage } from '@/context/language-context';
 import { Globe } from 'lucide-react';
 import Link from 'next/link';
@@ -50,6 +57,20 @@ export default function SignupPage() {
           <div className="space-y-2">
             <Label htmlFor="password">{t('password')}</Label>
             <Input id="password" type="password" required />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="source">{t('whereDidYouHearAboutUs')}</Label>
+            <Select>
+              <SelectTrigger id="source">
+                <SelectValue placeholder={t('selectSource')} />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="family">{t('family')}</SelectItem>
+                <SelectItem value="friends">{t('friends')}</SelectItem>
+                <SelectItem value="social-media">{t('socialMedia')}</SelectItem>
+                <SelectItem value="other">{t('other')}</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
           <Button asChild type="submit" className="w-full">
             <Link href="/dashboard">{t('createAccount')}</Link>
