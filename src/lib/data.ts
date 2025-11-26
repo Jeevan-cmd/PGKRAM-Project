@@ -314,6 +314,12 @@ export type SelfEmploymentScheme = {
   collateralFree: boolean;
   dbee: string;
   contact: string;
+  details: {
+    objective: string;
+    eligibility: string;
+    benefits: string;
+    applicationProcess: string;
+  }
 };
 
 export const selfEmploymentSchemes: SelfEmploymentScheme[] = [
@@ -326,26 +332,44 @@ export const selfEmploymentSchemes: SelfEmploymentScheme[] = [
     collateralFree: false,
     dbee: 'Ferozepur',
     contact: '9465474122',
+    details: {
+        objective: 'To provide financial assistance to students of Scheduled Castes for studies post-matriculation.',
+        eligibility: 'Students whose parents/guardians income from all sources does not exceed Rs. 2.50 lakh per annum.',
+        benefits: 'Full scholarship covering maintenance allowance, reimbursement of compulsory non-refundable fees, study tour charges, thesis typing/printing charges and book allowance for students pursuing correspondence courses.',
+        applicationProcess: 'Apply online through the Dr. Ambedkar Scholarship Portal of the Government of Punjab.'
+    }
   },
   {
     id: 'scheme-2',
-    name: 'Post Matric Scholarship Scheme',
-    marginMoney: '0-0',
-    subsidyComponent: '0',
-    loanAmount: '00-00',
-    collateralFree: false,
-    dbee: 'Ferozepur',
-    contact: '9465474122',
+    name: 'PMRY (Prime Minister\'s Rozgar Yojana)',
+    marginMoney: '5-12.5%',
+    subsidyComponent: '15% (Max Rs. 15,000)',
+    loanAmount: 'Up to Rs. 2 Lakh',
+    collateralFree: true,
+    dbee: 'All Districts',
+    contact: 'District Industries Centre',
+    details: {
+        objective: 'To provide self-employment opportunities to educated unemployed youth.',
+        eligibility: 'All educated unemployed between the age of 18 to 35 years, with a minimum qualification of 8th standard pass. Family income should not exceed Rs. 1 Lakh per annum.',
+        benefits: 'Loan up to Rs. 2 lakh for business/service sector and Rs. 5 lakh for industry sector. Subsidy of 15% of the project cost, subject to a ceiling of Rs. 15,000.',
+        applicationProcess: 'Application to be submitted to the District Industries Centre (DIC) of the respective district.'
+    }
   },
   {
     id: 'scheme-3',
-    name: 'Post Matric Scholarship Scheme',
-    marginMoney: '0-0',
+    name: 'Mudra Yojana',
+    marginMoney: '0%',
     subsidyComponent: '0',
-    loanAmount: '00-00',
-    collateralFree: false,
-    dbee: 'Ferozepur',
-    contact: '9465474122',
+    loanAmount: 'Up to Rs. 10 Lakh',
+    collateralFree: true,
+    dbee: 'All Banks',
+    contact: 'Nearest Bank Branch',
+     details: {
+        objective: 'To provide funding to the non-corporate, non-farm small/micro enterprises.',
+        eligibility: 'Any Indian Citizen who has a business plan for a non-farm sector income generating activity such as manufacturing, processing, trading or service sector.',
+        benefits: 'Loans are given in three categories: Shishu (up to Rs. 50,000), Kishore (Rs. 50,001 to Rs. 5 Lakh), and Tarun (Rs. 5,00,001 to Rs. 10 Lakh). No collateral required.',
+        applicationProcess: 'Approach any of the lending institutions like commercial banks, RRBs, Small Finance Banks, MFIs and NBFCs with your business plan.'
+    }
   },
   {
     id: 'scheme-4',
@@ -356,6 +380,12 @@ export const selfEmploymentSchemes: SelfEmploymentScheme[] = [
     collateralFree: false,
     dbee: 'Ferozepur',
     contact: '9465474122',
+     details: {
+        objective: 'To provide financial assistance on the occasion of marriage of the daughters of Scheduled Castes/Backward Classes families.',
+        eligibility: 'Families belonging to Scheduled Castes, Backward Classes, and Economically Weaker Sections with annual income not exceeding Rs. 32,790.',
+        benefits: 'A financial assistance of Rs. 51,000 is provided for the marriage of each daughter (up to two daughters).',
+        applicationProcess: 'Apply through the office of the District Welfare Officer.'
+    }
   },
   {
     id: 'scheme-5',
@@ -366,6 +396,12 @@ export const selfEmploymentSchemes: SelfEmploymentScheme[] = [
     collateralFree: true,
     dbee: 'Pathankot',
     contact: '7657825214',
+     details: {
+        objective: 'To reduce poverty by enabling poor households to access gainful self-employment and skilled wage employment opportunities.',
+        eligibility: 'Poor households, particularly women, are organized into Self Help Groups (SHGs).',
+        benefits: 'SHGs are provided with Revolving Fund and Community Investment Fund. They are also linked with banks for credit.',
+        applicationProcess: 'Contact the Block Mission Management Unit or District Mission Management Unit of Punjab State Rural Livelihood Mission.'
+    }
   },
   {
     id: 'scheme-6',
@@ -376,5 +412,11 @@ export const selfEmploymentSchemes: SelfEmploymentScheme[] = [
     collateralFree: true,
     dbee: 'Roopnagar',
     contact: '8557910066',
+     details: {
+        objective: 'Sub-Mission on Agricultural Mechanization (SMAM) aims to increase the reach of farm mechanization to small and marginal farmers.',
+        eligibility: 'Farmers, Self Help Groups, Cooperative Societies of farmers.',
+        benefits: 'Subsidy on purchase of various agricultural machinery and equipment. 40% to 50% subsidy is available.',
+        applicationProcess: 'Apply online on the portal of the Department of Agriculture and Farmer\'s Welfare, Punjab.'
+    }
   },
 ];
