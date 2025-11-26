@@ -46,9 +46,9 @@ export default function JobsPage() {
   const [isApplying, setIsApplying] = useState(false);
 
   const [searchTerm, setSearchTerm] = useState('');
-  const [location, setLocation] = useState('');
-  const [type, setType] = useState('');
-  const [sector, setSector] = useState('');
+  const [location, setLocation] = useState('all');
+  const [type, setType] = useState('all');
+  const [sector, setSector] = useState('all');
 
   const handleApply = (e: React.FormEvent) => {
     e.preventDefault();
@@ -69,9 +69,9 @@ export default function JobsPage() {
         translatedTitle.includes(lowerSearchTerm) ||
         job.company.toLowerCase().includes(lowerSearchTerm);
 
-      const matchesLocation = !location || job.location === location;
-      const matchesType = !type || job.type === type;
-      const matchesSector = !sector || job.sector === sector;
+      const matchesLocation = location === 'all' || job.location === location;
+      const matchesType = type === 'all' || job.type === type;
+      const matchesSector = sector === 'all' || job.sector === sector;
 
       return matchesSearch && matchesLocation && matchesType && matchesSector;
     });
@@ -116,7 +116,7 @@ export default function JobsPage() {
                   <SelectValue placeholder={t('filterByLocation')} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Locations</SelectItem>
+                  <SelectItem value="all">All Locations</SelectItem>
                   {locations.map(loc => <SelectItem key={loc} value={loc}>{loc}</SelectItem>)}
                 </SelectContent>
               </Select>
@@ -125,7 +125,7 @@ export default function JobsPage() {
                   <SelectValue placeholder={t('filterByType')} />
                 </SelectTrigger>
                 <SelectContent>
-                    <SelectItem value="">All Types</SelectItem>
+                    <SelectItem value="all">All Types</SelectItem>
                     {jobTypes.map(jobType => <SelectItem key={jobType} value={jobType}>{t(jobType)}</SelectItem>)}
                 </SelectContent>
               </Select>
@@ -134,7 +134,7 @@ export default function JobsPage() {
                   <SelectValue placeholder="Filter by Sector" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Sectors</SelectItem>
+                  <SelectItem value="all">All Sectors</SelectItem>
                   <SelectItem value="Private">Private</SelectItem>
                   <SelectItem value="Government">Government</SelectItem>
                 </SelectContent>
