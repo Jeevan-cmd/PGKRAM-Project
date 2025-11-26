@@ -216,6 +216,11 @@ const translations: Record<string, Record<string, string>> = {
     aiToolsUnicef: 'AI Tools Unicef',
     careerInformation: 'Career Information',
     webInformationManager: 'Web Information Manager (WIM)',
+    howToReachUs: 'How To Reach Us',
+    reachDistrictBureau: 'If you want to reach out to the District Bureau offices,',
+    clickHere: 'Click Here',
+    forContactDetails: 'for contact details.',
+    reachDistrictProgramme: 'If you want to reach out to the District Programme Management Unit officers,',
   },
   hi: {
     dashboard: 'डैशबोर्ड',
@@ -434,6 +439,11 @@ const translations: Record<string, Record<string, string>> = {
     aiToolsUnicef: 'ਏਆਈ ਟੂਲਜ਼ ਯੂਨੀਸੈਫ',
     careerInformation: 'ਕਰੀਅਰ ਜਾਣਕਾਰੀ',
     webInformationManager: 'ਵੈੱਬ ਸੂਚਨਾ ਪ੍ਰਬੰਧਕ (WIM)',
+    howToReachUs: 'ਸਾਡੇ ਤੱਕ ਕਿਵੇਂ ਪਹੁੰਚਣਾ ਹੈ',
+    reachDistrictBureau: 'ਜੇਕਰ ਤੁਸੀਂ ਜ਼ਿਲ੍ਹਾ ਬਿਊਰੋ ਦਫ਼ਤਰਾਂ ਤੱਕ ਪਹੁੰਚਣਾ ਚਾਹੁੰਦੇ ਹੋ,',
+    clickHere: 'ਇੱਥੇ ਕਲਿੱਕ ਕਰੋ',
+    forContactDetails: 'ਸੰਪਰਕ ਵੇਰਵਿਆਂ ਲਈ।',
+    reachDistrictProgramme: 'ਜੇਕਰ ਤੁਸੀਂ ਜ਼ਿਲ੍ਹਾ ਪ੍ਰੋਗਰਾਮ ਪ੍ਰਬੰਧਨ ਯੂਨਿਟ ਅਧਿਕਾਰੀਆਂ ਤੱਕ ਪਹੁੰਚਣਾ ਚਾਹੁੰਦੇ ਹੋ,',
   },
   pa: {
     dashboard: 'ਡੈਸ਼ਬੋਰਡ',
@@ -648,11 +658,15 @@ const translations: Record<string, Record<string, string>> = {
     sitemap: 'Sitemap',
     help: 'Help',
     giveFeedback: 'Give Feedback',
-
     feedbackGrievances: 'Feedback/Grievances',
     aiToolsUnicef: 'AI Tools Unicef',
     careerInformation: 'Career Information',
     webInformationManager: 'Web Information Manager (WIM)',
+    howToReachUs: 'How To Reach Us',
+    reachDistrictBureau: 'If you want to reach out to the District Bureau offices,',
+    clickHere: 'Click Here',
+    forContactDetails: 'for contact details.',
+    reachDistrictProgramme: 'If you want to reach out to the District Programme Management Unit officers,',
   },
 };
 
