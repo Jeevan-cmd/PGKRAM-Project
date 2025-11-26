@@ -15,10 +15,25 @@ import { Switch } from '@/components/ui/switch';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Textarea } from '@/components/ui/textarea';
 import { useLanguage } from '@/context/language-context';
-import { user } from '@/lib/data';
+import { useUser } from '@/firebase';
 
 export default function ProfilePage() {
   const { t } = useLanguage();
+  const { user } = useUser();
+
+  const getInitials = (name?: string | null) => {
+    if (!name) return "";
+    return name.split(' ').map((n) => n[0]).join('');
+  };
+
+  if (!user) {
+    return (
+      <div className="flex h-full items-center justify-center">
+        Loading profile...
+      </div>
+    );
+  }
+
   return (
     <div className="flex h-full flex-col">
       <PageHeader title={t('myProfile')} />
@@ -26,16 +41,13 @@ export default function ProfilePage() {
         <div className="mx-auto max-w-5xl">
           <div className="flex flex-col items-center gap-4 text-center md:flex-row md:text-left">
             <Avatar className="h-24 w-24">
-              <AvatarImage src={user.avatarUrl} alt={user.name} />
+              <AvatarImage src={user.photoURL ?? undefined} alt={user.displayName ?? ''} />
               <AvatarFallback>
-                {user.name
-                  .split(' ')
-                  .map((n) => n[0])
-                  .join('')}
+                {getInitials(user.displayName || user.email)}
               </AvatarFallback>
             </Avatar>
             <div>
-              <h1 className="font-headline text-3xl font-bold">{user.name}</h1>
+              <h1 className="font-headline text-3xl font-bold">{user.displayName || 'User'}</h1>
               <p className="text-muted-foreground">{user.email}</p>
             </div>
           </div>
@@ -59,18 +71,18 @@ export default function ProfilePage() {
                   <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div className="space-y-2">
                       <Label htmlFor="name">{t('fullName')}</Label>
-                      <Input id="name" defaultValue={user.name} />
+                      <Input id="name" defaultValue={user.displayName ?? ''} />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="email">{t('emailAddress')}</Label>
-                      <Input id="email" type="email" defaultValue={user.email} />
+                      <Input id="email" type="email" defaultValue={user.email ?? ''} />
                     </div>
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="headline">{t('professionalHeadline')}</Label>
                     <Input
                       id="headline"
-                      defaultValue={user.headline}
+                      defaultValue={''}
                       placeholder={t('professionalHeadlinePlaceholder')}
                     />
                   </div>
@@ -93,7 +105,7 @@ export default function ProfilePage() {
                     <Label htmlFor="skills">{t('skills')}</Label>
                     <Input
                       id="skills"
-                      defaultValue={user.skills.join(', ')}
+                      defaultValue={''}
                       placeholder={t('addSkillsPlaceholder')}
                     />
                   </div>
@@ -101,7 +113,7 @@ export default function ProfilePage() {
                     <Label htmlFor="experience">{t('workExperience')}</Label>
                     <Textarea
                       id="experience"
-                      defaultValue={user.experience}
+                      defaultValue={''}
                       rows={8}
                       placeholder={t('describeWorkExperience')}
                     />

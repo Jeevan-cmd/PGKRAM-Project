@@ -31,8 +31,8 @@ import {
   Sparkles,
   Heart,
 } from "lucide-react";
-import { user } from "@/lib/data";
 import { useLanguage } from "@/context/language-context";
+import { useUser } from "@/firebase";
 
 const menuItems = [
   { href: "/dashboard", labelKey: "dashboard", icon: <LayoutDashboard /> },
@@ -53,6 +53,12 @@ export function MainSidebar() {
   const pathname = usePathname();
   const isActive = (href: string) => pathname === href;
   const { t } = useLanguage();
+  const { user } = useUser();
+
+  const getInitials = (name?: string | null) => {
+    if (!name) return "";
+    return name.split(' ').map(n => n[0]).join('');
+  }
 
   return (
     <Sidebar collapsible="icon">
@@ -110,18 +116,20 @@ export function MainSidebar() {
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
-        <div className="flex items-center gap-3 p-2">
-           <Avatar className="h-8 w-8">
-              <AvatarImage src={user.avatarUrl} alt={user.name} />
-              <AvatarFallback>
-                {user.name.split(' ').map(n => n[0]).join('')}
-              </AvatarFallback>
-            </Avatar>
-            <div className="overflow-hidden whitespace-nowrap">
-              <p className="text-sm font-semibold">{user.name}</p>
-              <p className="text-xs text-sidebar-foreground/70 truncate">{user.email}</p>
-            </div>
-        </div>
+        {user && (
+          <div className="flex items-center gap-3 p-2">
+            <Avatar className="h-8 w-8">
+                <AvatarImage src={user.photoURL ?? undefined} alt={user.displayName ?? ""} />
+                <AvatarFallback>
+                  {getInitials(user.displayName || user.email)}
+                </AvatarFallback>
+              </Avatar>
+              <div className="overflow-hidden whitespace-nowrap">
+                <p className="text-sm font-semibold">{user.displayName || 'User'}</p>
+                <p className="text-xs text-sidebar-foreground/70 truncate">{user.email}</p>
+              </div>
+          </div>
+        )}
       </SidebarFooter>
     </Sidebar>
   );
