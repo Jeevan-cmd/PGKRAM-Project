@@ -31,7 +31,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 
 
 export default function SignupPage() {
@@ -57,13 +57,17 @@ export default function SignupPage() {
     }
     setLoading(true);
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      // You can also update the user's profile with the name here if needed
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      if (userCredential.user) {
+        await updateProfile(userCredential.user, {
+          displayName: name
+        });
+      }
       router.push('/dashboard');
     } catch (error: any) {
       console.error(error);
       toast({
-        title: 'Sign Up Failed',
+        title: t('signUpFailed'),
         description: error.message,
         variant: 'destructive',
       });
@@ -130,7 +134,7 @@ export default function SignupPage() {
               </Select>
             </div>
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? 'Creating Account...' : t('createAccount')}
+              {loading ? t('creatingAccount') : t('createAccount')}
             </Button>
           </CardContent>
         </form>

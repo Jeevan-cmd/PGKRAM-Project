@@ -52,11 +52,12 @@ export default function LoginPage() {
     } catch (error: any) {
       console.error(error);
       let description = 'An unexpected error occurred.';
+      // This block now correctly handles all common invalid credential errors
       if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
-        description = 'Invalid user. Kindly sign up.';
+        description = t('invalidUserError');
       }
       toast({
-        title: 'Sign In Failed',
+        title: t('signInFailed'),
         description,
         variant: 'destructive',
       });
@@ -99,7 +100,7 @@ export default function LoginPage() {
               />
             </div>
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? 'Signing In...' : t('signIn')}
+              {loading ? t('signingIn') : t('signIn')}
             </Button>
           </CardContent>
         </form>

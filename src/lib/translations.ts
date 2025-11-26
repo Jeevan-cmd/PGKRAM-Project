@@ -191,6 +191,10 @@ const translations: Record<string, Record<string, string>> = {
     friends: 'Friends',
     socialMedia: 'Social Media',
     other: 'Other',
+    signInFailed: 'Sign In Failed',
+    invalidUserError: 'Invalid user. Kindly sign up.',
+    signingIn: 'Signing In...',
+    creatingAccount: 'Creating Account...',
   },
   hi: {
     dashboard: 'डैशबोर्ड',
@@ -384,6 +388,10 @@ const translations: Record<string, Record<string, string>> = {
     friends: 'दोस्त',
     socialMedia: 'सोशल मीडिया',
     other: 'अन्य',
+    signInFailed: 'साइन इन विफल',
+    invalidUserError: 'अमान्य उपयोगकर्ता। कृपया साइन अप करें।',
+    signingIn: 'साइन इन कर रहा है...',
+    creatingAccount: 'खाता बनाया जा रहा है...',
   },
   pa: {
     dashboard: 'ਡੈਸ਼ਬੋਰਡ',
@@ -563,7 +571,7 @@ const translations: Record<string, Record<string, string>> = {
     duration: '{{duration}} {{unit}}',
     enrollNow: 'ਹੁਣੇ ਦਾਖਲ ਹੋਵੋ',
     signIn: 'ਸਾਈਨ ਇਨ ਕਰੋ',
-    signInPrompt: 'ਆਪਣੇ ਖਾਤੇ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਲਈ ਆਪਣੇ ਪ੍ਰਮਾਣ ਪੱਤਰ ਦਾਖਲ ਕਰੋ।',
+    signInPrompt: 'ਆਪਣੇ ਖਾਤੇ ਤੱਕ ਪਹੁੰch ਕਰਨ ਲਈ ਆਪਣੇ ਪ੍ਰਮਾਣ ਪੱਤਰ ਦਾਖਲ ਕਰੋ।',
     password: 'ਪਾਸਵਰਡ',
     noAccountPrompt: 'ਕੀ ਤੁਹਾਡਾ ਕੋਈ ਖਾਤਾ ਨਹੀਂ ਹੈ?',
     signUp: 'ਸਾਈਨ ਅੱਪ ਕਰੋ',
@@ -577,6 +585,10 @@ const translations: Record<string, Record<string, string>> = {
     friends: 'ਦੋਸਤ',
     socialMedia: 'ਸੋਸ਼ਲ ਮੀਡੀਆ',
     other: 'ਹੋਰ',
+    signInFailed: 'ਸਾਈਨ ਇਨ ਅਸਫਲ',
+    invalidUserError: 'ਅਵੈਧ ਉਪਭੋਗਤਾ। ਕਿਰਪਾ ਕਰਕੇ ਸਾਈਨ ਅੱਪ ਕਰੋ।',
+    signingIn: 'ਸਾਈਨ ਇਨ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...',
+    creatingAccount: 'ਖਾਤਾ ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ...',
   },
 };
 
