@@ -32,7 +32,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-   webpack: (config, { isServer }) => {
+  webpack: (config, {isServer}) => {
     // Copy the pdf.worker.min.mjs file to the static directory
     if (!isServer) {
       config.plugins.push(
@@ -51,8 +51,15 @@ const nextConfig: NextConfig = {
     }
 
     config.externals.push('canvas');
-    
+
     return config;
+  },
+  experimental: {
+    // This is to allow the Next.js dev server to be accessed from the
+    // Firebase Studio preview URL.
+    allowedDevOrigins: [
+      '*.cluster-ulqnojp5endvgve6krhe7klaws.cloudworkstations.dev',
+    ],
   },
 };
 
