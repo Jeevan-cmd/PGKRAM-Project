@@ -22,6 +22,8 @@ export const jobs = [
     location: 'Mohali, Punjab',
     type: 'Full-time',
     imageId: 'job-1',
+    description:
+      'We are looking for a skilled Frontend Developer to join our team in Mohali. The ideal candidate will be proficient in React, HTML, CSS, and modern JavaScript. You will be responsible for building beautiful and responsive user interfaces for our web applications.',
   },
   {
     id: 'job-2',
@@ -30,6 +32,8 @@ export const jobs = [
     location: 'Amritsar, Punjab',
     type: 'Full-time',
     imageId: 'job-2',
+    description:
+      'Lead our marketing team to create and execute campaigns that drive growth. You should have experience with SEO, SEM, social media marketing, and content strategy. Strong analytical skills are a must.',
   },
   {
     id: 'job-3',
@@ -38,6 +42,8 @@ export const jobs = [
     location: 'Ludhiana, Punjab',
     type: 'Part-time',
     imageId: 'job-3',
+    description:
+      'We need a part-time accountant to manage financial records, process invoices, and prepare tax returns. Experience with accounting software like Tally is required. This is a flexible, 20-hour per week position.',
   },
   {
     id: 'job-4',
@@ -46,6 +52,8 @@ export const jobs = [
     location: 'Jalandhar, Punjab',
     type: 'Internship',
     imageId: 'job-4',
+    description:
+      'A great opportunity for a student or recent graduate to gain hands-on experience in data analysis. You will work with our team to collect, clean, and analyze data to provide business insights. Basic knowledge of SQL and Python is a plus.',
   },
   {
     id: 'job-5',
@@ -54,6 +62,8 @@ export const jobs = [
     location: 'Remote',
     type: 'Contract',
     imageId: 'job-5',
+    description:
+      'We are seeking a talented graphic designer for a contract role. You will be creating marketing materials, social media graphics, and website assets. A strong portfolio demonstrating your design skills is required.',
   },
   {
     id: 'job-6',
@@ -62,6 +72,8 @@ export const jobs = [
     location: 'Patiala, Punjab',
     type: 'Full-time',
     imageId: 'job-6',
+    description:
+      'Oversee and improve our supply chain and logistics operations. The ideal candidate will have strong leadership skills and experience in warehouse management, inventory control, and transportation.',
   },
 ];
 
