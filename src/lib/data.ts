@@ -305,112 +305,76 @@ export const skills = [
   },
 ];
 
-export type BusinessResource = {
+export type SelfEmploymentScheme = {
   id: string;
   name: string;
-  category: 'Financial' | 'Mentorship' | 'Infrastructure' | 'Startup';
-  description: string;
-  details: {
-    eligibility: string;
-    benefits: string;
-    howToApply: string;
-  };
+  marginMoney: string;
+  subsidyComponent: string;
+  loanAmount: string;
+  collateralFree: boolean;
+  dbee: string;
+  contact: string;
 };
 
-export const businessResources: BusinessResource[] = [
+export const selfEmploymentSchemes: SelfEmploymentScheme[] = [
   {
-    id: 'biz-1',
-    name: 'Punjab State Startup Grant',
-    category: 'Financial',
-    description: 'Seed funding for innovative startups in key sectors.',
-    details: {
-      eligibility:
-        'eligibility.punjabStateStartupGrant',
-      benefits:
-        'benefits.punjabStateStartupGrant',
-      howToApply:
-        'howToApply.punjabStateStartupGrant',
-    },
+    id: 'scheme-1',
+    name: 'Post Matric Scholarship Scheme',
+    marginMoney: '0-0',
+    subsidyComponent: '0',
+    loanAmount: '00-00',
+    collateralFree: false,
+    dbee: 'Ferozepur',
+    contact: '9465474122',
   },
   {
-    id: 'biz-2',
-    name: 'MSME Loan Scheme',
-    category: 'Financial',
-    description: 'Low-interest loans for small and medium enterprises.',
-    details: {
-      eligibility: 'eligibility.msmeLoanScheme',
-      benefits: 'benefits.msmeLoanScheme',
-      howToApply: 'howToApply.msmeLoanScheme',
-    },
+    id: 'scheme-2',
+    name: 'Post Matric Scholarship Scheme',
+    marginMoney: '0-0',
+    subsidyComponent: '0',
+    loanAmount: '00-00',
+    collateralFree: false,
+    dbee: 'Ferozepur',
+    contact: '9465474122',
   },
   {
-    id: 'biz-8',
-    name: 'PMRF Loan Scheme',
-    category: 'Financial',
-    description: 'Special loan scheme for rural entrepreneurs in Punjab.',
-    details: {
-      eligibility: 'eligibility.pmrfLoanScheme',
-      benefits: 'benefits.pmrfLoanScheme',
-      howToApply: 'howToApply.pmrfLoanScheme',
-    },
+    id: 'scheme-3',
+    name: 'Post Matric Scholarship Scheme',
+    marginMoney: '0-0',
+    subsidyComponent: '0',
+    loanAmount: '00-00',
+    collateralFree: false,
+    dbee: 'Ferozepur',
+    contact: '9465474122',
   },
   {
-    id: 'biz-3',
-    name: 'Punjab Entrepreneurs Network (PEN)',
-    category: 'Mentorship',
-    description: 'Connect with experienced mentors and fellow entrepreneurs.',
-    details: {
-      eligibility: 'eligibility.pen',
-      benefits: 'benefits.pen',
-      howToApply: 'howToApply.pen',
-    },
+    id: 'scheme-4',
+    name: 'Shagun/Ashirwad Scheme',
+    marginMoney: '0-0',
+    subsidyComponent: '0',
+    loanAmount: '00-00',
+    collateralFree: false,
+    dbee: 'Ferozepur',
+    contact: '9465474122',
   },
   {
-    id: 'biz-4',
-    name: 'TiE Chandigarh',
-    category: 'Mentorship',
-    description:
-      'Global network fostering entrepreneurship through mentoring, networking, and education.',
-    details: {
-      eligibility: 'eligibility.tie',
-      benefits: 'benefits.tie',
-      howToApply: 'howToApply.tie',
-    },
+    id: 'scheme-5',
+    name: 'State Rural Livelihood Mission',
+    marginMoney: '5-5',
+    subsidyComponent: '0',
+    loanAmount: '50000-100000',
+    collateralFree: true,
+    dbee: 'Pathankot',
+    contact: '7657825214',
   },
   {
-    id: 'biz-5',
-    name: 'STPI Mohali',
-    category: 'Infrastructure',
-    description:
-      'Incubation center with state-of-the-art facilities for tech startups.',
-    details: {
-      eligibility: 'eligibility.stpi',
-      benefits: 'benefits.stpi',
-      howToApply: 'howToApply.stpi',
-    },
-  },
-  {
-    id: 'biz-6',
-    name: 'Agri-Processing Park',
-    category: 'Infrastructure',
-    description:
-      'Specialized zones with facilities for food processing businesses.',
-    details: {
-      eligibility: 'eligibility.agriPark',
-      benefits: 'benefits.agriPark',
-      howToApply: 'howToApply.agriPark',
-    },
-  },
-  {
-    id: 'biz-7',
-    name: 'Invest Punjab Business First Portal',
-    category: 'Startup',
-    description:
-      'A single portal for regulatory clearances and fiscal incentive applications.',
-    details: {
-      eligibility: 'eligibility.investPunjab',
-      benefits: 'benefits.investPunjab',
-      howToApply: 'howToApply.investPunjab',
-    },
+    id: 'scheme-6',
+    name: 'SMAM',
+    marginMoney: 'null-null',
+    subsidyComponent: '0',
+    loanAmount: '22400-78400',
+    collateralFree: true,
+    dbee: 'Roopnagar',
+    contact: '8557910066',
   },
 ];
