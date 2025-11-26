@@ -1,8 +1,9 @@
+
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, Sparkles } from "lucide-react";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -10,7 +11,6 @@ import {
   IntelligentJobMatchingInput,
   intelligentJobMatching,
 } from "@/ai/flows/intelligent-job-matching";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -32,7 +32,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { useEffect } from "react";
 import { useLanguage } from "@/context/language-context";
 
 const formSchema = z.object({
@@ -58,7 +57,7 @@ const initialState = {
 
 export function JobMatcherForm() {
   const { t } = useLanguage();
-  const [state, formAction] = useFormState(
+  const [state, formAction, isSubmitting] = useActionState(
     async (_prevState: any, data: IntelligentJobMatchingInput) => {
       const result = await intelligentJobMatching(data);
       if (!result.jobRecommendations || result.jobRecommendations.length === 0) {
@@ -89,8 +88,6 @@ export function JobMatcherForm() {
     const skillsArray = data.skills.split(",").map((s) => s.trim());
     formAction({ ...data, skills: skillsArray });
   };
-  
-  const { isSubmitting } = form.formState;
 
   return (
     <div className="mx-auto max-w-4xl">
