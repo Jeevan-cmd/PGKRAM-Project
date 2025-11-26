@@ -67,6 +67,44 @@ export default function JobsPage() {
     setSelectedJob(null);
   };
 
+  const handleSearchNearMe = () => {
+    if (!navigator.geolocation) {
+      toast({
+        variant: 'destructive',
+        title: 'Geolocation not supported',
+        description:
+          'Your browser does not support geolocation.',
+      });
+      return;
+    }
+
+    toast({
+      title: 'Fetching your location...',
+      description: 'Please allow location access.',
+    });
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        // In a real app, you'd use position.coords.latitude and position.coords.longitude
+        // to query a backend for the nearest city or jobs.
+        // For this demo, we'll simulate finding a nearby city by setting it to 'Mohali'.
+        setLocation('Mohali');
+        toast({
+          title: 'Location found!',
+          description: 'Showing jobs in the nearest major city: Mohali.',
+        });
+      },
+      (error) => {
+        toast({
+          variant: 'destructive',
+          title: 'Could not get location',
+          description:
+            'Please ensure location services are enabled in your browser settings.',
+        });
+      }
+    );
+  };
+
   const filteredJobs = useMemo(() => {
     return jobs.filter((job) => {
       const translatedTitle = t(job.title).toLowerCase();
@@ -199,7 +237,7 @@ export default function JobsPage() {
                 <Search className="mr-2 h-4 w-4" />
                 {t('searchJobs')}
               </Button>
-              <Button className="flex-1" size="lg" variant="outline">
+              <Button className="flex-1" size="lg" variant="outline" onClick={handleSearchNearMe}>
                 <MapPin className="mr-2 h-4 w-4" />
                 {t('searchJobsNearMe')}
               </Button>
