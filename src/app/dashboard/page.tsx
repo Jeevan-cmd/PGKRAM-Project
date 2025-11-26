@@ -2,8 +2,14 @@
 import {
   BriefcaseBusiness,
   Building2,
+  HeartHandshake,
   Lightbulb,
+  Palette,
+  Shield,
+  User,
   Wrench,
+  GraduationCap,
+  Sparkles,
 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -26,6 +32,49 @@ import imageData from '@/lib/placeholder-images.json';
 const { placeholderImages } = imageData;
 
 const heroImage = placeholderImages.find((img) => img.id === 'hero-bg');
+
+const services = [
+  {
+    title: 'jobs',
+    icon: <BriefcaseBusiness className="size-8" />,
+    href: '/jobs',
+  },
+  {
+    title: 'skillTraining',
+    icon: <Wrench className="size-8" />,
+    href: '/skills',
+  },
+  {
+    title: 'selfEmployment',
+    icon: <Lightbulb className="size-8" />,
+    href: '/business-support',
+  },
+  {
+    title: 'jobsForWomen',
+    icon: <User className="size-8" />,
+    href: '/jobs',
+  },
+  {
+    title: 'jobsForPersonsWithDisability',
+    icon: <HeartHandshake className="size-8" />,
+    href: '/jobs',
+  },
+  {
+    title: 'inductionIntoArmedForces',
+    icon: <Shield className="size-8" />,
+    href: '/jobs',
+  },
+  {
+    title: 'counselling',
+    icon: <GraduationCap className="size-8" />,
+    href: '#',
+  },
+  {
+    title: 'pmVikasScheme',
+    icon: <Sparkles className="size-8" />,
+    href: '#',
+  },
+];
 
 export default function DashboardPage() {
   const { t } = useLanguage();
@@ -55,6 +104,28 @@ export default function DashboardPage() {
           </div>
         </div>
 
+        <div>
+          <h2 className="font-headline mb-4 text-center text-2xl font-bold">
+            {t('ourServices')}
+          </h2>
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-4">
+            {services.map((service, index) => (
+              <Link key={index} href={service.href}>
+                <Card className="flex h-full flex-col items-center justify-center p-4 text-center transition-all hover:shadow-lg">
+                  <div
+                    className="mb-3 flex size-16 items-center justify-center rounded-full bg-primary/20 text-primary"
+                  >
+                    {service.icon}
+                  </div>
+                  <h3 className="font-headline text-sm font-semibold">
+                    {t(service.title)}
+                  </h3>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </div>
+
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <Card className="flex flex-col">
             <CardHeader>
@@ -62,14 +133,10 @@ export default function DashboardPage() {
                 <BriefcaseBusiness className="text-primary" />
                 {t('findYourNextJob')}
               </CardTitle>
-              <CardDescription>
-                {t('findYourNextJobDesc')}
-              </CardDescription>
+              <CardDescription>{t('findYourNextJobDesc')}</CardDescription>
             </CardHeader>
             <CardContent className="flex-grow">
-              <p>
-                {t('findYourNextJobPara')}
-              </p>
+              <p>{t('findYourNextJobPara')}</p>
             </CardContent>
             <CardFooter>
               <Button asChild className="w-full">
@@ -84,14 +151,10 @@ export default function DashboardPage() {
                 <Wrench className="text-primary" />
                 {t('developYourSkills')}
               </CardTitle>
-              <CardDescription>
-                {t('developYourSkillsDesc')}
-              </CardDescription>
+              <CardDescription>{t('developYourSkillsDesc')}</CardDescription>
             </CardHeader>
             <CardContent className="flex-grow">
-              <p>
-                {t('developYourSkillsPara')}
-              </p>
+              <p>{t('developYourSkillsPara')}</p>
             </CardContent>
             <CardFooter>
               <Button asChild className="w-full">
@@ -106,14 +169,10 @@ export default function DashboardPage() {
                 <Building2 className="text-primary" />
                 {t('growYourBusiness')}
               </CardTitle>
-              <CardDescription>
-                {t('growYourBusinessDesc')}
-              </CardDescription>
+              <CardDescription>{t('growYourBusinessDesc')}</CardDescription>
             </CardHeader>
             <CardContent className="flex-grow">
-              <p>
-                {t('growYourBusinessPara')}
-              </p>
+              <p>{t('growYourBusinessPara')}</p>
             </CardContent>
             <CardFooter>
               <Button asChild className="w-full">
@@ -123,7 +182,7 @@ export default function DashboardPage() {
           </Card>
         </div>
 
-        <Card className="bg-accent/50 border-accent">
+        <Card className="border-accent bg-accent/50">
           <CardHeader>
             <CardTitle className="font-headline flex items-center gap-3">
               <Lightbulb className="text-accent" />
@@ -142,7 +201,9 @@ export default function DashboardPage() {
                 {t('aiResumeAnalyzerDesc')}
               </p>
               <Button asChild variant="link" className="px-0">
-                <Link href="/resume-analyzer">{t('analyzeYourResume')} &rarr;</Link>
+                <Link href="/resume-analyzer">
+                  {t('analyzeYourResume')} &rarr;
+                </Link>
               </Button>
             </div>
           </CardContent>
