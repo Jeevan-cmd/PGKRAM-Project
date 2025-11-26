@@ -44,6 +44,7 @@ const menuItems = [
   { href: "/employer-portal", labelKey: "employerPortal", icon: <Shield /> },
   { href: "/counselling", labelKey: "counselling", icon: <GraduationCap /> },
   { href: "/jobs-for-disabled", labelKey: "jobsForPersonsWithDisability", icon: <HeartHandshake /> },
+  { href: "/armed-forces", labelKey: "inductionIntoArmedForces", icon: <Shield /> },
 ];
 
 const aiMenuItems = [

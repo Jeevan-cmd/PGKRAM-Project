@@ -61,7 +61,7 @@ const services = [
   {
     title: 'inductionIntoArmedForces',
     icon: <Shield className="size-8" />,
-    href: '/jobs',
+    href: '/armed-forces',
   },
   {
     title: 'counselling',

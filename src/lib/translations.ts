@@ -354,6 +354,8 @@ const translations: Record<string, Record<string, string>> = {
     shellBunkJobsPara1: "Shell India has launched a special initiative to provide employment opportunities for persons with disabilities (PWD) at their petrol bunks across Punjab. This program aims to create a more diverse and inclusive workforce while empowering individuals with valuable skills and financial independence.",
     shellBunkJobsPara2: "Roles typically include customer service, forecourt management, and handling transactions. Shell provides the necessary training and a supportive work environment. This is a great opportunity to join a global company committed to diversity and inclusion.",
     viewAvailableRoles: "View Available Roles at Shell",
+    armedForcesBoys: 'Armed forces preparatory institute for boys',
+    armedForcesGirls: 'Armed forces preparatory institute for girls',
   },
   hi: {
     dashboard: 'डैशबोर्ड',
@@ -671,7 +673,7 @@ const translations: Record<string, Record<string, string>> = {
     "Loans are given in three categories: Shishu (up to Rs. 50,000), Kishore (Rs. 50,001 to Rs. 5 Lakh), and Tarun (Rs. 5,00,001 to Rs. 10 Lakh). No collateral required.": "ऋण तीन श्रेणियों में दिए जाते हैं: शिशु (50,000 रुपये तक), किशोर (50,001 रुपये से 5 लाख रुपये तक), और तरुण (5,00,001 रुपये से 10 लाख रुपये तक)। किसी संपार्श्विक की आवश्यकता नहीं है।",
     "Approach any of the lending institutions like commercial banks, RRBs, Small Finance Banks, MFIs and NBFCs with your business plan.": "अपनी व्यावसायिक योजना के साथ वाणिज्यिक बैंकों, आरआरबी, लघु वित्त बैंकों, एमएफआई और एनबीएफसी जैसे किसी भी ऋण देने वाले संस्थान से संपर्क करें।",
     "To provide financial assistance on the occasion of marriage of the daughters of Scheduled Castes/Backward Classes families.": "अनुसूचित जाति/पिछड़ा वर्ग के परिवारों की बेटियों के विवाह के अवसर पर वित्तीय सहायता प्रदान करना।",
-    "Families belonging to Scheduled Castes, Backward Classes, and Economically Weaker Sections with annual income not exceeding Rs. 32,790.": "अनुसूचित जाति, पिछड़ा वर्ग और आर्थिक रूप से कमजोर वर्ग के परिवार जिनकी वार्षिक आय 32,790 रुपये से अधिक नहीं है।",
+    "Families belonging to Scheduled Castes, Backward Classes, and Economically Weaker Sections with annual income not exceeding Rs. 32,790.": "अनुसूचित जाति, पिछड़ा वर्ग और आर्थिक रूप سے कमजोर वर्ग के परिवार जिनकी वार्षिक आय 32,790 रुपये से अधिक नहीं है।",
     "A financial assistance of Rs. 51,000 is provided for the marriage of each daughter (up to two daughters).": "प्रत्येक बेटी (दो बेटियों तक) के विवाह के लिए 51,000 रुपये की वित्तीय सहायता प्रदान की जाती है।",
     "Apply through the office of the District Welfare Officer.": "जिला कल्याण अधिकारी के कार्यालय के माध्यम से आवेदन करें।",
     "To reduce poverty by enabling poor households to access gainful self-employment and skilled wage employment opportunities.": "गरीब परिवारों को लाभकारी स्वरोजगार और कुशल मजदूरी रोजगार के अवसर प्राप्त करने में सक्षम बनाकर गरीबी को कम करना।",
@@ -713,6 +715,8 @@ const translations: Record<string, Record<string, string>> = {
     shellBunkJobsPara1: "शेल इंडिया ने पंजाब भर में अपने पेट्रोल बंकों पर विकलांग व्यक्तियों (पीडब्ल्यूडी) के लिए रोजगार के अवसर प्रदान करने के लिए एक विशेष पहल शुरू की है। इस कार्यक्रम का उद्देश्य व्यक्तियों को मूल्यवान कौशल और वित्तीय स्वतंत्रता के साथ सशक्त बनाते हुए एक अधिक विविध और समावेशी कार्यबल बनाना है।",
     shellBunkJobsPara2: "भूमिकाओं में आमतौर पर ग्राहक सेवा, फोरकोर्ट प्रबंधन और लेनदेन संभालना शामिल है। शेल आवश्यक प्रशिक्षण और एक सहायक कार्य वातावरण प्रदान करता है। यह विविधता और समावेश के लिए प्रतिबद्ध एक वैश्विक कंपनी में शामिल होने का एक शानदार अवसर है।",
     viewAvailableRoles: "शेल में उपलब्ध भूमिकाएँ देखें",
+    armedForcesBoys: 'लड़कों के लिए सशस्त्र बल तैयारी संस्थान',
+    armedForcesGirls: 'लड़कियों के लिए सशस्त्र बल तैयारी संस्थान',
   },
   pa: {
     dashboard: 'ਡੈਸ਼ਬੋਰਡ',
@@ -1070,6 +1074,8 @@ const translations: Record<string, Record<string, string>> = {
     shellBunkJobsPara1: "ਸ਼ੈੱਲ ਇੰਡੀਆ ਨੇ ਪੰਜਾਬ ਭਰ ਵਿੱਚ ਆਪਣੇ ਪੈਟਰੋਲ ਬੰਕਾਂ 'ਤੇ ਅਪਾਹਜ ਵਿਅਕਤੀਆਂ (ਪੀਡਬਲਯੂਡੀ) ਲਈ ਰੋਜ਼ਗਾਰ ਦੇ ਮੌਕੇ ਪ੍ਰਦਾਨ ਕਰਨ ਲਈ ਇੱਕ ਵਿਸ਼ੇਸ਼ ਪਹਿਲ ਸ਼ੁਰੂ ਕੀਤੀ ਹੈ। ਇਸ ਪ੍ਰੋਗਰਾਮ ਦਾ ਉਦੇਸ਼ ਵਿਅਕਤੀਆਂ ਨੂੰ ਕੀਮਤੀ ਹੁਨਰ ਅਤੇ ਵਿੱਤੀ ਸੁਤੰਤਰਤਾ ਨਾਲ ਸਸ਼ਕਤ ਕਰਦੇ ਹੋਏ ਇੱਕ ਵਧੇਰੇ ਵਿਭਿੰਨ ਅਤੇ ਸਮਾਵੇਸ਼ੀ ਕਰਮਚਾਰੀ ਬਣਾਉਣਾ ਹੈ।",
     shellBunkJobsPara2: "ਭੂਮਿਕਾਵਾਂ ਵਿੱਚ ਆਮ ਤੌਰ 'ਤੇ ਗਾਹਕ ਸੇਵਾ, ਫੋਰਕੋਰਟ ਪ੍ਰਬੰਧਨ, ਅਤੇ ਲੈਣ-ਦੇਣ ਨੂੰ ਸੰਭਾਲਣਾ ਸ਼ਾਮਲ ਹੁੰਦਾ ਹੈ। ਸ਼ੈੱਲ ਲੋੜੀਂਦੀ ਸਿਖਲਾਈ ਅਤੇ ਇੱਕ ਸਹਾਇਕ ਕੰਮ ਦਾ ਮਾਹੌਲ ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ। ਇਹ ਵਿਭਿੰਨਤਾ ਅਤੇ ਸ਼ਮੂਲੀਅਤ ਲਈ ਵਚਨਬੱਧ ਇੱਕ ਗਲੋਬਲ ਕੰਪਨੀ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋਣ ਦਾ ਇੱਕ ਵਧੀਆ ਮੌਕਾ ਹੈ।",
     viewAvailableRoles: "ਸ਼ੈੱਲ 'ਤੇ ਉਪਲਬਧ ਭੂਮਿਕਾਵਾਂ ਵੇਖੋ",
+    armedForcesBoys: 'ਲੜਕਿਆਂ ਲਈ ਆਰਮਡ ਫੋਰਸਿਜ਼ ਪ੍ਰੈਪਰੇਟਰੀ ਇੰਸਟੀਚਿਊਟ',
+    armedForcesGirls: 'ਲੜਕੀਆਂ ਲਈ ਆਰਮਡ ਫੋਰਸਿਜ਼ ਪ੍ਰੈਪਰੇਟਰੀ ਇੰਸਟੀਚਿਊਟ',
   },
 };
 
