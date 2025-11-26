@@ -71,7 +71,7 @@ const services = [
   {
     title: 'pmVikasScheme',
     icon: <Sparkles className="size-8" />,
-    href: '#',
+    href: '/pm-vikas-scheme',
   },
 ];
 
