@@ -30,9 +30,20 @@ import {
   LineChart,
   Sparkles,
   Heart,
+  Facebook,
+  Twitter,
+  Instagram,
+  Linkedin,
+  Youtube,
 } from "lucide-react";
 import { useLanguage } from "@/context/language-context";
 import { useUser } from "@/firebase";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
 
 const menuItems = [
   { href: "/dashboard", labelKey: "dashboard", icon: <LayoutDashboard /> },
@@ -48,6 +59,14 @@ const aiMenuItems = [
     { href: "/resume-analyzer", labelKey: "aiResumeAnalyzer", icon: <BotMessageSquare /> },
     { href: "/analysis-dashboard", labelKey: "analysisDashboard", icon: <LineChart /> },
 ]
+
+const socialItems = [
+  { name: "Facebook", icon: <Facebook />, href: "#" },
+  { name: "Twitter", icon: <Twitter />, href: "#" },
+  { name: "Instagram", icon: <Instagram />, href: "#" },
+  { name: "LinkedIn", icon: <Linkedin />, href: "#" },
+  { name: "YouTube", icon: <Youtube />, href: "#" },
+];
 
 export function MainSidebar() {
   const pathname = usePathname();
@@ -94,7 +113,42 @@ export function MainSidebar() {
           </SidebarMenuItem>
         ))}
       </SidebarMenu>
+      
       <SidebarSeparator />
+      
+      <SidebarMenu>
+        <div className="group-data-[collapsible=icon]:hidden px-2 pb-2 text-xs font-medium text-sidebar-foreground/70">
+          Socials
+        </div>
+        <TooltipProvider>
+          {socialItems.map((item) => (
+            <SidebarMenuItem key={item.name}>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <SidebarMenuButton
+                    as={Link}
+                    href={item.href}
+                    variant="ghost"
+                    className="text-sidebar-foreground/80 hover:text-sidebar-foreground"
+                    tooltip={{ children: item.name, side: "right", align: "center"}}
+                  >
+                    {item.icon}
+                    <span className="group-data-[collapsible=icon]:hidden">
+                      {item.name}
+                    </span>
+                  </SidebarMenuButton>
+                </TooltipTrigger>
+                <TooltipContent side="right" align="center">
+                  {item.name}
+                </TooltipContent>
+              </Tooltip>
+            </SidebarMenuItem>
+          ))}
+        </TooltipProvider>
+      </SidebarMenu>
+
+      <SidebarSeparator />
+      
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
