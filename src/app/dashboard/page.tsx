@@ -4,7 +4,6 @@ import {
   Building2,
   HeartHandshake,
   Lightbulb,
-  Palette,
   Shield,
   User,
   Wrench,
@@ -52,7 +51,7 @@ const services = [
   {
     title: 'jobsForWomen',
     icon: <User className="size-8" />,
-    href: '/jobs',
+    href: '/jobs-for-women',
   },
   {
     title: 'jobsForPersonsWithDisability',

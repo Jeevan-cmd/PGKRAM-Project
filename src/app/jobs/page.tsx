@@ -1,6 +1,6 @@
 
 'use client';
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { PageHeader } from '@/components/layout/page-header';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -35,15 +35,18 @@ import { useUser } from '@/firebase';
 import { jobs } from '@/lib/data';
 import { MapPin, Search, Frown } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { useSearchParams } from 'next/navigation';
 
 type Job = (typeof jobs)[0];
 
-export default function JobsPage() {
+function JobsPageContent() {
   const { t } = useLanguage();
   const { user } = useUser();
   const { toast } = useToast();
+  const searchParams = useSearchParams();
+
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [isApplying, setIsApplying] = useState(false);
 
@@ -53,6 +56,14 @@ export default function JobsPage() {
   const [qualification, setQualification] = useState('all');
   const [experience, setExperience] = useState('all');
   const [category, setCategory] = useState('all');
+  const [sector, setSector] = useState(searchParams.get('sector') || 'all');
+
+  useEffect(() => {
+    const sectorParam = searchParams.get('sector');
+    if (sectorParam) {
+      setSector(sectorParam);
+    }
+  }, [searchParams]);
 
   const handleApply = (e: React.FormEvent) => {
     e.preventDefault();
@@ -120,15 +131,17 @@ export default function JobsPage() {
       const matchesQualification = qualification === 'all' || job.qualification === qualification;
       const matchesExperience = experience === 'all' || job.experience <= parseInt(experience);
       const matchesCategory = category === 'all' || job.category === category;
+      const matchesSector = sector === 'all' || job.sector === sector;
 
-      return matchesSearch && matchesLocation && matchesType && matchesQualification && matchesExperience && matchesCategory;
+      return matchesSearch && matchesLocation && matchesType && matchesQualification && matchesExperience && matchesCategory && matchesSector;
     });
-  }, [searchTerm, location, type, qualification, experience, category, t]);
+  }, [searchTerm, location, type, qualification, experience, category, sector, t]);
 
   const locations = useMemo(() => [...new Set(jobs.map((j) => j.location))], []);
   const jobTypes = useMemo(() => [...new Set(jobs.map((j) => j.type))], []);
   const qualifications = useMemo(() => [...new Set(jobs.map((j) => j.qualification))], []);
   const categories = useMemo(() => [...new Set(jobs.map(j => j.category).filter(Boolean))] as string[], []);
+  const sectors = useMemo(() => [...new Set(jobs.map((j) => j.sector))], []);
 
 
   const openDetailsModal = (job: Job) => {
@@ -158,6 +171,19 @@ export default function JobsPage() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+              <Select value={sector} onValueChange={setSector}>
+                  <SelectTrigger>
+                    <SelectValue placeholder={t('selectSector')} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">{t('allSectors')}</SelectItem>
+                    {sectors.map((sec) => (
+                      <SelectItem key={sec} value={sec}>
+                        {t(sec)}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               <Select value={type} onValueChange={setType}>
                 <SelectTrigger>
                   <SelectValue placeholder={t('selectJobType')} />
@@ -302,7 +328,7 @@ export default function JobsPage() {
                         job.sector === 'Government' ? 'default' : 'outline'
                         }
                     >
-                        {job.sector}
+                        {t(job.sector)}
                     </Badge>
                     {job.category && <Badge variant="destructive">{t(job.category)}</Badge>}
                     </div>
@@ -418,4 +444,12 @@ export default function JobsPage() {
       </Dialog>
     </div>
   );
+}
+
+export default function JobsPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <JobsPageContent />
+    </Suspense>
+  )
 }

@@ -326,7 +326,13 @@ const translations: Record<string, Record<string, string>> = {
     eligibility: "Eligibility",
     benefits: "Benefits",
     howToApply: "How to Apply",
-    close: "Close"
+    close: "Close",
+    privateJobsForWomen: 'Private Jobs For Women',
+    governmentJobsForWomen: 'Government Jobs For Women',
+    selectSector: 'Select Sector',
+    allSectors: 'All Sectors',
+    Private: 'Private',
+    Government: 'Government',
   },
   hi: {
     dashboard: 'डैशबोर्ड',
@@ -556,7 +562,7 @@ const translations: Record<string, Record<string, string>> = {
     howToReachUs: 'ਸਾਡੇ ਤੱਕ ਕਿਵੇਂ ਪਹੁੰਚਣਾ ਹੈ',
     reachDistrictBureau:
       'ਜੇਕਰ ਤੁਸੀਂ ਜ਼ਿਲ੍ਹਾ ਬਿਊਰੋ ਦਫ਼ਤਰਾਂ ਤੱਕ ਪਹੁੰਚਣਾ ਚਾਹੁੰਦੇ ਹੋ,',
-    clickHere: 'ਇੱਥੇ ਕਲਿੱਕ ਕਰੋ',
+    clickHere: 'यहाँ क्लिक करें',
     forContactDetails: 'ਸੰਪਰਕ ਵੇਰਵਿਆਂ ਲਈ।',
     reachDistrictProgramme:
       'ਜੇਕਰ ਤੁਸੀਂ ਜ਼ਿਲ੍ਹਾ ਪ੍ਰੋਗਰਾਮ ਪ੍ਰਬੰਧਨ ਯੂਨਿਟ ਅਧਿਕਾਰੀਆਂ ਤੱਕ ਪਹੁੰਚਣਾ ਚਾਹੁੰਦੇ ਹੋ,',
@@ -658,7 +664,13 @@ const translations: Record<string, Record<string, string>> = {
     eligibility: "पात्रता",
     benefits: "लाभ",
     howToApply: "आवेदन कैसे करें",
-    close: "बंद करे"
+    close: "बंद करे",
+    privateJobsForWomen: 'महिलाओं के लिए निजी नौकरियां',
+    governmentJobsForWomen: 'महिलाओं के लिए सरकारी नौकरियां',
+    selectSector: 'क्षेत्र चुनें',
+    allSectors: 'सभी क्षेत्र',
+    Private: 'निजी',
+    Government: 'सरकारी',
   },
   pa: {
     dashboard: 'ਡੈਸ਼ਬੋਰਡ',
@@ -888,7 +900,7 @@ const translations: Record<string, Record<string, string>> = {
     howToReachUs: 'How To Reach Us',
     reachDistrictBureau:
       'If you want to reach out to the District Bureau offices,',
-    clickHere: 'Click Here',
+    clickHere: 'ਇੱਥੇ ਕਲਿੱਕ ਕਰੋ',
     forContactDetails: 'for contact details.',
     reachDistrictProgramme:
       'If you want to reach out to the District Programme Management Unit officers,',
@@ -988,7 +1000,13 @@ const translations: Record<string, Record<string, string>> = {
     eligibility: "ਯੋਗਤਾ",
     benefits: "ਲਾਭ",
     howToApply: "ਕਿਵੇਂ ਅਪਲਾਈ ਕਰਨਾ ਹੈ",
-    close: "ਬੰਦ ਕਰੋ"
+    close: "ਬੰਦ ਕਰੋ",
+    privateJobsForWomen: 'ਔਰਤਾਂ ਲਈ ਨਿੱਜੀ ਨੌਕਰੀਆਂ',
+    governmentJobsForWomen: 'ਔਰਤਾਂ ਲਈ ਸਰਕਾਰੀ ਨੌਕਰੀਆਂ',
+    selectSector: 'ਸੈਕਟਰ ਚੁਣੋ',
+    allSectors: 'ਸਾਰੇ ਸੈਕਟਰ',
+    Private: 'ਨਿੱਜੀ',
+    Government: 'ਸਰਕਾਰੀ',
   },
 };
 
