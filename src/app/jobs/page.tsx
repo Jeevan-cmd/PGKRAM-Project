@@ -55,13 +55,17 @@ function JobsPageContent() {
   const [type, setType] = useState('all');
   const [qualification, setQualification] = useState('all');
   const [experience, setExperience] = useState('all');
-  const [category, setCategory] = useState('all');
+  const [category, setCategory] = useState(searchParams.get('category') || 'all');
   const [sector, setSector] = useState(searchParams.get('sector') || 'all');
 
   useEffect(() => {
     const sectorParam = searchParams.get('sector');
     if (sectorParam) {
       setSector(sectorParam);
+    }
+    const categoryParam = searchParams.get('category');
+    if(categoryParam) {
+      setCategory(categoryParam);
     }
   }, [searchParams]);
 
@@ -330,7 +334,7 @@ function JobsPageContent() {
                     >
                         {t(job.sector)}
                     </Badge>
-                    {job.category && <Badge variant="destructive">{t(job.category)}</Badge>}
+                    {job.category && <Badge variant={job.category === 'PWD' ? 'destructive' : 'default'}>{t(job.category)}</Badge>}
                     </div>
                 </CardContent>
                 <CardFooter className="flex gap-2">

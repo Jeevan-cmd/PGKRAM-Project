@@ -31,6 +31,7 @@ import {
   Sparkles,
   Heart,
   GraduationCap,
+  HeartHandshake,
 } from "lucide-react";
 import { useLanguage } from "@/context/language-context";
 import { useUser } from "@/firebase";
@@ -42,6 +43,7 @@ const menuItems = [
   { href: "/business-support", labelKey: "businessSupport", icon: <Building2 /> },
   { href: "/employer-portal", labelKey: "employerPortal", icon: <Shield /> },
   { href: "/counselling", labelKey: "counselling", icon: <GraduationCap /> },
+  { href: "/jobs-for-disabled", labelKey: "jobsForPersonsWithDisability", icon: <HeartHandshake /> },
 ];
 
 const aiMenuItems = [

@@ -192,6 +192,20 @@ export const jobs = [
     experience: 0,
     category: 'General',
   },
+  {
+    id: 'job-14',
+    title: 'Customer Service Associate',
+    company: 'Shell Petrol Bunk',
+    location: 'Various Cities',
+    type: 'Full-time',
+    sector: 'Private',
+    imageId: 'job-1', // Re-using an image for now
+    description:
+      'Shell is committed to creating an inclusive workplace. We are actively hiring persons with disabilities for customer service roles at our petrol bunks across Punjab. Responsibilities include assisting customers, handling payments, and maintaining a clean and safe environment.',
+    qualification: '10th Pass',
+    experience: 0,
+    category: 'PWD',
+  },
 ];
 
 export const skills = [

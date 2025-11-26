@@ -56,7 +56,7 @@ const services = [
   {
     title: 'jobsForPersonsWithDisability',
     icon: <HeartHandshake className="size-8" />,
-    href: '/jobs',
+    href: '/jobs-for-disabled',
   },
   {
     title: 'inductionIntoArmedForces',
