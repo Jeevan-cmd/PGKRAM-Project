@@ -1,5 +1,7 @@
+
 'use client';
 import Image from 'next/image';
+import { useState } from 'react';
 import { PageHeader } from '@/components/layout/page-header';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -13,11 +15,21 @@ import {
 import { useLanguage } from '@/context/language-context';
 import { skills } from '@/lib/data';
 import imageData from '@/lib/placeholder-images.json';
+import { cn } from '@/lib/utils';
 
 const { placeholderImages } = imageData;
+const INITIAL_VISIBLE_COURSES = 6;
 
 export default function SkillsPage() {
   const { t } = useLanguage();
+  const [visibleCourses, setVisibleCourses] = useState(
+    INITIAL_VISIBLE_COURSES
+  );
+
+  const showMoreCourses = () => {
+    setVisibleCourses(skills.length);
+  };
+
   return (
     <div className="flex h-full flex-col">
       <PageHeader title={t('skillDevelopment')} />
@@ -27,7 +39,7 @@ export default function SkillsPage() {
         </p>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {skills.map((skill) => {
+          {skills.slice(0, visibleCourses).map((skill) => {
             const image = placeholderImages.find(
               (img) => img.id === skill.imageId
             );
@@ -56,7 +68,10 @@ export default function SkillsPage() {
                     {t(skill.title)}
                   </CardTitle>
                   <p className="text-sm text-muted-foreground">
-                    {t(skill.duration, { duration: skill.durationValue, unit: t(skill.durationUnit) })}
+                    {t(skill.duration, {
+                      duration: skill.durationValue,
+                      unit: t(skill.durationUnit),
+                    })}
                   </p>
                 </CardContent>
                 <CardFooter className="p-4 pt-0">
@@ -66,6 +81,14 @@ export default function SkillsPage() {
             );
           })}
         </div>
+
+        {visibleCourses < skills.length && (
+          <div className="mt-8 flex justify-center">
+            <Button onClick={showMoreCourses} size="lg">
+              {t('browseMoreCourses')}
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

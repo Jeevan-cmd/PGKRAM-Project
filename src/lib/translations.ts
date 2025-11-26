@@ -1,3 +1,4 @@
+
 const translations: Record<string, Record<string, string>> = {
   en: {
     dashboard: 'Dashboard',
@@ -305,7 +306,7 @@ const translations: Record<string, Record<string, string>> = {
     searchJobs: 'Search Jobs',
     searchJobsNearMe: 'Search Jobs near by me',
     availableGovtJobs: 'Available Govt. Jobs',
-    availablePrivateJobs: 'Available Private Jobs',
+    availablePrivateJobs: 'Available Private. Jobs',
     General: 'General',
     SC: 'SC',
     BC: 'BC',
@@ -316,6 +317,15 @@ const translations: Record<string, Record<string, string>> = {
     'Financial Analyst': 'Financial Analyst',
     'High School Teacher (Maths)': 'High School Teacher (Maths)',
     'Police Constable': 'Police Constable',
+    'Cybersecurity Analyst Certification':
+      'Cybersecurity Analyst Certification',
+    'Human Resource Management': 'Human Resource Management',
+    'Cloud Computing (AWS/Azure)': 'Cloud Computing (AWS/Azure)',
+    'Project Management Professional (PMP)':
+      'Project Management Professional (PMP)',
+    'Effective Communication Skills': 'Effective Communication Skills',
+    'Tally & GST Compliance': 'Tally & GST Compliance',
+    browseMoreCourses: 'Browse More Courses',
   },
   hi: {
     dashboard: 'डैशबोर्ड',
@@ -638,6 +648,15 @@ const translations: Record<string, Record<string, string>> = {
     'Financial Analyst': 'वित्तीय विश्लेषक',
     'High School Teacher (Maths)': 'उच्च विद्यालय शिक्षक (गणित)',
     'Police Constable': 'पुलिस कांस्टेबल',
+    'Cybersecurity Analyst Certification':
+      'साइबर सुरक्षा विश्लेषक प्रमाणन',
+    'Human Resource Management': 'मानव संसाधन प्रबंधन',
+    'Cloud Computing (AWS/Azure)': 'क्लाउड कंप्यूटिंग (AWS/Azure)',
+    'Project Management Professional (PMP)':
+      'परियोजना प्रबंधन पेशेवर (पीएमपी)',
+    'Effective Communication Skills': 'प्रभावी संचार कौशल',
+    'Tally & GST Compliance': 'टैली और जीएसटी अनुपालन',
+    browseMoreCourses: 'अधिक पाठ्यक्रम ब्राउज़ करें',
   },
   pa: {
     dashboard: 'ਡੈਸ਼ਬੋਰਡ',
@@ -960,6 +979,13 @@ const translations: Record<string, Record<string, string>> = {
     'Financial Analyst': 'ਵਿੱਤੀ ਵਿਸ਼ਲੇਸ਼ਕ',
     'High School Teacher (Maths)': 'ਹਾਈ ਸਕੂਲ ਅਧਿਆਪਕ (ਗਣਿਤ)',
     'Police Constable': 'ਪੁਲਿਸ ਕਾਂਸਟੇਬਲ',
+    'Cybersecurity Analyst Certification': 'ਸਾਈਬਰ ਸੁਰੱਖਿਆ ਵਿਸ਼ਲੇਸ਼ਕ ਸਰਟੀਫਿਕੇਸ਼ਨ',
+    'Human Resource Management': 'ਮਨੁੱਖੀ ਸਰੋਤ ਪ੍ਰਬੰਧਨ',
+    'Cloud Computing (AWS/Azure)': 'ਕਲਾਉਡ ਕੰਪਿਊਟਿੰਗ (AWS/Azure)',
+    'Project Management Professional (PMP)': 'ਪ੍ਰੋਜੈਕਟ ਪ੍ਰਬੰਧਨ ਪੇਸ਼ੇਵਰ (PMP)',
+    'Effective Communication Skills': 'ਪ੍ਰਭਾਵਸ਼ਾਲੀ ਸੰਚਾਰ ਹੁਨਰ',
+    'Tally & GST Compliance': 'ਟੈਲੀ ਅਤੇ ਜੀਐਸਟੀ ਪਾਲਣਾ',
+    browseMoreCourses: 'ਹੋਰ ਕੋਰਸ ਬ੍ਰਾਊਜ਼ ਕਰੋ',
   },
 };
 

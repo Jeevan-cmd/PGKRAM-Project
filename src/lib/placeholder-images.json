@@ -117,8 +117,44 @@
     {
       "id": "skill-6",
       "description": "Placeholder for a supply chain management course.",
-      "imageUrl": "https://images.unsplash.com/photo-1585713181935-d5f622cc2415?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjYXJnbyUyMHNoaXB8ZW58MHx8fHwxNzYzMTI4ODg1fDA&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1585713181935-d5f622cc2415?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjYXJnbyUyMHNoaXB8ZW58MHx8fHwxNzYzMTI4ODg1fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "cargo ship"
+    },
+    {
+      "id": "skill-7",
+      "description": "Placeholder for a cybersecurity course.",
+      "imageUrl": "https://images.unsplash.com/photo-1555949963-ff980877a24f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjeWJlcnNlY3VyaXR5fGVufDB8fHx8MTc2NTU3OTQyMnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cybersecurity code"
+    },
+    {
+      "id": "skill-8",
+      "description": "Placeholder for an HR management course.",
+      "imageUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhcGl8ZW58MHx8fHwxNzY1NTc5NDIyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "business meeting"
+    },
+    {
+      "id": "skill-9",
+      "description": "Placeholder for a cloud computing course.",
+      "imageUrl": "https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjbG91ZCUyMGNvbXB1dGluZ3xlbnwwfHx8fDE3NjU1Nzk0MjJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cloud computing"
+    },
+    {
+      "id": "skill-10",
+      "description": "Placeholder for a project management course.",
+      "imageUrl": "https://images.unsplash.com/photo-1542626991-cbc4e62a8d87?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwcm9qZWN0JTIwbWFuYWdlbWVudHxlbnwwfHx8fDE3NjU1Nzk0MjJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "project management"
+    },
+    {
+      "id": "skill-11",
+      "description": "Placeholder for a communication skills course.",
+      "imageUrl": "https://images.unsplash.com/photo-1549923746-c502d488b3ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjb21tdW5pY2F0aW9ufGVufDB8fHx8fDE3NjU1Nzk0MjJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "communication"
+    },
+    {
+      "id": "skill-12",
+      "description": "Placeholder for a Tally and GST course.",
+      "imageUrl": "https://images.unsplash.com/photo-1554224155-169544351720?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhY2NvdW50aW5nfGVufDB8fHx8fDE3NjU1Nzk0MjJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "accounting"
     }
   ]
 }
