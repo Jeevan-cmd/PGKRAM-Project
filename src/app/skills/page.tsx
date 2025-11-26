@@ -15,19 +15,29 @@ import {
 import { useLanguage } from '@/context/language-context';
 import { skills } from '@/lib/data';
 import imageData from '@/lib/placeholder-images.json';
-import { cn } from '@/lib/utils';
+import { useToast } from '@/hooks/use-toast';
+import { useUser } from '@/firebase';
 
 const { placeholderImages } = imageData;
 const INITIAL_VISIBLE_COURSES = 6;
 
 export default function SkillsPage() {
   const { t } = useLanguage();
+  const { toast } = useToast();
+  const { user } = useUser();
   const [visibleCourses, setVisibleCourses] = useState(
     INITIAL_VISIBLE_COURSES
   );
 
   const showMoreCourses = () => {
     setVisibleCourses(skills.length);
+  };
+
+  const handleEnroll = (courseTitle: string) => {
+    toast({
+      title: 'Successfully Enrolled!',
+      description: `A confirmation for '${courseTitle}' with a course link will be sent to your email: ${user?.email}`,
+    });
   };
 
   return (
@@ -56,7 +66,7 @@ export default function SkillsPage() {
                         alt={image.description}
                         width={400}
                         height={225}
-                        className="object-cover w-full h-full"
+                        className="h-full w-full object-cover"
                         data-ai-hint={image.imageHint}
                       />
                     )}
@@ -75,7 +85,12 @@ export default function SkillsPage() {
                   </p>
                 </CardContent>
                 <CardFooter className="p-4 pt-0">
-                  <Button className="w-full">{t('enrollNow')}</Button>
+                  <Button
+                    className="w-full"
+                    onClick={() => handleEnroll(t(skill.title))}
+                  >
+                    {t('enrollNow')}
+                  </Button>
                 </CardFooter>
               </Card>
             );
