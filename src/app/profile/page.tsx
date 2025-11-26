@@ -75,7 +75,7 @@ export default function ProfilePage() {
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="email">{t('emailAddress')}</Label>
-                      <Input id="email" type="email" defaultValue={user.email ?? ''} />
+                      <Input id="email" type="email" defaultValue={user.email ?? ''} readOnly />
                     </div>
                   </div>
                   <div className="space-y-2">
