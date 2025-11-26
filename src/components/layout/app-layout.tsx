@@ -5,6 +5,7 @@ import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
 import { MainSidebar } from '@/components/layout/main-sidebar';
 import { useUser } from '@/firebase';
 import { useEffect } from 'react';
+import { Footer } from './footer';
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -36,7 +37,12 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
       <MainSidebar />
-      <SidebarInset>{children}</SidebarInset>
+      <SidebarInset>
+        <div className="flex flex-col min-h-screen">
+            <main className="flex-1">{children}</main>
+            <Footer />
+        </div>
+      </SidebarInset>
     </SidebarProvider>
   );
 }
