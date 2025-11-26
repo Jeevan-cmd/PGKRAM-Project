@@ -6,6 +6,7 @@ import { Loader2, Sparkles } from "lucide-react";
 import { useActionState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { jobs as allJobs } from "@/lib/data";
 
 import {
   IntelligentJobMatchingInput,
@@ -86,7 +87,15 @@ export function JobMatcherForm() {
 
   const onSubmit = (data: FormValues) => {
     const skillsArray = data.skills.split(",").map((s) => s.trim());
-    formAction({ ...data, skills: skillsArray });
+    
+    // Pass the full list of jobs to the AI flow
+    const jobsForAI = allJobs.map(job => ({
+        ...job,
+        title: t(job.title), // Translate title for consistency
+        description: t(job.description), // Translate description
+    }));
+
+    formAction({ ...data, skills: skillsArray, jobs: jobsForAI });
   };
 
   return (

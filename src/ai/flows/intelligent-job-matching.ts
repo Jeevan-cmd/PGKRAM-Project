@@ -3,7 +3,8 @@
 /**
  * @fileOverview This file implements the intelligent job matching flow.
  *
- * The flow takes user skills, experience, and preferences as input and returns personalized job recommendations.
+ * The flow takes user skills, experience, and preferences, along with a list of available jobs,
+ * and returns personalized job recommendations from that list.
  *
  * @exports intelligentJobMatching - The main function to trigger the job matching flow.
  * @exports IntelligentJobMatchingInput - The input type for the intelligentJobMatching function.
@@ -13,15 +14,28 @@
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
+const JobSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  description: z.string(),
+  company: z.string(),
+  location: z.string(),
+  type: z.string(),
+  sector: z.string(),
+  qualification: z.string(),
+  experience: z.number(),
+});
+
 const IntelligentJobMatchingInputSchema = z.object({
   skills: z.array(z.string()).describe('List of skills possessed by the job seeker.'),
   experience: z.string().describe('Description of the job seeker\'s work experience.'),
   preferences: z.string().describe('Job seeker\'s preferences regarding job type, location, etc.'),
+  jobs: z.array(JobSchema).describe('The list of available jobs to match against.'),
 });
 export type IntelligentJobMatchingInput = z.infer<typeof IntelligentJobMatchingInputSchema>;
 
 const IntelligentJobMatchingOutputSchema = z.object({
-  jobRecommendations: z.array(z.string()).describe('List of job recommendations based on the input.'),
+  jobRecommendations: z.array(z.string()).describe('A list of titles of the most suitable jobs from the provided list.'),
 });
 export type IntelligentJobMatchingOutput = z.infer<typeof IntelligentJobMatchingOutputSchema>;
 
@@ -33,15 +47,23 @@ const prompt = ai.definePrompt({
   name: 'intelligentJobMatchingPrompt',
   input: {schema: IntelligentJobMatchingInputSchema},
   output: {schema: IntelligentJobMatchingOutputSchema},
-  prompt: `You are an AI job recommendation system.
+  prompt: `You are an expert AI career counselor for the Punjab Opportunities Hub. Your task is to act as a recommendation engine.
 
-  Based on the job seeker's skills, experience, and preferences, provide a list of personalized job recommendations.
+You will be given a job seeker's profile (skills, experience, preferences) and a list of available jobs in JSON format.
 
-  Skills: {{skills}}
-  Experience: {{experience}}
-  Preferences: {{preferences}}
+Analyze the user's profile and compare it against each job in the list. Based on this analysis, identify the top 3-5 most suitable jobs for the user.
 
-  Job Recommendations:`,
+Return only the titles of the recommended jobs in the 'jobRecommendations' array.
+
+**Job Seeker Profile:**
+- Skills: {{{skills}}}
+- Experience: {{{experience}}}
+- Preferences: {{{preferences}}}
+
+**Available Jobs List (JSON):**
+{{{json jobs}}}
+
+Based on your analysis, provide the personalized job recommendations.`,
 });
 
 const intelligentJobMatchingFlow = ai.defineFlow(
