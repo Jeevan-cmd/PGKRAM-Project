@@ -49,7 +49,7 @@ export function PageHeader({ title }: PageHeaderProps) {
       <div className="ml-auto flex items-center gap-4">
         <nav className="hidden md:flex gap-4">
             <Link href="/dashboard" className="text-sm font-medium text-muted-foreground hover:text-foreground">Home</Link>
-            <Link href="#" className="text-sm font-medium text-muted-foreground hover:text-foreground">About Us</Link>
+            <Link href="/about" className="text-sm font-medium text-muted-foreground hover:text-foreground">About Us</Link>
             <Link href="#" className="text-sm font-medium text-muted-foreground hover:text-foreground">Contact Us</Link>
         </nav>
 
