@@ -18,7 +18,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import imageData from '@/lib/placeholder-images.json';
 
-const { placeholderImages } = imageData;
+const placeholderImages = imageData.placeholderImages;
 const heroImage = placeholderImages.find((img) => img.id === 'hero-bg');
 
 export default function CounsellingPage() {
