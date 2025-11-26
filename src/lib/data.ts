@@ -1,16 +1,9 @@
-
 export const user = {
   name: 'Harmanpreet Singh',
   email: 'h.singh@example.com',
   avatarUrl: 'https://picsum.photos/seed/user-avatar/100/100',
   headline: 'Aspiring Software Developer | Mohali, Punjab',
-  skills: [
-    'JavaScript',
-    'React',
-    'Node.js',
-    'Communication',
-    'Teamwork',
-  ],
+  skills: ['JavaScript', 'React', 'Node.js', 'Communication', 'Teamwork'],
   experience:
     'Completed a 6-month internship at a local tech startup, where I contributed to front-end development using React. Eager to apply my skills in a full-time role.',
 };
@@ -257,47 +250,112 @@ export const skills = [
   },
 ];
 
-export const businessResources = [
+export type BusinessResource = {
+  id: string;
+  name: string;
+  category: 'Financial' | 'Mentorship' | 'Infrastructure' | 'Startup';
+  description: string;
+  details: {
+    eligibility: string;
+    benefits: string;
+    howToApply: string;
+  };
+};
+
+export const businessResources: BusinessResource[] = [
   {
     id: 'biz-1',
     name: 'Punjab State Startup Grant',
     category: 'Financial',
     description: 'Seed funding for innovative startups in key sectors.',
+    details: {
+      eligibility:
+        'eligibility.punjabStateStartupGrant',
+      benefits:
+        'benefits.punjabStateStartupGrant',
+      howToApply:
+        'howToApply.punjabStateStartupGrant',
+    },
   },
   {
     id: 'biz-2',
     name: 'MSME Loan Scheme',
     category: 'Financial',
     description: 'Low-interest loans for small and medium enterprises.',
+    details: {
+      eligibility: 'eligibility.msmeLoanScheme',
+      benefits: 'benefits.msmeLoanScheme',
+      howToApply: 'howToApply.msmeLoanScheme',
+    },
+  },
+  {
+    id: 'biz-8',
+    name: 'PMRF Loan Scheme',
+    category: 'Financial',
+    description: 'Special loan scheme for rural entrepreneurs in Punjab.',
+    details: {
+      eligibility: 'eligibility.pmrfLoanScheme',
+      benefits: 'benefits.pmrfLoanScheme',
+      howToApply: 'howToApply.pmrfLoanScheme',
+    },
   },
   {
     id: 'biz-3',
     name: 'Punjab Entrepreneurs Network (PEN)',
     category: 'Mentorship',
     description: 'Connect with experienced mentors and fellow entrepreneurs.',
+    details: {
+      eligibility: 'eligibility.pen',
+      benefits: 'benefits.pen',
+      howToApply: 'howToApply.pen',
+    },
   },
   {
     id: 'biz-4',
     name: 'TiE Chandigarh',
     category: 'Mentorship',
-    description: 'Global network fostering entrepreneurship through mentoring, networking, and education.',
+    description:
+      'Global network fostering entrepreneurship through mentoring, networking, and education.',
+    details: {
+      eligibility: 'eligibility.tie',
+      benefits: 'benefits.tie',
+      howToApply: 'howToApply.tie',
+    },
   },
   {
     id: 'biz-5',
     name: 'STPI Mohali',
     category: 'Infrastructure',
-    description: 'Incubation center with state-of-the-art facilities for tech startups.',
+    description:
+      'Incubation center with state-of-the-art facilities for tech startups.',
+    details: {
+      eligibility: 'eligibility.stpi',
+      benefits: 'benefits.stpi',
+      howToApply: 'howToApply.stpi',
+    },
   },
   {
     id: 'biz-6',
     name: 'Agri-Processing Park',
     category: 'Infrastructure',
-    description: 'Specialized zones with facilities for food processing businesses.',
+    description:
+      'Specialized zones with facilities for food processing businesses.',
+    details: {
+      eligibility: 'eligibility.agriPark',
+      benefits: 'benefits.agriPark',
+      howToApply: 'howToApply.agriPark',
+    },
   },
   {
     id: 'biz-7',
     name: 'Invest Punjab Business First Portal',
     category: 'Startup',
-    description: 'A single portal for regulatory clearances and fiscal incentive applications.',
+    description:
+      'A single portal for regulatory clearances and fiscal incentive applications.',
+    details: {
+      eligibility: 'eligibility.investPunjab',
+      benefits: 'benefits.investPunjab',
+      howToApply: 'howToApply.investPunjab',
+    },
   },
 ];

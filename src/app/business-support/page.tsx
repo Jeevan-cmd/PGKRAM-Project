@@ -1,4 +1,5 @@
 'use client';
+import { useState } from 'react';
 import { PageHeader } from '@/components/layout/page-header';
 import {
   Accordion,
@@ -6,19 +7,29 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import { useLanguage } from '@/context/language-context';
-import { businessResources } from '@/lib/data';
+import { businessResources, BusinessResource } from '@/lib/data';
 import { Building, Factory, HandCoins, Users } from 'lucide-react';
 
 export default function BusinessSupportPage() {
   const { t } = useLanguage();
+  const [selectedResource, setSelectedResource] = useState<BusinessResource | null>(null);
 
   const categories = [
     {
@@ -71,16 +82,27 @@ export default function BusinessSupportPage() {
                     {category.items.map((item) => (
                       <Card
                         key={item.id}
-                        className="transition-all hover:shadow-md"
+                        className="flex flex-col transition-all hover:shadow-md"
                       >
                         <CardHeader>
                           <CardTitle className="font-headline text-lg">
                             {t(item.name)}
                           </CardTitle>
                         </CardHeader>
-                        <CardContent>
-                          <CardDescription>{t(item.description)}</CardDescription>
+                        <CardContent className="flex-grow">
+                          <CardDescription>
+                            {t(item.description)}
+                          </CardDescription>
                         </CardContent>
+                        <CardFooter>
+                          <Button
+                            variant="outline"
+                            className="w-full"
+                            onClick={() => setSelectedResource(item)}
+                          >
+                            {t('viewMore')}
+                          </Button>
+                        </CardFooter>
                       </Card>
                     ))}
                   </div>
@@ -90,6 +112,41 @@ export default function BusinessSupportPage() {
           </Accordion>
         </div>
       </div>
+      <Dialog
+        open={!!selectedResource}
+        onOpenChange={(isOpen) => !isOpen && setSelectedResource(null)}
+      >
+        <DialogContent className="sm:max-w-[600px]">
+          {selectedResource && (
+            <>
+              <DialogHeader>
+                <DialogTitle className="font-headline text-2xl">
+                  {t(selectedResource.name)}
+                </DialogTitle>
+                <DialogDescription>
+                  {t(selectedResource.description)}
+                </DialogDescription>
+              </DialogHeader>
+              <div className="prose prose-sm max-h-[60vh] overflow-y-auto py-4 text-sm">
+                <h3 className="font-semibold">{t('eligibility')}</h3>
+                <p className="text-muted-foreground">
+                  {t(selectedResource.details.eligibility)}
+                </p>
+
+                <h3 className="mt-4 font-semibold">{t('benefits')}</h3>
+                <p className="text-muted-foreground">
+                  {t(selectedResource.details.benefits)}
+                </p>
+
+                <h3 className="mt-4 font-semibold">{t('howToApply')}</h3>
+                <p className="text-muted-foreground">
+                  {t(selectedResource.details.howToApply)}
+                </p>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
