@@ -33,9 +33,10 @@ import { Textarea } from '@/components/ui/textarea';
 import { useLanguage } from '@/context/language-context';
 import { useUser } from '@/firebase';
 import { jobs } from '@/lib/data';
-import { MapPin, Search } from 'lucide-react';
+import { MapPin, Search, Frown } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useMemo } from 'react';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 type Job = (typeof jobs)[0];
 
@@ -241,48 +242,57 @@ export default function JobsPage() {
           </Card>
         </div>
 
-
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filteredJobs.map((job) => (
-            <Card
-              key={job.id}
-              className="flex flex-col transition-all hover:shadow-lg"
-            >
-              <CardHeader>
-                <CardTitle className="font-headline">{t(job.title)}</CardTitle>
-                <CardDescription>{job.company}</CardDescription>
-              </CardHeader>
-              <CardContent className="flex-grow space-y-2">
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <span>{job.location}</span>
-                </div>
-                <div className="space-x-2">
-                  <Badge variant="secondary">{t(job.type)}</Badge>
-                  <Badge
-                    variant={
-                      job.sector === 'Government' ? 'default' : 'outline'
-                    }
-                  >
-                    {job.sector}
-                  </Badge>
-                  {job.category && <Badge variant="destructive">{t(job.category)}</Badge>}
-                </div>
-              </CardContent>
-              <CardFooter className="flex gap-2">
-                <Button className="flex-1" onClick={() => openApplyModal(job)}>
-                  {t('applyNow')}
-                </Button>
-                <Button
-                  variant="outline"
-                  className="flex-1"
-                  onClick={() => openDetailsModal(job)}
+        {filteredJobs.length > 0 ? (
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {filteredJobs.map((job) => (
+                <Card
+                key={job.id}
+                className="flex flex-col transition-all hover:shadow-lg"
                 >
-                  {t('viewDetails')}
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
+                <CardHeader>
+                    <CardTitle className="font-headline">{t(job.title)}</CardTitle>
+                    <CardDescription>{job.company}</CardDescription>
+                </CardHeader>
+                <CardContent className="flex-grow space-y-2">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <span>{job.location}</span>
+                    </div>
+                    <div className="space-x-2">
+                    <Badge variant="secondary">{t(job.type)}</Badge>
+                    <Badge
+                        variant={
+                        job.sector === 'Government' ? 'default' : 'outline'
+                        }
+                    >
+                        {job.sector}
+                    </Badge>
+                    {job.category && <Badge variant="destructive">{t(job.category)}</Badge>}
+                    </div>
+                </CardContent>
+                <CardFooter className="flex gap-2">
+                    <Button className="flex-1" onClick={() => openApplyModal(job)}>
+                    {t('applyNow')}
+                    </Button>
+                    <Button
+                    variant="outline"
+                    className="flex-1"
+                    onClick={() => openDetailsModal(job)}
+                    >
+                    {t('viewDetails')}
+                    </Button>
+                </CardFooter>
+                </Card>
+            ))}
+            </div>
+        ) : (
+            <Alert variant="destructive">
+                <Frown className="h-4 w-4" />
+                <AlertTitle>{t('noJobsFound')}</AlertTitle>
+                <AlertDescription>
+                    {t('noJobsFoundDesc')}
+                </AlertDescription>
+            </Alert>
+        )}
       </div>
 
       <Dialog

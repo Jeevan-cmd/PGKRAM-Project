@@ -326,6 +326,8 @@ const translations: Record<string, Record<string, string>> = {
     'Effective Communication Skills': 'Effective Communication Skills',
     'Tally & GST Compliance': 'Tally & GST Compliance',
     browseMoreCourses: 'Browse More Courses',
+    noJobsFound: 'No Jobs Found',
+    noJobsFoundDesc: 'We couldn\'t find any jobs matching your criteria. Please try adjusting your search.',
   },
   hi: {
     dashboard: 'डैशबोर्ड',
@@ -657,6 +659,8 @@ const translations: Record<string, Record<string, string>> = {
     'Effective Communication Skills': 'प्रभावी संचार कौशल',
     'Tally & GST Compliance': 'टैली और जीएसटी अनुपालन',
     browseMoreCourses: 'अधिक पाठ्यक्रम ब्राउज़ करें',
+    noJobsFound: 'कोई नौकरी नहीं मिली',
+    noJobsFoundDesc: 'हमें आपके मानदंडों से मेल खाने वाली कोई नौकरी नहीं मिली। कृपया अपनी खोज को समायोजित करने का प्रयास करें।',
   },
   pa: {
     dashboard: 'ਡੈਸ਼ਬੋਰਡ',
@@ -986,6 +990,8 @@ const translations: Record<string, Record<string, string>> = {
     'Effective Communication Skills': 'ਪ੍ਰਭਾਵਸ਼ਾਲੀ ਸੰਚਾਰ ਹੁਨਰ',
     'Tally & GST Compliance': 'ਟੈਲੀ ਅਤੇ ਜੀਐਸਟੀ ਪਾਲਣਾ',
     browseMoreCourses: 'ਹੋਰ ਕੋਰਸ ਬ੍ਰਾਊਜ਼ ਕਰੋ',
+    noJobsFound: 'ਕੋਈ ਨੌਕਰੀ ਨਹੀਂ ਮਿਲੀ',
+    noJobsFoundDesc: 'ਸਾਨੂੰ ਤੁਹਾਡੇ ਮਾਪਦੰਡਾਂ ਨਾਲ ਮੇਲ ਖਾਂਦੀ ਕੋਈ ਨੌਕਰੀ ਨਹੀਂ ਮਿਲੀ। ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੀ ਖੋਜ ਨੂੰ ਅਨੁਕੂਲ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ।',
   },
 };
 
