@@ -25,6 +25,9 @@ export const jobs = [
     imageId: 'job-1',
     description:
       'We are looking for a skilled Frontend Developer to join our team in Mohali. The ideal candidate will be proficient in React, HTML, CSS, and modern JavaScript. You will be responsible for building beautiful and responsive user interfaces for our web applications.',
+    qualification: 'B.Tech',
+    experience: 2,
+    category: 'General',
   },
   {
     id: 'job-2',
@@ -36,6 +39,9 @@ export const jobs = [
     imageId: 'job-2',
     description:
       'Lead our marketing team to create and execute campaigns that drive growth. You should have experience with SEO, SEM, social media marketing, and content strategy. Strong analytical skills are a must.',
+    qualification: 'MBA',
+    experience: 5,
+    category: 'General',
   },
   {
     id: 'job-3',
@@ -47,6 +53,9 @@ export const jobs = [
     imageId: 'job-3',
     description:
       'We need a part-time accountant to manage financial records, process invoices, and prepare tax returns. Experience with accounting software like Tally is required. This is a flexible, 20-hour per week position.',
+    qualification: 'B.Com',
+    experience: 3,
+    category: 'General',
   },
   {
     id: 'job-4',
@@ -58,6 +67,9 @@ export const jobs = [
     imageId: 'job-4',
     description:
       'A great opportunity for a student or recent graduate to gain hands-on experience in data analysis. You will work with our team to collect, clean, and analyze data to provide business insights. Basic knowledge of SQL and Python is a plus.',
+    qualification: 'B.Sc',
+    experience: 0,
+    category: 'General',
   },
   {
     id: 'job-5',
@@ -69,6 +81,9 @@ export const jobs = [
     imageId: 'job-5',
     description:
       'We are seeking a talented graphic designer for a contract role. You will be creating marketing materials, social media graphics, and website assets. A strong portfolio demonstrating your design skills is required.',
+    qualification: 'Diploma',
+    experience: 2,
+    category: 'General',
   },
   {
     id: 'job-6',
@@ -80,6 +95,9 @@ export const jobs = [
     imageId: 'job-6',
     description:
       'Oversee and improve our supply chain and logistics operations. The ideal candidate will have strong leadership skills and experience in warehouse management, inventory control, and transportation.',
+    qualification: 'MBA',
+    experience: 7,
+    category: 'General',
   },
   {
     id: 'job-7',
@@ -91,6 +109,9 @@ export const jobs = [
     imageId: 'job-7',
     description:
       'Join the PWD to work on infrastructure projects across the state. Responsibilities include project planning, design, and supervision. A degree in Civil Engineering is required.',
+    qualification: 'B.Tech',
+    experience: 4,
+    category: 'General',
   },
   {
     id: 'job-8',
@@ -102,6 +123,9 @@ export const jobs = [
     imageId: 'job-8',
     description:
       'Perform administrative duties, maintain records, and handle correspondence. Strong organizational skills and proficiency in office software are required.',
+    qualification: '12th Pass',
+    experience: 1,
+    category: 'SC',
   },
 ];
 
