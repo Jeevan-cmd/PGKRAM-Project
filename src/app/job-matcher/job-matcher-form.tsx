@@ -88,14 +88,8 @@ export function JobMatcherForm() {
   const onSubmit = (data: FormValues) => {
     const skillsArray = data.skills.split(",").map((s) => s.trim());
     
-    // Pass the full list of jobs to the AI flow
-    const jobsForAI = allJobs.map(job => ({
-        ...job,
-        title: t(job.title), // Translate title for consistency
-        description: t(job.description), // Translate description
-    }));
-
-    formAction({ ...data, skills: skillsArray, jobs: jobsForAI });
+    // Pass the full list of jobs to the AI flow without translating them
+    formAction({ ...data, skills: skillsArray, jobs: allJobs });
   };
 
   return (
