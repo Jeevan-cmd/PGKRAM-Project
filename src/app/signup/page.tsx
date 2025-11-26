@@ -27,55 +27,113 @@ import {
 import { useLanguage } from '@/context/language-context';
 import { Globe } from 'lucide-react';
 import Link from 'next/link';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useToast } from '@/hooks/use-toast';
+import { useAuth } from '@/firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+
 
 export default function SignupPage() {
   const { t } = useLanguage();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [source, setSource] = useState('');
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const { toast } = useToast();
+  const auth = useAuth();
+
+  const handleSignUp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!auth) {
+       toast({
+        title: 'Error',
+        description: 'Authentication service is not available.',
+        variant: 'destructive',
+      });
+      return;
+    }
+    setLoading(true);
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      // You can also update the user's profile with the name here if needed
+      router.push('/dashboard');
+    } catch (error: any) {
+      console.error(error);
+      toast({
+        title: 'Sign Up Failed',
+        description: error.message,
+        variant: 'destructive',
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-background p-4">
       <div className="absolute top-4 right-4">
         <LanguageSwitcher />
       </div>
       <Card className="w-full max-w-md">
-        <CardHeader className="space-y-1 text-center">
-          <CardTitle className="font-headline text-2xl">{t('createAnAccount')}</CardTitle>
-          <CardDescription>{t('createAnAccountPrompt')}</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="name">{t('fullName')}</Label>
-            <Input id="name" placeholder={t('fullNamePlaceholder')} required />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="email">{t('emailAddress')}</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="name@example.com"
-              required
-            />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="password">{t('password')}</Label>
-            <Input id="password" type="password" required />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="source">{t('whereDidYouHearAboutUs')}</Label>
-            <Select>
-              <SelectTrigger id="source">
-                <SelectValue placeholder={t('selectSource')} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="family">{t('family')}</SelectItem>
-                <SelectItem value="friends">{t('friends')}</SelectItem>
-                <SelectItem value="social-media">{t('socialMedia')}</SelectItem>
-                <SelectItem value="other">{t('other')}</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <Button asChild type="submit" className="w-full">
-            <Link href="/dashboard">{t('createAccount')}</Link>
-          </Button>
-        </CardContent>
+        <form onSubmit={handleSignUp}>
+          <CardHeader className="space-y-1 text-center">
+            <CardTitle className="font-headline text-2xl">{t('createAnAccount')}</CardTitle>
+            <CardDescription>{t('createAnAccountPrompt')}</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="name">{t('fullName')}</Label>
+              <Input 
+                id="name" 
+                placeholder={t('fullNamePlaceholder')} 
+                required 
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="email">{t('emailAddress')}</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="name@example.com"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="password">{t('password')}</Label>
+              <Input 
+                id="password" 
+                type="password" 
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="source">{t('whereDidYouHearAboutUs')}</Label>
+              <Select onValueChange={setSource} value={source}>
+                <SelectTrigger id="source">
+                  <SelectValue placeholder={t('selectSource')} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="family">{t('family')}</SelectItem>
+                  <SelectItem value="friends">{t('friends')}</SelectItem>
+                  <SelectItem value="social-media">{t('socialMedia')}</SelectItem>
+                  <SelectItem value="other">{t('other')}</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? 'Creating Account...' : t('createAccount')}
+            </Button>
+          </CardContent>
+        </form>
         <CardContent className="mt-4 text-center text-sm">
           {t('hasAccountPrompt')}{' '}
           <Link href="/" className="underline">

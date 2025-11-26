@@ -1,0 +1,92 @@
+/**
+ * Core Philosophy: This ruleset enforces a strict user-ownership model. All data is
+ * stored in a user-specific document, and access is granted only to the authenticated
+ * user who owns that data. This prevents users from accessing or even knowing about
+ * the data of other users.
+ *
+ * Data Structure: The data is organized under a single top-level collection `/users`.
+ * Each user's profile data is stored in a document where the document ID is the
+ * user's Firebase Authentication UID (e.g., /users/{userId}).
+ *
+ * Key Security Decisions:
+ * - User Enumeration Blocked: Listing the entire `/users` collection is explicitly
+ *   disallowed to protect user privacy. Clients must know a user's specific UID to
+ *   attempt a read.
+ * - Strict Ownership: A user can only read, create, update, or delete their own
+ *   document at `/users/{userId}`. All other access attempts are denied.
+ * - Path and Data Consistency: On creation, the document's internal `id` field must
+ *   match the `userId` from the document path. This `id` field is immutable and cannot
+ *   be changed on update, ensuring the ownership link is permanent.
+ * - Prototyping Flexibility: While ownership and relational links are strictly enforced,
+ *   the shape of the user profile data (e.g., firstName, skills) is not validated,
+ *   allowing for rapid frontend iteration.
+ */
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    //----------------------------------------------------------------//
+    // Helper Functions
+    //----------------------------------------------------------------//
+
+    /**
+     * Checks if the user is authenticated.
+     */
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    /**
+     * Checks if the currently authenticated user's UID matches the
+     * provided userId, typically from the resource path.
+     */
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    /**
+     * Combines an ownership check with a check to ensure the document
+     * already exists. This is critical for safe update and delete operations.
+     */
+    function isExistingOwner(userId) {
+      return isOwner(userId) && resource != null;
+    }
+
+    /**
+     * Validates required relational data when a user document is created.
+     * In Prototyping Mode, we only validate the field essential for authorization:
+     * the document's internal 'id' must match the user's UID in the path.
+     */
+    function hasValidUserDataForCreate(userId) {
+      return request.resource.data.id == userId;
+    }
+
+    /**
+     * Enforces immutability of critical relational fields on update.
+     * The document's internal 'id' field, which links it to the owner,
+     * must not be changed after creation.
+     */
+    function isUserDataImmutable() {
+      return request.resource.data.id == resource.data.id;
+    }
+
+    //----------------------------------------------------------------//
+    // Collection Rules
+    //----------------------------------------------------------------//
+
+    /**
+     * @description Manages user profile documents.
+     * @path /users/{userId}
+     * @allow A logged-in user (UID: 'user_abc') can create their own profile document at `/users/user_abc`. (create)
+     * @deny A logged-in user (UID: 'user_abc') cannot read a different user's profile at `/users/user_xyz`. (get)
+     * @principle Restricts access to a user's own data tree, enforcing the principle of least privilege.
+     */
+    match /users/{userId} {
+      allow get: if isOwner(userId);
+      allow list: if false;
+      allow create: if isOwner(userId) && hasValidUserDataForCreate(userId);
+      allow update: if isExistingOwner(userId) && isUserDataImmutable();
+      allow delete: if isExistingOwner(userId);
+    }
+  }
+}

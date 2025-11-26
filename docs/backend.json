@@ -1,0 +1,94 @@
+{
+  "entities": {
+    "User": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "User",
+      "type": "object",
+      "description": "Represents a user of the Punjab Opportunities Hub platform.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the user."
+        },
+        "firstName": {
+          "type": "string",
+          "description": "The user's first name."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "The user's last name."
+        },
+        "email": {
+          "type": "string",
+          "description": "The user's email address.",
+          "format": "email"
+        },
+        "phone": {
+          "type": "string",
+          "description": "The user's phone number."
+        },
+        "location": {
+          "type": "string",
+          "description": "The user's general location (e.g., city, district)."
+        },
+        "skills": {
+          "type": "array",
+          "description": "An array of skills possessed by the user.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "experience": {
+          "type": "array",
+          "description": "An array of previous job experiences.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "education": {
+          "type": "string",
+          "description": "The highest education level of the user."
+        },
+        "resumeUrl": {
+          "type": "string",
+          "description": "URL to the user's resume.",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "id",
+        "firstName",
+        "lastName",
+        "email",
+        "location"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/users/{userId}",
+        "definition": {
+          "entityName": "User",
+          "schema": {
+            "$ref": "#/backend/entities/User"
+          },
+          "description": "Stores user profile information. Access is restricted to the user identified by {userId}.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier of the user, matching the Firebase Auth UID."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "The Firestore structure is designed to ensure authorization independence, clarity, and scalability, aligning with the principles of secure data management.  User data is stored under `/users/{userId}`. This direct path-based ownership ensures that security rules can be written to grant access based solely on the `request.auth.uid` matching the `userId` path parameter, avoiding costly and insecure `get()` calls. This structure inherently supports QAPs as list operations are naturally scoped to individual users.  The structure also enforces invariants by making ownership explicit in the path. The structure avoids custom claims (DBAC) by relying exclusively on `request.auth.uid` for authentication, coupled with path-based authorization.  Denormalization is not required in this simple design as no collections depend on each other for access control."
+  }
+}
