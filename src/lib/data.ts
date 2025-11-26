@@ -19,8 +19,9 @@ export const jobs = [
     id: 'job-1',
     title: 'Frontend Developer',
     company: 'Innovate Punjab Tech',
-    location: 'Mohali, Punjab',
+    location: 'Mohali',
     type: 'Full-time',
+    sector: 'Private',
     imageId: 'job-1',
     description:
       'We are looking for a skilled Frontend Developer to join our team in Mohali. The ideal candidate will be proficient in React, HTML, CSS, and modern JavaScript. You will be responsible for building beautiful and responsive user interfaces for our web applications.',
@@ -29,8 +30,9 @@ export const jobs = [
     id: 'job-2',
     title: 'Digital Marketing Manager',
     company: 'Amritsar Growth Solutions',
-    location: 'Amritsar, Punjab',
+    location: 'Amritsar',
     type: 'Full-time',
+    sector: 'Private',
     imageId: 'job-2',
     description:
       'Lead our marketing team to create and execute campaigns that drive growth. You should have experience with SEO, SEM, social media marketing, and content strategy. Strong analytical skills are a must.',
@@ -39,8 +41,9 @@ export const jobs = [
     id: 'job-3',
     title: 'Accountant',
     company: 'Ludhiana Financials',
-    location: 'Ludhiana, Punjab',
+    location: 'Ludhiana',
     type: 'Part-time',
+    sector: 'Private',
     imageId: 'job-3',
     description:
       'We need a part-time accountant to manage financial records, process invoices, and prepare tax returns. Experience with accounting software like Tally is required. This is a flexible, 20-hour per week position.',
@@ -49,8 +52,9 @@ export const jobs = [
     id: 'job-4',
     title: 'Data Analyst Intern',
     company: 'Jalandhar Insights',
-    location: 'Jalandhar, Punjab',
+    location: 'Jalandhar',
     type: 'Internship',
+    sector: 'Private',
     imageId: 'job-4',
     description:
       'A great opportunity for a student or recent graduate to gain hands-on experience in data analysis. You will work with our team to collect, clean, and analyze data to provide business insights. Basic knowledge of SQL and Python is a plus.',
@@ -61,6 +65,7 @@ export const jobs = [
     company: 'Creative Designs Co.',
     location: 'Remote',
     type: 'Contract',
+    sector: 'Private',
     imageId: 'job-5',
     description:
       'We are seeking a talented graphic designer for a contract role. You will be creating marketing materials, social media graphics, and website assets. A strong portfolio demonstrating your design skills is required.',
@@ -69,11 +74,34 @@ export const jobs = [
     id: 'job-6',
     title: 'Operations Manager',
     company: 'Punjab Logistics',
-    location: 'Patiala, Punjab',
+    location: 'Patiala',
     type: 'Full-time',
+    sector: 'Private',
     imageId: 'job-6',
     description:
       'Oversee and improve our supply chain and logistics operations. The ideal candidate will have strong leadership skills and experience in warehouse management, inventory control, and transportation.',
+  },
+  {
+    id: 'job-7',
+    title: 'Civil Engineer',
+    company: 'Punjab Public Works Department',
+    location: 'Chandigarh',
+    type: 'Full-time',
+    sector: 'Government',
+    imageId: 'job-7',
+    description:
+      'Join the PWD to work on infrastructure projects across the state. Responsibilities include project planning, design, and supervision. A degree in Civil Engineering is required.',
+  },
+  {
+    id: 'job-8',
+    title: 'Clerk',
+    company: 'Punjab State Civil Secretariat',
+    location: 'Chandigarh',
+    type: 'Full-time',
+    sector: 'Government',
+    imageId: 'job-8',
+    description:
+      'Perform administrative duties, maintain records, and handle correspondence. Strong organizational skills and proficiency in office software are required.',
   },
 ];
 

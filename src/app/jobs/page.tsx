@@ -22,12 +22,10 @@ import {
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
-  DialogClose,
+  DialogDescription,
+  DialogFooter,
 } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
@@ -36,6 +34,7 @@ import { useUser } from '@/firebase';
 import { jobs } from '@/lib/data';
 import { Search } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useMemo } from 'react';
 
 type Job = (typeof jobs)[0];
 
@@ -46,17 +45,55 @@ export default function JobsPage() {
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [isApplying, setIsApplying] = useState(false);
 
+  const [searchTerm, setSearchTerm] = useState('');
+  const [location, setLocation] = useState('');
+  const [type, setType] = useState('');
+  const [sector, setSector] = useState('');
+
   const handleApply = (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically handle the form submission,
-    // e.g., send the application to your backend.
     toast({
-      title: "Application Sent!",
+      title: 'Application Sent!',
       description: `Your application for the ${selectedJob?.title} position has been submitted.`,
     });
     setIsApplying(false);
     setSelectedJob(null);
   };
+
+  const filteredJobs = useMemo(() => {
+    return jobs.filter((job) => {
+      const translatedTitle = t(job.title).toLowerCase();
+      const lowerSearchTerm = searchTerm.toLowerCase();
+
+      const matchesSearch =
+        translatedTitle.includes(lowerSearchTerm) ||
+        job.company.toLowerCase().includes(lowerSearchTerm);
+
+      const matchesLocation = !location || job.location === location;
+      const matchesType = !type || job.type === type;
+      const matchesSector = !sector || job.sector === sector;
+
+      return matchesSearch && matchesLocation && matchesType && matchesSector;
+    });
+  }, [searchTerm, location, type, sector, t]);
+  
+  const locations = useMemo(() => [...new Set(jobs.map(j => j.location))], []);
+  const jobTypes = useMemo(() => [...new Set(jobs.map(j => j.type))], []);
+
+  const openDetailsModal = (job: Job) => {
+    setSelectedJob(job);
+    setIsApplying(false);
+  }
+
+  const openApplyModal = (job: Job) => {
+    setSelectedJob(job);
+    setIsApplying(true);
+  }
+
+  const closeModal = () => {
+    setSelectedJob(null);
+    setIsApplying(false);
+  }
 
   return (
     <div className="flex h-full flex-col">
@@ -65,30 +102,41 @@ export default function JobsPage() {
         <Card>
           <CardContent className="p-4">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <div className="relative sm:col-span-2">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                <Input placeholder={t('searchBy')} className="pl-10" />
+              <div className="relative sm:col-span-2 lg:col-span-1">
+                <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                  placeholder={t('searchBy')}
+                  className="pl-10"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
               </div>
-              <Select>
+              <Select value={location} onValueChange={setLocation}>
                 <SelectTrigger>
                   <SelectValue placeholder={t('filterByLocation')} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="mohali">Mohali</SelectItem>
-                  <SelectItem value="ludhiana">Ludhiana</SelectItem>
-                  <SelectItem value="amritsar">Amritsar</SelectItem>
-                  <SelectItem value="jalandhar">Jalandhar</SelectItem>
+                  <SelectItem value="">All Locations</SelectItem>
+                  {locations.map(loc => <SelectItem key={loc} value={loc}>{loc}</SelectItem>)}
                 </SelectContent>
               </Select>
-              <Select>
+              <Select value={type} onValueChange={setType}>
                 <SelectTrigger>
                   <SelectValue placeholder={t('filterByType')} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="full-time">{t('fullTime')}</SelectItem>
-                  <SelectItem value="part-time">{t('partTime')}</SelectItem>
-                  <SelectItem value="contract">{t('contract')}</SelectItem>
-                  <SelectItem value="internship">{t('internship')}</SelectItem>
+                    <SelectItem value="">All Types</SelectItem>
+                    {jobTypes.map(jobType => <SelectItem key={jobType} value={jobType}>{t(jobType)}</SelectItem>)}
+                </SelectContent>
+              </Select>
+              <Select value={sector} onValueChange={setSector}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Filter by Sector" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="">All Sectors</SelectItem>
+                  <SelectItem value="Private">Private</SelectItem>
+                  <SelectItem value="Government">Government</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -96,7 +144,7 @@ export default function JobsPage() {
         </Card>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {jobs.map((job) => (
+          {filteredJobs.map((job) => (
             <Card
               key={job.id}
               className="flex flex-col transition-all hover:shadow-lg"
@@ -109,13 +157,20 @@ export default function JobsPage() {
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <span>{job.location}</span>
                 </div>
-                <div>
+                <div className='space-x-2'>
                   <Badge variant="secondary">{t(job.type)}</Badge>
+                  <Badge variant={job.sector === 'Government' ? 'default' : 'outline'}>{job.sector}</Badge>
                 </div>
               </CardContent>
               <CardFooter className="flex gap-2">
-                <Button className="flex-1" onClick={() => { setIsApplying(true); setSelectedJob(job); }}>{t('applyNow')}</Button>
-                <Button variant="outline" className="flex-1" onClick={() => setSelectedJob(job)}>
+                <Button className="flex-1" onClick={() => openApplyModal(job)}>
+                  {t('applyNow')}
+                </Button>
+                <Button
+                  variant="outline"
+                  className="flex-1"
+                  onClick={() => openDetailsModal(job)}
+                >
                   {t('viewDetails')}
                 </Button>
               </CardFooter>
@@ -124,28 +179,12 @@ export default function JobsPage() {
         </div>
       </div>
 
-      {/* Job Details Dialog */}
-      <Dialog open={!!selectedJob && !isApplying} onOpenChange={() => setSelectedJob(null)}>
-        <DialogContent className="sm:max-w-[600px]">
-          <DialogHeader>
-            <DialogTitle className="font-headline text-2xl">{selectedJob?.title}</DialogTitle>
-            <DialogDescription>
-              {selectedJob?.company} - {selectedJob?.location}
-            </DialogDescription>
-          </DialogHeader>
-          <div className="prose prose-sm max-h-[60vh] overflow-y-auto py-4 text-sm text-muted-foreground">
-            <p>{selectedJob?.description}</p>
-          </div>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setSelectedJob(null)}>Close</Button>
-            <Button onClick={() => setIsApplying(true)}>{t('applyNow')}</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-      
-      {/* Application Form Dialog */}
-      <Dialog open={isApplying} onOpenChange={() => { setIsApplying(false); setSelectedJob(null); }}>
-        <DialogContent className="sm:max-w-[425px]">
+      <Dialog
+        open={!!selectedJob}
+        onOpenChange={(isOpen) => !isOpen && closeModal()}
+      >
+        {isApplying ? (
+           <DialogContent className="sm:max-w-[425px]">
            <form onSubmit={handleApply}>
             <DialogHeader>
               <DialogTitle className="font-headline">Apply for {selectedJob?.title}</DialogTitle>
@@ -174,11 +213,32 @@ export default function JobsPage() {
               </div>
             </div>
             <DialogFooter>
-              <Button type="button" variant="ghost" onClick={() => { setIsApplying(false); setSelectedJob(null); }}>Cancel</Button>
+              <Button type="button" variant="ghost" onClick={closeModal}>Cancel</Button>
               <Button type="submit">Submit Application</Button>
             </DialogFooter>
           </form>
         </DialogContent>
+        ) : (
+          <DialogContent className="sm:max-w-[600px]">
+          <DialogHeader>
+            <DialogTitle className="font-headline text-2xl">
+              {t(selectedJob?.title ?? '')}
+            </DialogTitle>
+            <DialogDescription>
+              {selectedJob?.company} - {selectedJob?.location}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="prose prose-sm max-h-[60vh] overflow-y-auto py-4 text-sm text-muted-foreground">
+            <p>{t(selectedJob?.description ?? '')}</p>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={closeModal}>
+              Close
+            </Button>
+            <Button onClick={() => selectedJob && openApplyModal(selectedJob)}>{t('applyNow')}</Button>
+          </DialogFooter>
+        </DialogContent>
+        )}
       </Dialog>
     </div>
   );
