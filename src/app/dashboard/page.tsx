@@ -21,7 +21,9 @@ import {
 } from '@/components/ui/card';
 import { useLanguage } from '@/context/language-context';
 import { jobs } from '@/lib/data';
-import { placeholderImages } from '@/lib/placeholder-images.json';
+import imageData from '@/lib/placeholder-images.json';
+
+const { placeholderImages } = imageData;
 
 const heroImage = placeholderImages.find((img) => img.id === 'hero-bg');
 

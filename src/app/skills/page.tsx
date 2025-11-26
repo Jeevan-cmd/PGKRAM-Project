@@ -12,7 +12,9 @@ import {
 } from '@/components/ui/card';
 import { useLanguage } from '@/context/language-context';
 import { skills } from '@/lib/data';
-import { placeholderImages } from '@/lib/placeholder-images.json';
+import imageData from '@/lib/placeholder-images.json';
+
+const { placeholderImages } = imageData;
 
 export default function SkillsPage() {
   const { t } = useLanguage();
