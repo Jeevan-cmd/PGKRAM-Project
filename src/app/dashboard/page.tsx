@@ -66,7 +66,7 @@ const services = [
   {
     title: 'counselling',
     icon: <GraduationCap className="size-8" />,
-    href: '#',
+    href: '/counselling',
   },
   {
     title: 'pmVikasScheme',

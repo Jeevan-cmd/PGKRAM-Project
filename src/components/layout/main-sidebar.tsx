@@ -30,6 +30,7 @@ import {
   LineChart,
   Sparkles,
   Heart,
+  GraduationCap,
 } from "lucide-react";
 import { useLanguage } from "@/context/language-context";
 import { useUser } from "@/firebase";
@@ -40,6 +41,7 @@ const menuItems = [
   { href: "/skills", labelKey: "skillDevelopment", icon: <Wrench /> },
   { href: "/business-support", labelKey: "businessSupport", icon: <Building2 /> },
   { href: "/employer-portal", labelKey: "employerPortal", icon: <Shield /> },
+  { href: "/counselling", labelKey: "counselling", icon: <GraduationCap /> },
 ];
 
 const aiMenuItems = [
