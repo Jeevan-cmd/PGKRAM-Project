@@ -110,7 +110,7 @@ export default function SignupPage() {
           <div className="text-sm">&copy; 2024 Punjab Government. All rights reserved.</div>
         </div>
         <div className="flex items-center justify-center p-4">
-          <Card className="w-full max-w-md animate-in fade-in-50 slide-in-from-bottom-10 duration-500">
+          <Card className="w-full max-w-md animate-in fade-in-50 slide-in-from-bottom-10 duration-700">
             <div className="absolute top-4 right-4">
               <LanguageSwitcher />
             </div>
