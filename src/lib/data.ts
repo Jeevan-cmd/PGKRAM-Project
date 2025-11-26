@@ -1,3 +1,4 @@
+
 export const user = {
   name: 'Harmanpreet Singh',
   email: 'h.singh@example.com',
@@ -111,7 +112,7 @@ export const jobs = [
       'Join the PWD to work on infrastructure projects across the state. Responsibilities include project planning, design, and supervision. A degree in Civil Engineering is required.',
     qualification: 'B.Tech',
     experience: 4,
-    category: 'General',
+    category: 'BC',
   },
   {
     id: 'job-8',

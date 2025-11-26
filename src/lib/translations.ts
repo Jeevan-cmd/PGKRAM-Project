@@ -1,3 +1,4 @@
+
 const translations: Record<string, Record<string, string>> = {
   en: {
     dashboard: 'Dashboard',
@@ -241,6 +242,9 @@ const translations: Record<string, Record<string, string>> = {
     searchJobsNearMe: 'Search Jobs near by me',
     availableGovtJobs: 'Available Govt. Jobs',
     availablePrivateJobs: 'Available Private Jobs',
+    General: 'General',
+    SC: 'SC',
+    BC: 'BC',
   },
   hi: {
     dashboard: 'डैशबोर्ड',
@@ -484,6 +488,9 @@ const translations: Record<string, Record<string, string>> = {
     searchJobsNearMe: 'मेरे आस-पास नौकरियां खोजें',
     availableGovtJobs: 'उपलब्ध सरकारी नौकरियां',
     availablePrivateJobs: 'उपलब्ध निजी नौकरियां',
+    General: 'सामान्य',
+    SC: 'एससी',
+    BC: 'बीसी',
   },
   pa: {
     dashboard: 'ਡੈਸ਼ਬੋਰਡ',
@@ -727,6 +734,9 @@ const translations: Record<string, Record<string, string>> = {
     searchJobsNearMe: 'ਮੇਰੇ ਨੇੜੇ ਨੌਕਰੀਆਂ ਖੋਜੋ',
     availableGovtJobs: 'ਉਪਲਬਧ ਸਰਕਾਰੀ ਨੌਕਰੀਆਂ',
     availablePrivateJobs: 'ਉਪਲਬਧ ਨਿੱਜੀ ਨੌਕਰੀਆਂ',
+    General: 'ਜਨਰਲ',
+    SC: 'SC',
+    BC: 'BC',
   },
 };
 

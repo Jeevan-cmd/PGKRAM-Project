@@ -1,3 +1,4 @@
+
 'use client';
 import { useState } from 'react';
 import { PageHeader } from '@/components/layout/page-header';
@@ -173,7 +174,7 @@ export default function JobsPage() {
                   <SelectItem value="all">{t('allCategories')}</SelectItem>
                   {categories.map((cat) => (
                     <SelectItem key={cat} value={cat}>
-                      {cat}
+                      {t(cat)}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -264,7 +265,7 @@ export default function JobsPage() {
                   >
                     {job.sector}
                   </Badge>
-                  {job.category && <Badge variant="destructive">{job.category}</Badge>}
+                  {job.category && <Badge variant="destructive">{t(job.category)}</Badge>}
                 </div>
               </CardContent>
               <CardFooter className="flex gap-2">
