@@ -26,7 +26,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { useLanguage } from '@/context/language-context';
-import { Globe } from 'lucide-react';
+import { Globe, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -35,6 +35,7 @@ import { useAuth } from '@/firebase';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import Image from 'next/image';
 import imageData from '@/lib/placeholder-images.json';
+import { cn } from '@/lib/utils';
 
 const { placeholderImages } = imageData;
 const bgImage = placeholderImages.find((img) => img.id === 'hero-bg');
@@ -110,7 +111,10 @@ export default function SignupPage() {
           <div className="text-sm">&copy; 2024 Punjab Government. All rights reserved.</div>
         </div>
         <div className="flex items-center justify-center p-4">
-          <Card className="w-full max-w-md animate-in fade-in-50 slide-in-from-bottom-10 duration-700">
+          <Card className={cn(
+              "relative w-full max-w-md animate-in fade-in-50 slide-in-from-bottom-10 duration-1000",
+              loading && "loading-glow"
+            )}>
             <div className="absolute top-4 right-4">
               <LanguageSwitcher />
             </div>
@@ -130,6 +134,7 @@ export default function SignupPage() {
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
+                    disabled={loading}
                   />
                 </div>
                 <div className="space-y-2">
@@ -141,6 +146,7 @@ export default function SignupPage() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    disabled={loading}
                   />
                 </div>
                 <div className="space-y-2">
@@ -151,11 +157,12 @@ export default function SignupPage() {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    disabled={loading}
                   />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="source">{t('whereDidYouHearAboutUs')}</Label>
-                  <Select onValueChange={setSource} value={source}>
+                  <Select onValueChange={setSource} value={source} disabled={loading}>
                     <SelectTrigger id="source">
                       <SelectValue placeholder={t('selectSource')} />
                     </SelectTrigger>
@@ -170,7 +177,14 @@ export default function SignupPage() {
                   </Select>
                 </div>
                 <Button type="submit" className="w-full" disabled={loading}>
-                  {loading ? t('creatingAccount') : t('createAccount')}
+                  {loading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      {t('creatingAccount')}
+                    </>
+                  ) : (
+                    t('createAccount')
+                  )}
                 </Button>
               </CardContent>
             </form>
