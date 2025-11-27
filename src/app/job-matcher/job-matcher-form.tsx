@@ -58,6 +58,8 @@ const initialState = {
 
 export function JobMatcherForm() {
   const { t } = useLanguage();
+  const { toast } = useToast();
+
   const [state, formAction, isSubmitting] = useActionState(
     async (_prevState: any, data: IntelligentJobMatchingInput) => {
       const result = await intelligentJobMatching(data);
@@ -74,8 +76,6 @@ export function JobMatcherForm() {
     initialState
   );
   
-  const { toast } = useToast();
-
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
