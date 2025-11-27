@@ -128,7 +128,7 @@ export function ResumeAnalyzerForm() {
           const result = await mammoth.extractRawText({ arrayBuffer: arrayBuffer as ArrayBuffer });
           text = result.value;
         } else if (fileType === 'text/plain' || fileType === 'text/markdown') {
-          text = arrayBuffer.toString();
+          text = new TextDecoder().decode(arrayBuffer as ArrayBuffer);
         }
 
         form.setValue('resumeText', text, { shouldValidate: true });
@@ -159,10 +159,8 @@ export function ResumeAnalyzerForm() {
     };
 
     const fileType = file.type;
-    if (fileType === 'application/pdf' || fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+    if (fileType === 'application/pdf' || fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || fileType === 'text/plain' || fileType === 'text/markdown') {
         reader.readAsArrayBuffer(file);
-    } else if (fileType === 'text/plain' || fileType === 'text/markdown') {
-        reader.readAsText(file);
     } else {
         toast({
             title: t('unsupportedFileType'),
@@ -188,7 +186,7 @@ export function ResumeAnalyzerForm() {
     <div className="mx-auto max-w-4xl space-y-8">
       <Card>
         <Form {...form}>
-          <form action={formAction} onSubmit={form.handleSubmit(() => formAction(form.getValues()))}>
+          <form action={form.handleSubmit(() => formAction(form.getValues()))}>
             <CardHeader>
               <CardTitle className="font-headline flex items-center gap-2 text-2xl">
                 <Sparkles className="text-primary" />
