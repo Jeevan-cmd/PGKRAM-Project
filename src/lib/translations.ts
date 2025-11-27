@@ -408,7 +408,10 @@ const translations: Record<string, Record<string, string>> = {
     validityUpto: 'Validity Upto',
     postedOn: 'Posted On',
     startupPunjabInnovation: 'To know about or to register your Innovation with Startup Punjab:',
-    clickHereToReadPdf: 'Click here to Read pdf'
+    clickHereToReadPdf: 'Click here to Read pdf',
+    mostVisitedJobs: 'Most Visited Jobs',
+    'Iti,driver,helper,technicians Etc': 'Iti,driver,helper,technicians Etc',
+    'Security Guard': 'Security Guard'
   },
   hi: {
     dashboard: 'डैशबोर्ड',
@@ -822,7 +825,10 @@ const translations: Record<string, Record<string, string>> = {
     validityUpto: 'तक वैध',
     postedOn: 'पर पोस्ट किया गया',
     startupPunjabInnovation: 'स्टार्टअप पंजाब के साथ अपने नवाचार को जानने या पंजीकृत करने के लिए:',
-    clickHereToReadPdf: 'पीडीएफ पढ़ने के लिए यहां क्लिक करें'
+    clickHereToReadPdf: 'पीडीएफ पढ़ने के लिए यहां क्लिक करें',
+    mostVisitedJobs: 'सबसे ज्यादा देखी जाने वाली नौकरियां',
+    'Iti,driver,helper,technicians Etc': 'आईटीआई, ड्राइवर, हेल्पर, तकनीशियन आदि',
+    'Security Guard': 'सुरक्षा गार्ड'
   },
   pa: {
     dashboard: 'ਡੈਸ਼ਬੋਰਡ',
@@ -1234,7 +1240,10 @@ const translations: Record<string, Record<string, string>> = {
     validityUpto: 'ਤੱਕ ਵੈਧ',
     postedOn: 'ਨੂੰ ਪੋਸਟ ਕੀਤਾ ਗਿਆ',
     startupPunjabInnovation: 'ਸਟਾਰਟਅੱਪ ਪੰਜਾਬ ਨਾਲ ਆਪਣੇ ਨਵੀਨਤਾ ਬਾਰੇ ਜਾਣਨ ਜਾਂ ਰਜਿਸਟਰ ਕਰਨ ਲਈ:',
-    clickHereToReadPdf: 'PDF ਪੜ੍ਹਨ ਲਈ ਇੱਥੇ ਕਲਿੱਕ ਕਰੋ'
+    clickHereToReadPdf: 'PDF ਪੜ੍ਹਨ ਲਈ ਇੱਥੇ ਕਲਿੱਕ ਕਰੋ',
+    mostVisitedJobs: 'ਸਭ ਤੋਂ ਵੱਧ ਵੇਖੀਆਂ ਗਈਆਂ ਨੌਕਰੀਆਂ',
+    'Iti,driver,helper,technicians Etc': 'ਆਈ.ਟੀ.ਆਈ., ਡਰਾਈਵਰ, ਹੈਲਪਰ, ਟੈਕਨੀਸ਼ੀਅਨ ਆਦਿ',
+    'Security Guard': 'ਸੁਰੱਖਿਆ ਗਾਰਡ'
   },
 };
 

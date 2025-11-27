@@ -26,35 +26,44 @@ import {
   User as UserIcon,
   Bell,
   FileText,
+  TrendingUp,
 } from 'lucide-react';
 import { useLanguage } from '@/context/language-context';
 import { useUser } from '@/firebase';
 import { notifications, Notification } from '@/lib/notifications-data';
-import { Card } from '../ui/card';
+import {
+  mostVisitedJobs,
+  MostVisitedJob,
+} from '@/lib/most-visited-jobs-data';
 
-type PageHeaderProps = {
-  title: string;
+type InfoCardProps = {
+  item: Notification | MostVisitedJob;
 };
 
-function NotificationCard({ notification }: { notification: Notification }) {
+function InfoCard({ item }: InfoCardProps) {
   const { t } = useLanguage();
   return (
     <div className="border-b p-4 text-sm last:border-b-0">
-      {notification.validity && (
+      {item.text && <p className="mb-2 font-semibold">{t(item.text)}</p>}
+      {'validity' in item && item.validity && (
         <p className="mb-2">
-          {t('validityUpto')}: {notification.validity}
+          {t('validityUpto')}: {item.validity}
         </p>
       )}
-      {notification.text && <p className="mb-2 font-semibold">{t(notification.text)}</p>}
-      {notification.link && (
-        <a href={notification.link} target="_blank" rel="noopener noreferrer" className="flex items-center text-primary hover:underline">
+      {item.link && (
+        <a
+          href={item.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center text-primary hover:underline"
+        >
           <FileText className="mr-2 h-4 w-4" />
-          {t(notification.linkText || 'clickHereToReadPdf')}
+          {t(item.linkText || 'clickHereToReadPdf')}
         </a>
       )}
-      {notification.postedOn && (
+      {item.postedOn && (
         <p className="mt-2 text-xs text-muted-foreground">
-          {t('postedOn')}: {notification.postedOn}
+          {t('postedOn')}: {item.postedOn}
         </p>
       )}
     </div>
@@ -122,6 +131,25 @@ export function PageHeader({ title }: PageHeaderProps) {
         <Popover>
           <PopoverTrigger asChild>
             <Button variant="ghost" size="icon" className="h-9 w-9">
+              <TrendingUp className="h-5 w-5" />
+              <span className="sr-only">{t('mostVisitedJobs')}</span>
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-80 p-0" align="end">
+            <div className="bg-primary p-2 text-center font-bold text-primary-foreground">
+              {t('mostVisitedJobs').toUpperCase()}
+            </div>
+            <ScrollArea className="h-[400px]">
+              {mostVisitedJobs.map((job) => (
+                <InfoCard key={job.id} item={job} />
+              ))}
+            </ScrollArea>
+          </PopoverContent>
+        </Popover>
+
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button variant="ghost" size="icon" className="h-9 w-9">
               <Bell className="h-5 w-5" />
               <span className="sr-only">{t('notifications')}</span>
             </Button>
@@ -132,7 +160,7 @@ export function PageHeader({ title }: PageHeaderProps) {
             </div>
             <ScrollArea className="h-[400px]">
               {notifications.map((notification) => (
-                <NotificationCard key={notification.id} notification={notification} />
+                <InfoCard key={notification.id} item={notification} />
               ))}
             </ScrollArea>
           </PopoverContent>
