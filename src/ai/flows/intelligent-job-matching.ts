@@ -27,9 +27,9 @@ const JobSchema = z.object({
 });
 
 const IntelligentJobMatchingInputSchema = z.object({
-  skills: z.array(z.string()).describe('List of skills possessed by the job seeker.'),
-  experience: z.string().describe('Description of the job seeker\'s work experience.'),
-  preferences: z.string().describe('Job seeker\'s preferences regarding job type, location, etc.'),
+  category: z.string().describe('The desired job category.'),
+  experienceLevel: z.string().describe('The job seeker\'s experience level (e.g., Entry-level, Mid-level, Senior).'),
+  jobType: z.string().describe('The preferred type of employment (e.g., Full-time, Part-time).'),
   jobs: z.array(JobSchema).describe('The list of available jobs to match against.'),
 });
 export type IntelligentJobMatchingInput = z.infer<typeof IntelligentJobMatchingInputSchema>;
@@ -49,16 +49,16 @@ const prompt = ai.definePrompt({
   output: {schema: IntelligentJobMatchingOutputSchema},
   prompt: `You are an expert AI career counselor for the Punjab Opportunities Hub. Your task is to act as a recommendation engine.
 
-You will be given a job seeker's profile (skills, experience, preferences) and a list of available jobs in JSON format.
+You will be given a job seeker's preferences (category, experience level, job type) and a list of available jobs in JSON format.
 
-Analyze the user's profile and compare it against each job in the list. Based on this analysis, identify the top 3-5 most suitable jobs for the user.
+Analyze the user's preferences and compare them against each job in the list. Based on this analysis, identify the top 3-5 most suitable jobs for the user.
 
 Return only the titles of the recommended jobs in the 'jobRecommendations' array.
 
-**Job Seeker Profile:**
-- Skills: {{{skills}}}
-- Experience: {{{experience}}}
-- Preferences: {{{preferences}}}
+**Job Seeker Preferences:**
+- Category: {{{category}}}
+- Experience Level: {{{experienceLevel}}}
+- Job Type: {{{jobType}}}
 
 **Available Jobs List (JSON):**
 {{{json jobs}}}

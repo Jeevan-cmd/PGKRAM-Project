@@ -30,24 +30,20 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/context/language-context";
 
 const formSchema = z.object({
-  skills: z
-    .string()
-    .min(1, "Please enter at least one skill.")
-    .describe("Comma-separated list of skills"),
-  experience: z
-    .string()
-    .min(10, "Please describe your experience in at least 10 characters.")
-    .describe("Description of work experience"),
-  preferences: z
-    .string()
-    .min(5, "Please describe your preferences in at least 5 characters.")
-    .describe("Job preferences"),
+  category: z.string().min(1, "Please select a job category."),
+  experienceLevel: z.string().min(1, "Please select an experience level."),
+  jobType: z.string().min(1, "Please select a job type."),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -55,6 +51,20 @@ type FormValues = z.infer<typeof formSchema>;
 const initialState = {
   jobRecommendations: [],
 };
+
+const jobCategories = [
+  "IT/Software",
+  "Marketing",
+  "Finance/Accounting",
+  "Healthcare",
+  "Engineering",
+  "Education",
+  "Government",
+];
+
+const experienceLevels = ["Entry-level", "Mid-level", "Senior-level"];
+
+const jobTypes = ["Full-time", "Part-time", "Contract", "Internship"];
 
 export function JobMatcherForm() {
   const { t } = useLanguage();
@@ -79,17 +89,14 @@ export function JobMatcherForm() {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      skills: "",
-      experience: "",
-      preferences: "",
+      category: "",
+      experienceLevel: "",
+      jobType: "",
     },
   });
 
   const onSubmit = (data: FormValues) => {
-    const skillsArray = data.skills.split(",").map((s) => s.trim());
-    
-    // Pass the full list of jobs to the AI flow without translating them
-    formAction({ ...data, skills: skillsArray, jobs: allJobs });
+    formAction({ ...data, jobs: allJobs });
   };
 
   return (
@@ -109,18 +116,24 @@ export function JobMatcherForm() {
             <CardContent className="space-y-6">
               <FormField
                 control={form.control}
-                name="skills"
+                name="category"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('yourSkills')}</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder={t('yourSkillsPlaceholder')}
-                        {...field}
-                      />
-                    </FormControl>
+                    <FormLabel>{t('jobCategory')}</FormLabel>
+                     <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder={t('selectJobCategory')} />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {jobCategories.map(cat => (
+                            <SelectItem key={cat} value={cat}>{t(cat)}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                     <FormDescription>
-                      {t('yourSkillsDesc')}
+                      {t('jobCategoryDesc')}
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -128,33 +141,47 @@ export function JobMatcherForm() {
               />
               <FormField
                 control={form.control}
-                name="experience"
+                name="experienceLevel"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('yourExperience')}</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder={t('yourExperiencePlaceholder')}
-                        {...field}
-                        rows={5}
-                      />
-                    </FormControl>
+                    <FormLabel>{t('experienceLevel')}</FormLabel>
+                     <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder={t('selectExperienceLevel')} />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                           {experienceLevels.map(level => (
+                            <SelectItem key={level} value={level}>{t(level)}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                     <FormDescription>
+                      {t('experienceLevelDesc')}
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
               <FormField
                 control={form.control}
-                name="preferences"
+                name="jobType"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('jobPreferences')}</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder={t('jobPreferencesPlaceholder')}
-                        {...field}
-                      />
-                    </FormControl>
+                    <FormLabel>{t('jobType')}</FormLabel>
+                     <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder={t('selectJobType')} />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                           {jobTypes.map(type => (
+                            <SelectItem key={type} value={type}>{t(type)}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                     <FormDescription>
                       {t('jobPreferencesDesc')}
                     </FormDescription>
