@@ -403,7 +403,12 @@ const translations: Record<string, Record<string, string>> = {
     thu: 'Thu',
     fri: 'Fri',
     sat: 'Sat',
-    'vocationalGuidance': 'Vocational Guidance'
+    'vocationalGuidance': 'Vocational Guidance',
+    notifications: 'Notifications',
+    validityUpto: 'Validity Upto',
+    postedOn: 'Posted On',
+    startupPunjabInnovation: 'To know about or to register your Innovation with Startup Punjab:',
+    clickHereToReadPdf: 'Click here to Read pdf'
   },
   hi: {
     dashboard: 'डैशबोर्ड',
@@ -812,7 +817,12 @@ const translations: Record<string, Record<string, string>> = {
     thu: 'गुरु',
     fri: 'शुक्र',
     sat: 'शनि',
-    'vocationalGuidance': 'व्यावसायिक मार्गदर्शन'
+    'vocationalGuidance': 'व्यावसायिक मार्गदर्शन',
+    notifications: 'सूचनाएं',
+    validityUpto: 'तक वैध',
+    postedOn: 'पर पोस्ट किया गया',
+    startupPunjabInnovation: 'स्टार्टअप पंजाब के साथ अपने नवाचार को जानने या पंजीकृत करने के लिए:',
+    clickHereToReadPdf: 'पीडीएफ पढ़ने के लिए यहां क्लिक करें'
   },
   pa: {
     dashboard: 'ਡੈਸ਼ਬੋਰਡ',
@@ -1219,7 +1229,12 @@ const translations: Record<string, Record<string, string>> = {
     thu: 'ਵੀਰ',
     fri: 'ਸ਼ੁੱਕਰ',
     sat: 'ਸ਼ਨੀ',
-    'vocationalGuidance': 'ਵੋਕੇਸ਼ਨਲ ਗਾਈਡੈਂਸ'
+    'vocationalGuidance': 'ਵੋਕੇਸ਼ਨਲ ਗਾਈਡੈਂਸ',
+    notifications: 'ਸੂਚਨਾਵਾਂ',
+    validityUpto: 'ਤੱਕ ਵੈਧ',
+    postedOn: 'ਨੂੰ ਪੋਸਟ ਕੀਤਾ ਗਿਆ',
+    startupPunjabInnovation: 'ਸਟਾਰਟਅੱਪ ਪੰਜਾਬ ਨਾਲ ਆਪਣੇ ਨਵੀਨਤਾ ਬਾਰੇ ਜਾਣਨ ਜਾਂ ਰਜਿਸਟਰ ਕਰਨ ਲਈ:',
+    clickHereToReadPdf: 'PDF ਪੜ੍ਹਨ ਲਈ ਇੱਥੇ ਕਲਿੱਕ ਕਰੋ'
   },
 };
 
