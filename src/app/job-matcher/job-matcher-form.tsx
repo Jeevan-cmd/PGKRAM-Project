@@ -103,7 +103,7 @@ export function JobMatcherForm() {
     <div className="mx-auto max-w-4xl">
       <Card>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
+          <form action={form.handleSubmit(onSubmit)}>
             <CardHeader>
               <CardTitle className="font-headline text-2xl flex items-center gap-2">
                 <Sparkles className="text-primary" />
