@@ -32,6 +32,7 @@ import {
   Heart,
   GraduationCap,
   HeartHandshake,
+  CalendarDays,
 } from "lucide-react";
 import { useLanguage } from "@/context/language-context";
 import { useUser } from "@/firebase";
@@ -53,6 +54,7 @@ const aiMenuItems = [
     { href: "/recommendations", labelKey: "personalizedRecommendations", icon: <Heart /> },
     { href: "/resume-analyzer", labelKey: "aiResumeAnalyzer", icon: <BotMessageSquare /> },
     { href: "/analysis-dashboard", labelKey: "analysisDashboard", icon: <LineChart /> },
+    { href: "/events-calendar", labelKey: "eventsCalendar", icon: <CalendarDays /> },
 ]
 
 export function MainSidebar() {
