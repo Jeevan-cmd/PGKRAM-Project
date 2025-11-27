@@ -30,8 +30,7 @@ import Image from 'next/image';
 import imageData from '@/lib/placeholder-images.json';
 import { cn } from '@/lib/utils';
 
-const { placeholderImages } = imageData;
-const bgImage = placeholderImages.find((img) => img.id === 'hero-bg');
+const bgImage = imageData.placeholderImages.find((img) => img.id === 'hero-bg');
 
 export default function LoginPage() {
   const { t } = useLanguage();
