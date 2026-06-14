@@ -118,16 +118,6 @@ This enables better understanding of user acquisition channels and supports futu
 
 ---
 
-## 👨‍💻 Author
-
-**Jeevan Kishore N**
-B.Tech – Information Science & Technology
-Presidency University
-
-📧 [natarajkishore803@gmail.com](mailto:natarajkishore803@gmail.com)
-
----
-
 ## 📄 License
 
 Developed for project demonstration and educational purposes.
